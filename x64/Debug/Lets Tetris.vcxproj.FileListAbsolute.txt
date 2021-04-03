@@ -1,1 +1,2 @@
 D:\Homework\Lets Tetris\x64\Debug\Lets Tetris.exe
+D:\Lets_Tetris\x64\Debug\Lets Tetris.exe
