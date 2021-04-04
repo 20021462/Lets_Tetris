@@ -1,9 +1,4 @@
-#include <SDL.h>
-#include <SDL_image.h>
-#include <iostream>
-#include <iomanip>
-#include <stdlib.h>
-#include <ctime>
+#include "Const.h"
 
 using namespace std;
 

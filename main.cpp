@@ -1,7 +1,6 @@
 #include "render.h"
-
-const int SCREEN_WIDTH = 700;
-const int SCREEN_HEIGHT = 900;
+#include "Const.h"
+#include "Block.h"
 
 SDL_Window* mainWindow = NULL;
 SDL_Renderer* mainRenderer = NULL;
@@ -10,8 +9,6 @@ SDL_Rect BlockRect[BLOCK_TOTAL];
 Texture BlockSheet;
 Texture Board;
 
-const int BOARD_WIDTH = 10;
-const int BOARD_HEIGHT = 24;
 int player1Board[BOARD_HEIGHT][BOARD_WIDTH] = { 0 };
 
 void print()
