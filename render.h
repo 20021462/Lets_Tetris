@@ -7,8 +7,11 @@
 
 using namespace std;
 
-SDL_Window* mainWindow = NULL;
-SDL_Renderer* mainRenderer = NULL;
+extern const int SCREEN_WIDTH;
+extern const int SCREEN_HEIGHT;
+
+extern SDL_Window* mainWindow;
+extern SDL_Renderer* mainRenderer;
 
 enum BlockType
 {
@@ -52,15 +55,9 @@ private:
 
 };
 
-SDL_Rect BlockRect[BLOCK_TOTAL];
-Texture BlockSheet;
-Texture Board;
-
-
-const int BOARD_WIDTH = 10;
-const int BOARD_HEIGHT = 24;
-
-int player1Board[BOARD_HEIGHT][BOARD_WIDTH] = { 0 };
+extern SDL_Rect BlockRect[BLOCK_TOTAL];
+extern Texture BlockSheet;
+extern Texture Board;
 
 void print();
 
