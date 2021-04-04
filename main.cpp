@@ -1,71 +1,38 @@
 #include "render.h"
+#include <SDL.h>
+#include <SDL_image.h>
+#include <iostream>
+#include <iomanip>
+#include <stdlib.h>
+#include <ctime>
 
 const int SCREEN_WIDTH = 700;
 const int SCREEN_HEIGHT = 900;
+const int BOARD_WIDTH = 10;
+const int BOARD_HEIGHT = 24;
 
-Texture::Texture()
+SDL_Window* mainWindow = NULL;
+SDL_Renderer* mainRenderer = NULL;
+
+int player1Board[BOARD_HEIGHT][BOARD_WIDTH] = { 0 };
+
+enum BlockType
 {
-	mTexture = NULL;
-	mWidth = 0;
-	mHeight = 0;
-}
+	EMPTY,
+	BLOCK_Z,
+	BLOCK_S,
+	BLOCK_J,
+	BLOCK_L,
+	BLOCK_O,
+	BLOCK_I,
+	BLOCK_T,
+	BLOCK_DEFAULT,
+	BLOCK_TOTAL
+};
 
-Texture::~Texture()
-{
-	free();
-}
-
-bool Texture::loadFromFile(string path)
-{
-	free();
-
-	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
-	if (loadedSurface == NULL)
-	{
-		cout << "Couldn't load image " << path << ". Error : " << IMG_GetError() << endl;
-	}
-	else
-	{
-		SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
-
-		mTexture = SDL_CreateTextureFromSurface(mainRenderer, loadedSurface);
-		if (mTexture == NULL)
-		{
-			cout << "Unable to create texture from surface" << path << ". Error : " << SDL_GetError << endl;
-		}
-		else
-		{
-			mWidth = loadedSurface->w;
-			mHeight = loadedSurface->h;
-		}
-		SDL_FreeSurface(loadedSurface);
-	}
-
-	return mTexture != NULL;
-}
-
-void Texture::free()
-{
-	if (mTexture != NULL)
-	{
-		SDL_DestroyTexture(mTexture);
-		mTexture = NULL;
-		mWidth = 0;
-		mHeight = 0;
-	}
-}
-
-void Texture::render(int x, int y, SDL_Rect* clip)
-{
-	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
-	if (clip != NULL)
-	{
-		renderQuad.w = clip->w;
-		renderQuad.h = clip->h;
-	}
-
-	SDL_RenderCopy(mainRenderer, mTexture, clip, &renderQuad);
-}
+SDL_Rect BlockRect[BLOCK_TOTAL];
+Texture BlockSheet;
+Texture Board;
 
 bool initSDL()
 {
@@ -122,7 +89,7 @@ void close()
 
 bool loadBlock()
 {
-	if (!BlockSheet.loadFromFile("texture/Block.png"))
+	if (!BlockSheet.loadFromFile("texture/Block.png",mainRenderer))
 	{
 		cout << "Failed to load block sheet" << endl;
 		return false;
@@ -177,8 +144,8 @@ void print()
 	for (int i = 4; i < 24; i++) {
 		for (int j = 0; j < 10; j++) {
 			if (player1Board[i][j] == 0) continue;
-			if (player1Board[i][j] > BLOCK_TOTAL) BlockSheet.render(150 + 40 * j, 50 + 40 * (i - 4), &BlockRect[player1Board[i][j] - BLOCK_TOTAL]);
-			else BlockSheet.render(150 + 40 * j, 50 + 40 * (i - 4), &BlockRect[player1Board[i][j]]);
+			if (player1Board[i][j] > BLOCK_TOTAL) BlockSheet.render(150 + 40 * j, 50 + 40 * (i - 4), &BlockRect[player1Board[i][j] - BLOCK_TOTAL],mainRenderer);
+			else BlockSheet.render(150 + 40 * j, 50 + 40 * (i - 4), &BlockRect[player1Board[i][j]],mainRenderer);
 		}
 	}
 }
@@ -246,7 +213,7 @@ void gravity()
 int main(int argc, char* args[])
 {
 
-	srand(time(0));
+	srand(time(NULL));
 	int tmp = rand() % 7 + 1;
 	generateBlock(tmp);
 
@@ -256,7 +223,7 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		if (!Board.loadFromFile("texture/Board.png"))
+		if (!Board.loadFromFile("texture/Board.png",mainRenderer))
 		{
 			cout << "Failed to load board" << endl;
 		}
@@ -291,7 +258,7 @@ int main(int argc, char* args[])
 								if (i == 0) player1Board[i][j] = 0;
 							}
 						}
-						Board.render(145, 45, NULL);
+						Board.render(145, 45, NULL,mainRenderer);
 						print();
 						SDL_RenderPresent(mainRenderer);
 						SDL_Delay(500);

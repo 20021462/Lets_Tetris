@@ -1,3 +1,4 @@
+#pragma once
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
@@ -7,28 +8,13 @@
 
 using namespace std;
 
-SDL_Window* mainWindow = NULL;
-SDL_Renderer* mainRenderer = NULL;
 
-enum BlockType
-{
-	EMPTY,
-	BLOCK_Z,
-	BLOCK_S,
-	BLOCK_J,
-	BLOCK_L,
-	BLOCK_O,
-	BLOCK_I,
-	BLOCK_T,
-	BLOCK_DEFAULT,
-	BLOCK_TOTAL
-};
 
-bool initSDL();
-
-void close();
-
-bool loadBlock();
+//bool initSDL();
+//
+//void close();
+//
+//bool loadBlock();
 
 class Texture
 {
@@ -37,11 +23,15 @@ public:
 
 	~Texture();
 
-	bool loadFromFile(string path);
+	bool loadFromFile(string path, SDL_Renderer* Renderer);
+
+
 
 	void free();
 
-	void render(int x, int y, SDL_Rect* clip = NULL);
+	void render(int x, int y, SDL_Rect* clip, SDL_Renderer* Renderer);
+
+
 
 private:
 	SDL_Texture* mTexture;
@@ -49,21 +39,10 @@ private:
 	int mWidth;
 	int mHeight;
 
-
 };
 
-SDL_Rect BlockRect[BLOCK_TOTAL];
-Texture BlockSheet;
-Texture Board;
 
 
-const int BOARD_WIDTH = 10;
-const int BOARD_HEIGHT = 24;
-
-int player1Board[BOARD_HEIGHT][BOARD_WIDTH] = { 0 };
-
-void print();
-
-void generateBlock(int BlockType);
-
-#pragma once
+//void print();
+//
+//void generateBlock(int BlockType);
