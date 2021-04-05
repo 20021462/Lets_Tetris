@@ -1,4 +1,4 @@
-#include "Block.h"
+#include "block.h"
 
 Block::Block(Block_type type):
 	y_(0),
