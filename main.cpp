@@ -9,7 +9,7 @@ SDL_Rect BlockRect[BLOCK_TOTAL];
 Texture BlockSheet;
 Texture Board;
 
-int player1Board[BOARD_HEIGHT][BOARD_WIDTH] = { 0 };
+int player1Board[BOARD_HEIGHT][BOARD_WIDTH] = { {0} };
 
 void print()
 {
