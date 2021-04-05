@@ -1,2 +1,7 @@
-﻿  Block.cpp
+﻿  block.cpp
+  const.cpp
+  main.cpp
+D:\C++\Lets_Tetris\main.cpp(92,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  render.cpp
+  Generating Code...
   Lets Tetris.vcxproj -> D:\C++\Lets_Tetris\x64\Debug\Lets Tetris.exe

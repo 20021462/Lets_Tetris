@@ -1,6 +1,6 @@
 #include "render.h"
-#include "Const.h"
-#include "Block.h"
+#include "const.h"
+#include "block.h"
 
 SDL_Window* mainWindow = NULL;
 SDL_Renderer* mainRenderer = NULL;
