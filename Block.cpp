@@ -81,6 +81,19 @@ void Block::rotate(int matrix[4][4])
 	transpose(matrix, this->size);
 }
 
+void Block::collide()
+{
+	return false;
+}
+
+void Block::gravity()
+{
+	while (!collide())
+	{
+		move(0, 1);
+	}
+}
+
 void Block::print()
 {
 	for (int i = 0; i < 4; i++) {

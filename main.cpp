@@ -22,15 +22,6 @@ void print()
 	}
 }
 
-/*void gravity()
-{
-	for (int i = 22; i >= 0; i--) {
-		for (int j = 0; j < 10; j++) {
-			if (player1Board[i][j] > EMPTY )
-		}
-	}
-}*/
-
 int main(int argc, char* args[])
 {
 
