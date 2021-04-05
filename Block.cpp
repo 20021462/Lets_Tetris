@@ -1,6 +1,6 @@
 #include "block.h"
 
-Block::Block(Block_type type):
+Block::Block(int type):
 	y_(0),
 	x_ ((BOARD_WIDTH - 4) / 2)
 {

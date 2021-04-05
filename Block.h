@@ -1,6 +1,7 @@
 #pragma once
 #include "render.h"
 #include "const.h"
+
 class Block
 {
 public:
@@ -14,7 +15,7 @@ public:
 		I,
 		T,
 	};
-	Block(Block_type type);
+	Block(int type);
 	~Block();
 	void move(int x, int y);
 	void rotate(int matrix[4][4]=NULL);
