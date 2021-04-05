@@ -81,7 +81,7 @@ void Block::rotate(int matrix[4][4])
 	transpose(matrix, this->size);
 }
 
-void Block::collide()
+bool Block::collide()
 {
 	return false;
 }
