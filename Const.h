@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <ctime>
 
+
+
 const int SCREEN_WIDTH = 700;
 const int SCREEN_HEIGHT = 900;
 
@@ -16,8 +18,9 @@ const int START_WIDTH = 150;
 const int START_HEIGHT = 50;
 
 const int BLOCK_SIZE = 40;
+//int player1Board[BOARD_HEIGHT][BOARD_WIDTH] = { 0 };
 
-const int FPS = 2;
+const int FPS = 4;
 
 void copyMatrix(int matrix[4][4], int temp[4][4], int size);
 void horizontalReflectioin(int matrix[4][4], int size);

@@ -37,7 +37,7 @@ bool Block::collide()
 	{
 		for (int j = 0; j < size; j++)
 		{
-			if (matrix[i][j] && this->y_+j == BOARD_HEIGHT-1) return true;
+			if (matrix[i][j] && (this->y_+j == BOARD_HEIGHT-1)) return true;
 		}
 	}
 	return false;
