@@ -22,61 +22,6 @@ void print()
 	}
 }
 
-void generateBlock(int BlockType)
-{
-	switch (BlockType)
-	{
-		case BLOCK_Z : 
-			player1Board[0][5] = BlockType;
-			player1Board[1][4] = BlockType;
-			player1Board[1][5] = BlockType;
-			player1Board[2][4] = BlockType;
-			break;
-
-		case BLOCK_S:
-			player1Board[0][4] = BlockType;
-			player1Board[1][4] = BlockType;
-			player1Board[1][5] = BlockType;
-			player1Board[2][5] = BlockType;
-			break;
-
-		case BLOCK_J:
-			player1Board[0][5] = BlockType;
-			player1Board[1][5] = BlockType;
-			player1Board[2][5] = BlockType;
-			player1Board[2][4] = BlockType;
-			break;
-
-		case BLOCK_L:
-			player1Board[0][4] = BlockType;
-			player1Board[1][4] = BlockType;
-			player1Board[2][4] = BlockType;
-			player1Board[2][5] = BlockType;
-			break;
-
-		case BLOCK_I:
-			player1Board[0][4] = BlockType;
-			player1Board[1][4] = BlockType;
-			player1Board[2][4] = BlockType;
-			player1Board[3][4] = BlockType;
-			break;
-
-		case BLOCK_O:
-			player1Board[0][4] = BlockType;
-			player1Board[0][5] = BlockType;
-			player1Board[1][4] = BlockType;
-			player1Board[1][5] = BlockType;
-			break;
-
-		case BLOCK_T:
-			player1Board[0][4] = BlockType;
-			player1Board[1][3] = BlockType;
-			player1Board[1][4] = BlockType;
-			player1Board[1][5] = BlockType;
-			break;
-	}
-}
-
 /*void gravity()
 {
 	for (int i = 22; i >= 0; i--) {
@@ -91,7 +36,7 @@ int main(int argc, char* args[])
 
 	srand(time(0));
 	int tmp = rand() % 7 + 1;
-	generateBlock(tmp);
+	Block block(tmp);
 
 	if (!initSDL())
 	{
@@ -127,7 +72,15 @@ int main(int argc, char* args[])
 					SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 					SDL_RenderClear(mainRenderer);
 
-					while (player1Board[23][4] != 1) {
+					for (int i = 0; i < 20; i++) {
+						block.move(0, 1);
+						Board.render(145, 45, NULL);
+						block.print();
+						SDL_RenderPresent(mainRenderer);
+						SDL_Delay(500);
+
+					}
+					/*while (player1Board[23][4] != 1) {
 						for (int i = 22; i >= 0; i--) {
 							for (int j = 0; j < 10; j++) {
 								player1Board[i + 1][j] = player1Board[i][j];
@@ -138,7 +91,7 @@ int main(int argc, char* args[])
 						print();
 						SDL_RenderPresent(mainRenderer);
 						SDL_Delay(500);
-					}
+					}*/
 				}
 			}
 

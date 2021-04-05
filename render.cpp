@@ -128,43 +128,43 @@ bool loadBlock()
 	{
 		BlockRect[BLOCK_Z].x = 0;
 		BlockRect[BLOCK_Z].y = 0;
-		BlockRect[BLOCK_Z].w = 40;
-		BlockRect[BLOCK_Z].h = 40;
+		BlockRect[BLOCK_Z].w = BLOCK_SIZE;
+		BlockRect[BLOCK_Z].h = BLOCK_SIZE;
 
-		BlockRect[BLOCK_S].x = 40;
+		BlockRect[BLOCK_S].x = BLOCK_SIZE;
 		BlockRect[BLOCK_S].y = 0;
-		BlockRect[BLOCK_S].w = 40;
-		BlockRect[BLOCK_S].h = 40;
+		BlockRect[BLOCK_S].w = BLOCK_SIZE;
+		BlockRect[BLOCK_S].h = BLOCK_SIZE;
 
-		BlockRect[BLOCK_J].x = 80;
+		BlockRect[BLOCK_J].x = BLOCK_SIZE * 2;
 		BlockRect[BLOCK_J].y = 0;
-		BlockRect[BLOCK_J].w = 40;
-		BlockRect[BLOCK_J].h = 40;
+		BlockRect[BLOCK_J].w = BLOCK_SIZE;
+		BlockRect[BLOCK_J].h = BLOCK_SIZE;
 
-		BlockRect[BLOCK_L].x = 120;
+		BlockRect[BLOCK_L].x = BLOCK_SIZE * 3;
 		BlockRect[BLOCK_L].y = 0;
-		BlockRect[BLOCK_L].w = 40;
-		BlockRect[BLOCK_L].h = 40;
+		BlockRect[BLOCK_L].w = BLOCK_SIZE;
+		BlockRect[BLOCK_L].h = BLOCK_SIZE;
 
 		BlockRect[BLOCK_O].x = 0;
-		BlockRect[BLOCK_O].y = 40;
-		BlockRect[BLOCK_O].w = 40;
-		BlockRect[BLOCK_O].h = 40;
+		BlockRect[BLOCK_O].y = BLOCK_SIZE;
+		BlockRect[BLOCK_O].w = BLOCK_SIZE;
+		BlockRect[BLOCK_O].h = BLOCK_SIZE;
 
-		BlockRect[BLOCK_I].x = 40;
-		BlockRect[BLOCK_I].y = 40;
-		BlockRect[BLOCK_I].w = 40;
-		BlockRect[BLOCK_I].h = 40;
+		BlockRect[BLOCK_I].x = BLOCK_SIZE;
+		BlockRect[BLOCK_I].y = BLOCK_SIZE;
+		BlockRect[BLOCK_I].w = BLOCK_SIZE;
+		BlockRect[BLOCK_I].h = BLOCK_SIZE;
 
-		BlockRect[BLOCK_T].x = 80;
-		BlockRect[BLOCK_T].y = 40;
-		BlockRect[BLOCK_T].w = 40;
-		BlockRect[BLOCK_T].h = 40;
+		BlockRect[BLOCK_T].x = BLOCK_SIZE * 2;
+		BlockRect[BLOCK_T].y = BLOCK_SIZE;
+		BlockRect[BLOCK_T].w = BLOCK_SIZE;
+		BlockRect[BLOCK_T].h = BLOCK_SIZE;
 
-		BlockRect[BLOCK_DEFAULT].x = 120;
-		BlockRect[BLOCK_DEFAULT].y = 40;
-		BlockRect[BLOCK_DEFAULT].w = 40;
-		BlockRect[BLOCK_DEFAULT].h = 40;
+		BlockRect[BLOCK_DEFAULT].x = BLOCK_SIZE * 3;
+		BlockRect[BLOCK_DEFAULT].y = BLOCK_SIZE;
+		BlockRect[BLOCK_DEFAULT].w = BLOCK_SIZE;
+		BlockRect[BLOCK_DEFAULT].h = BLOCK_SIZE;
 	}
 	return true;
 }

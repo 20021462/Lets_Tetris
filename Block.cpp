@@ -2,7 +2,7 @@
 
 Block::Block(int type):
 	y_(0),
-	x_ ((BOARD_WIDTH - 4) / 2)
+	x_(4)
 {
 	switch (type)
 	{
@@ -47,6 +47,7 @@ Block::Block(int type):
 		matrix[1][2] = I;
 		matrix[1][3] = I;
 		this->size = 4;
+		x_--;
 		break;
 	case T:
 		matrix[1][0] = T;
@@ -78,6 +79,18 @@ void Block::rotate(int matrix[4][4])
 	copyMatrix(matrix, temp, this->size);
 	horizontalReflectioin(matrix,this->size);
 	transpose(matrix, this->size);
+}
+
+void Block::print()
+{
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (matrix[i][j] == 0) continue;
+			int x_print = START_WIDTH + (x_ + j) * BLOCK_SIZE;
+			int y_print = START_HEIGHT + (y_ + i - 4) * BLOCK_SIZE;
+			if (y_print >= START_HEIGHT) BlockSheet.render(x_print, y_print, &BlockRect[matrix[i][j]]);
+		}
+	}
 }
 
 int Block::x()

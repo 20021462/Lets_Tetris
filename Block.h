@@ -7,7 +7,7 @@ class Block
 public:
 	enum Block_type
 	{
-		Z=0,
+		Z=1,
 		S,
 		J,
 		L,
@@ -15,10 +15,15 @@ public:
 		I,
 		T,
 	};
+
 	Block(int type);
 	~Block();
+
 	void move(int x, int y);
 	void rotate(int matrix[4][4]=NULL);
+	bool collide();
+	void print();
+
 	int x();
 	int y();
 	
