@@ -16,7 +16,7 @@ public:
 		T,
 	};
 
-	Block(int type);
+	Block();
 	~Block();
 
 	void move(int x, int y);
@@ -24,14 +24,15 @@ public:
 	bool collide();
 	void gravity();
 	void print();
+	void generate(int type);
 
 	int x();
 	int y();
-	
+	int matrix[4][4] = { {0} };
 	
 private:
 	int size;
 	int x_;
 	int y_;
-	int matrix[4][4] = { {0} };
+
 };

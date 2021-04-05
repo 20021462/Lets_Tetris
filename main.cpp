@@ -26,8 +26,8 @@ int main(int argc, char* args[])
 {
 
 	srand(time(0));
-	int tmp = rand() % 7 + 1;
-	Block block(tmp);
+	
+	Block block;
 
 	if (!initSDL())
 	{
@@ -63,9 +63,13 @@ int main(int argc, char* args[])
 					SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 					SDL_RenderClear(mainRenderer);
 
+					int tmp = rand() % 7 + 1;
+					block.generate(tmp);
+
 					for (int i = 0; i < 20; i++) {
 						block.move(0, 1);
 						Board.render(145, 45, NULL);
+						block.rotate();
 						block.print();
 						SDL_RenderPresent(mainRenderer);
 						SDL_Delay(500);
