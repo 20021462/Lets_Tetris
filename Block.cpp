@@ -26,8 +26,20 @@ void Block::rotate(int matrix[4][4])
 	transpose(matrix, this->size);
 }
 
-bool Block::collide()
+bool Block::is_block(int x,int y)
 {
+	return matrix[x][y];
+}
+
+bool Block::collide()
+{	
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			if (matrix[i][j] && this->y_+j == BOARD_HEIGHT-1) return true;
+		}
+	}
 	return false;
 }
 

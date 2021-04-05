@@ -22,6 +22,7 @@ public:
 	void move(int x, int y);
 	void rotate(int matrix[4][4]=NULL);
 	bool collide();
+	bool is_block(int x, int y);
 	void gravity();
 	void print();
 	void generate(int type);

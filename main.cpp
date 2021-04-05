@@ -66,7 +66,7 @@ int main(int argc, char* args[])
 					int tmp = rand() % 7 + 1;
 					block.generate(tmp);
 
-					for (int i = 0; i < 20; i++) {
+					/*for (int i = 0; i < 20; i++) {
 						block.move(0, 1);
 						Board.render(145, 45, NULL);
 						block.rotate();
@@ -74,6 +74,16 @@ int main(int argc, char* args[])
 						SDL_RenderPresent(mainRenderer);
 						SDL_Delay(500);
 
+					}*/
+
+					while (!block.collide())
+					{
+						block.move(0, 1);
+						Board.render(145, 45, NULL);
+						block.rotate();
+						block.print();
+						SDL_RenderPresent(mainRenderer);
+						SDL_Delay(1000/FPS);
 					}
 					/*while (player1Board[23][4] != 1) {
 						for (int i = 22; i >= 0; i--) {
