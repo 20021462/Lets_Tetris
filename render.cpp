@@ -119,7 +119,7 @@ void close()
 
 bool loadBlock()
 {
-	if (!BlockSheet.loadFromFile("texture/Block2.3.png"))
+	if (!BlockSheet.loadFromFile("texture/pastel_block.png"))
 	{
 		cout << "Failed to load block sheet" << endl;
 		return false;
