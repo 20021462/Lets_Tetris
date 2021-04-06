@@ -35,7 +35,7 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		if (!Board.loadFromFile("texture/Board.png"))
+		if (!Board.loadFromFile("texture/playFIeld.png"))
 		{
 			cout << "Failed to load board" << endl;
 		}
