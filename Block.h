@@ -19,15 +19,20 @@ public:
 	Block();
 	~Block();
 
-	void move(int x, int y);
-	void rotate(int matrix[4][4]=NULL);
-	bool collide();
-	void gravity();
-	void print();
 	void generate(int type);
-
 	int x();
 	int y();
+
+	bool collide();
+
+	void move(int x, int y);
+	void rotate(int matrix[4][4]=NULL);
+	void gravity();
+	void moveRight();
+	void moveLeft();
+	void control(SDL_Event keypress);
+
+	void print();
 
 	int matrix[4][4] = { {0} };
 	int size;
