@@ -19,17 +19,24 @@ void Block::move(int x, int y)
 
 void Block::rotate(int matrix[4][4])
 {
-	int temp[4][4];
+	int temp[4][4] = { {0} };
 	if (matrix == NULL) matrix = this->matrix;
-	copyMatrix(matrix, temp, this->size);
+	copyMatrix(matrix, temp, 4);
 	horizontalReflectioin(matrix,this->size);
 	transpose(matrix, this->size);
+	for (int i = 0; i < this->size; i++)
+	{
+		for (int j = 0; j < this->size; j++)
+		{
+			if (matrix[i][j] && (player1Field[this->y_ + i][this->x_ + j] != 0))
+			{
+				copyMatrix(temp, matrix, 4);
+				break;
+			}
+		}
+	}
 }
 
-bool Block::is_block(int x,int y)
-{
-	return matrix[x][y];
-}
 
 bool Block::collide()
 {	
@@ -37,7 +44,7 @@ bool Block::collide()
 	{
 		for (int j = 0; j < size; j++)
 		{
-			if (matrix[i][j] && (this->y_+j == BOARD_HEIGHT-1)) return true;
+			if (matrix[i][j] && (this->y_+i+1 == BOARD_HEIGHT|| player1Field[this->y_ + i + 1][this->x_+j]!=0)) return true;
 		}
 	}
 	return false;
@@ -73,53 +80,53 @@ void Block::generate(int type)
 	switch (type)
 	{
 	case Z:
-		matrix[0][0] = Z;
-		matrix[0][1] = Z;
-		matrix[1][1] = Z;
-		matrix[1][2] = Z;
+		matrix[0][0] = type;
+		matrix[0][1] = type;
+		matrix[1][1] = type;
+		matrix[1][2] = type;
 		this->size = 3;
 		break;
 	case S:
-		matrix[0][1] = L;
-		matrix[0][2] = L;
-		matrix[1][0] = L;
-		matrix[1][1] = L;
+		matrix[0][1] = type;
+		matrix[0][2] = type;
+		matrix[1][0] = type;
+		matrix[1][1] = type;
 		this->size = 3;
 		break;
 	case J:
-		matrix[0][0] = J;
-		matrix[1][1] = J;
-		matrix[1][2] = J;
-		matrix[1][0] = J;
+		matrix[0][0] = type;
+		matrix[1][1] = type;
+		matrix[1][2] = type;
+		matrix[1][0] = type;
 		this->size = 3;
 		break;
 	case L:
-		matrix[0][2] = L;
-		matrix[1][1] = L;
-		matrix[1][2] = L;
-		matrix[1][0] = L;
+		matrix[0][2] = type;
+		matrix[1][1] = type;
+		matrix[1][2] = type;
+		matrix[1][0] = type;
 		this->size = 3;
 		break;
 	case O:
-		matrix[0][0] = O;
-		matrix[0][1] = O;
-		matrix[1][0] = O;
-		matrix[1][1] = O;
+		matrix[0][0] = type;
+		matrix[0][1] = type;
+		matrix[1][0] = type;
+		matrix[1][1] = type;
 		this->size = 2;
 		break;
 	case I:
-		matrix[1][0] = I;
-		matrix[1][1] = I;
-		matrix[1][2] = I;
-		matrix[1][3] = I;
+		matrix[1][0] = type;
+		matrix[1][1] = type;
+		matrix[1][2] = type;
+		matrix[1][3] = type;
 		this->size = 4;
 		x_--;
 		break;
 	case T:
-		matrix[1][0] = T;
-		matrix[1][1] = T;
-		matrix[1][2] = T;
-		matrix[0][1] = T;
+		matrix[1][0] = type;
+		matrix[1][1] = type;
+		matrix[1][2] = type;
+		matrix[0][1] = type;
 		this->size = 3;
 		break;
 	default:
@@ -137,4 +144,19 @@ int Block::y()
 	return y_;
 }
 
-
+void unite(Block& block)
+{
+	if (block.collide())
+	{
+		for (int i = 0; i < block.size; i++)
+		{
+			for (int j = 0; j < block.size; j++)
+			{
+				if (block.matrix[i][j])
+				{
+					player1Field[block.y_ + i][block.x_ + j] = block.matrix[i][j];
+				}
+			}
+		}
+	}
+}

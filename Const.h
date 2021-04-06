@@ -19,9 +19,9 @@ const int START_HEIGHT = 50;
 
 const int BLOCK_SIZE = 40;
 
-//extern int player1Board[BOARD_HEIGHT][BOARD_WIDTH] = { {0} };
+extern int player1Field[BOARD_HEIGHT][BOARD_WIDTH];
 
-const int FPS = 2;
+const int FPS = 4;
 
 void copyMatrix(int matrix[4][4], int temp[4][4], int size);
 void horizontalReflectioin(int matrix[4][4], int size);

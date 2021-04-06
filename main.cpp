@@ -9,15 +9,15 @@ SDL_Rect BlockRect[BLOCK_TOTAL];
 Texture BlockSheet;
 Texture Board;
 
-int player1Board[BOARD_HEIGHT][BOARD_WIDTH] = { {0} };
+int player1Field[BOARD_HEIGHT][BOARD_WIDTH] = { 0 };
 
 void print()
 {
 	for (int i = 4; i < 24; i++) {
 		for (int j = 0; j < 10; j++) {
-			if (player1Board[i][j] == 0) continue;
-			if (player1Board[i][j] > BLOCK_TOTAL) BlockSheet.render(150 + 40 * j, 50 + 40 * (i - 4), &BlockRect[player1Board[i][j] - BLOCK_TOTAL]);
-			else BlockSheet.render(150 + 40 * j, 50 + 40 * (i - 4), &BlockRect[player1Board[i][j]]);
+			if (player1Field[i][j] == 0) continue;
+			if (player1Field[i][j] > BLOCK_TOTAL) BlockSheet.render(150 + 40 * j, 50 + 40 * (i - 4), &BlockRect[player1Field[i][j] - BLOCK_TOTAL]);
+			else BlockSheet.render(150 + 40 * j, 50 + 40 * (i - 4), &BlockRect[player1Field[i][j]]);
 		}
 	}
 }
@@ -52,13 +52,7 @@ int main(int argc, char* args[])
 
 				while (!quit)
 				{
-					while (SDL_PollEvent(&e) != 0)
-					{
-						if (e.type == SDL_QUIT)
-						{
-							quit = true;
-						}
-					}
+
 
 					SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 					SDL_RenderClear(mainRenderer);
@@ -66,37 +60,26 @@ int main(int argc, char* args[])
 					int tmp = rand() % 7 + 1;
 					block.generate(tmp);
 
-					/*for (int i = 0; i < 20; i++) {
-						block.move(0, 1);
-						Board.render(145, 45, NULL);
-						block.rotate();
-						block.print();
-						SDL_RenderPresent(mainRenderer);
-						SDL_Delay(500);
-
-					}*/
 
 					while (!block.collide())
 					{
 						block.move(0, 1);
 						Board.render(145, 45, NULL);
+						print();
 						block.rotate();
 						block.print();
+						unite(block);
 						SDL_RenderPresent(mainRenderer);
 						SDL_Delay(1000/FPS);
-					}
-					/*while (player1Board[23][4] != 1) {
-						for (int i = 22; i >= 0; i--) {
-							for (int j = 0; j < 10; j++) {
-								player1Board[i + 1][j] = player1Board[i][j];
-								if (i == 0) player1Board[i][j] = 0;
+						while (SDL_PollEvent(&e) != 0)
+						{
+							if (e.type == SDL_QUIT)
+							{
+								quit = true;
 							}
 						}
-						Board.render(145, 45, NULL);
-						print();
-						SDL_RenderPresent(mainRenderer);
-						SDL_Delay(500);
-					}*/
+						if (quit) break;
+					}
 				}
 			}
 

@@ -22,18 +22,20 @@ public:
 	void move(int x, int y);
 	void rotate(int matrix[4][4]=NULL);
 	bool collide();
-	bool is_block(int x, int y);
 	void gravity();
 	void print();
 	void generate(int type);
 
 	int x();
 	int y();
+
 	int matrix[4][4] = { {0} };
-	
-private:
 	int size;
 	int x_;
 	int y_;
+private:
+	
 
 };
+
+void unite(Block &block);
