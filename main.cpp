@@ -58,6 +58,11 @@ int main(int argc, char* args[])
 						e.type = NULL;
 						block.print();
 						SDL_RenderPresent(mainRenderer);
+						if (lineClear()) {
+							Board.render(145, 45, NULL);
+							block.print();
+							SDL_RenderPresent(mainRenderer);
+						}
 						SDL_Delay(1000 / FPS);
 					}
 					unite(block);
