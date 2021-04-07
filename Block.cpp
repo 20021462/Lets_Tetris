@@ -95,7 +95,7 @@ bool Block::collide()
 	{
 		for (int j = 0; j < size; j++)
 		{
-			if (matrix[i][j] && (this->y_ + i + 1 == BOARD_HEIGHT || player1Field[this->y_ + i + 1][this->x_ + j] != 0)) return true;
+			if (matrix[i][j] && (this->y_ + i  == BOARD_HEIGHT || player1Field[this->y_ + i ][this->x_ + j] != 0)) return true;
 		}
 	}
 	return false;
@@ -253,20 +253,19 @@ void printField()
 }
 
 void unite(Block& block)
-{
-	if (block.collide())
+{	
+	block.move(0, -1);
+	for (int i = 0; i < block.size; i++)
 	{
-		for (int i = 0; i < block.size; i++)
+		for (int j = 0; j < block.size; j++)
 		{
-			for (int j = 0; j < block.size; j++)
+			if (block.matrix[i][j])
 			{
-				if (block.matrix[i][j])
-				{
-					player1Field[block.y_ + i][block.x_ + j] = block.matrix[i][j];
-				}
+				player1Field[block.y_ + i][block.x_ + j] = block.matrix[i][j];
 			}
 		}
 	}
+	
 }
 
 void fieldDown(int line)
