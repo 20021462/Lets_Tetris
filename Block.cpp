@@ -1,5 +1,9 @@
 #include "block.h"
 
+int Level = 1;
+int Line = 0;
+int Point = 0;
+
 Block::Block():
 	y_(0),
 	x_(4)
@@ -252,5 +256,53 @@ void unite(Block& block)
 	}
 }
 
+void fieldDown(int line)
+{
+	for (int i = line - 1; i > 0; i--) {
+		for (int j = 0; j < BOARD_WIDTH; j++) {
+			player1Field[i + 1][j] = player1Field[i][j];
+		}
+	}
+	for (int i = 0; i < BOARD_WIDTH; i++) {
+		player1Field[0][i] = 0;
+	}
+}
+
+bool lineClear()
+{
+	int lineFull = 0;
+	bool getPoint = false;
+	bool isFull = true;
+	for (int i = BOARD_HEIGHT - 1; i >= 0; i--) {
+		isFull = true;
+		for (int j = 0; j < BOARD_WIDTH; j++) {
+			if (!player1Field[i][j]) isFull = false;
+		}
+		if (isFull) {
+			fieldDown(i);
+			lineFull++;
+			i++;
+			getPoint = true;
+		}
+	}
+	Line += lineFull;
+	switch (lineFull) 
+	{
+		case 1 : 
+			Point += 1;
+			break;
+		case 2 :
+			Point += 3;
+			break;
+		case 3 :
+			Point += 5;
+			break;
+		case 4 :
+			Point += 8;
+			break;
+	}
+	Level = Point / 5 + 1;
+	return getPoint;
+}
 
 
