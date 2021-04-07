@@ -1,5 +1,12 @@
 #include "render.h"
 
+SDL_Window* mainWindow = NULL;
+SDL_Renderer* mainRenderer = NULL;
+
+SDL_Rect BlockRect[BLOCK_TOTAL];
+Texture BlockSheet;
+Texture Board;
+
 Texture::Texture()
 {
 	mTexture = NULL;

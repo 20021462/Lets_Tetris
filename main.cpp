@@ -1,16 +1,7 @@
 #include "render.h"
 #include "const.h"
 #include "block.h"
-
-SDL_Window* mainWindow = NULL;
-SDL_Renderer* mainRenderer = NULL;
-
-SDL_Rect BlockRect[BLOCK_TOTAL];
-Texture BlockSheet;
-Texture Board;
-
-int player1Field[BOARD_HEIGHT][BOARD_WIDTH] = { 0 };
-
+#include "playerField.h"
 
 int main(int argc, char* args[])
 {

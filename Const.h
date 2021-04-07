@@ -6,8 +6,6 @@
 #include <stdlib.h>
 #include <ctime>
 
-
-
 const int SCREEN_WIDTH = 700;
 const int SCREEN_HEIGHT = 900;
 
@@ -18,8 +16,6 @@ const int START_WIDTH = 150;
 const int START_HEIGHT = 50;
 
 const int BLOCK_SIZE = 40;
-
-extern int player1Field[BOARD_HEIGHT][BOARD_WIDTH];
 
 const int FPS = 4;
 
