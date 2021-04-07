@@ -88,6 +88,9 @@ void generateBlock(int BlockType)
 
 int main(int argc, char* args[])
 {
+	long long time_ = 1;
+	int moveTime = 1;
+	int startTIme = 0;
 
 	srand(time(0));
 	int tmp = rand() % 7 + 1;
@@ -116,7 +119,37 @@ int main(int argc, char* args[])
 
 				while (!quit)
 				{
+<<<<<<< Updated upstream
 					while (SDL_PollEvent(&e) != 0)
+=======
+					SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+					SDL_RenderClear(mainRenderer);
+
+					int tmp = rand() % 7 + 1;
+					block.generate(tmp);
+
+					while (!block.collide())
+					{	
+						
+						if (SDL_GetTicks()/1000 > time_)
+						{	
+							time_ += moveTime;
+							block.move(0, 1);
+						}
+						Board.render(145, 45, NULL);
+						print();
+						SDL_Event e;
+						SDL_PollEvent(&e);
+						block.control(e);
+						e.key.keysym.sym = SDLK_DOWN;
+						block.print();
+						SDL_RenderPresent(mainRenderer);
+						//SDL_Delay(1000 / FPS);
+					}
+					unite(block);
+
+					/*while (SDL_PollEvent(&e) != 0)
+>>>>>>> Stashed changes
 					{
 						if (e.type == SDL_QUIT)
 						{
