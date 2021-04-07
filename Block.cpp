@@ -162,6 +162,14 @@ void Block::gravity()
 	}
 }
 
+void Block::hardDrop()
+{
+	while (!collide())
+	{
+		move(0, 1);
+	}
+}
+
 void Block::moveRight()
 {
 	for (int i = 0; i < size; i++)
@@ -201,6 +209,7 @@ void Block::control(SDL_Event keypress)
 			break;
 		
 		case SDLK_DOWN:
+			move(0, 1);
 			break;
 
 		case SDLK_RIGHT:
@@ -209,6 +218,10 @@ void Block::control(SDL_Event keypress)
 
 		case SDLK_LEFT:
 			moveLeft();
+			break;
+		
+		case SDLK_SPACE:
+			hardDrop();
 			break;
 
 		default:

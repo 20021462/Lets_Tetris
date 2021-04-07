@@ -31,7 +31,7 @@ public:
 	void moveRight();
 	void moveLeft();
 	void control(SDL_Event keypress);
-
+	void hardDrop();
 	void print();
 
 	int matrix[4][4] = { {0} };

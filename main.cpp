@@ -14,7 +14,8 @@ int player1Field[BOARD_HEIGHT][BOARD_WIDTH] = { 0 };
 
 int main(int argc, char* args[])
 {
-
+	int timeMove = 1;
+	long long time_ = 1;
 	srand(time(0));
 	
 	Block block;
@@ -44,18 +45,24 @@ int main(int argc, char* args[])
 					SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 					SDL_RenderClear(mainRenderer);
 
-					int tmp = rand() % 7 + 1;
-					block.generate(tmp);
+					
+					block.generate(rand() % 7 + 1);
 
 					while (!block.collide())
-					{
-						block.move(0, 1);
+					{	
+						
+						if (SDL_GetTicks() / 1000 > time_)
+						{	
+							time_ += timeMove;
+							block.move(0, 1);
+						}
+						
 						Board.render(145, 45, NULL);
 						printField();
 						SDL_Event e;
 						SDL_PollEvent(&e);
 						block.control(e);
-						e.type = NULL;
+						e.key.keysym.sym = NULL;
 						block.print();
 						SDL_RenderPresent(mainRenderer);
 						if (lineClear()) {
@@ -63,7 +70,7 @@ int main(int argc, char* args[])
 							block.print();
 							SDL_RenderPresent(mainRenderer);
 						}
-						SDL_Delay(1000 / FPS);
+						
 					}
 					unite(block);
 
