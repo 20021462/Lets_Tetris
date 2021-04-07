@@ -224,6 +224,17 @@ void Block::print()
 	}
 }
 
+void printField()
+{
+	for (int i = 4; i < 24; i++) {
+		for (int j = 0; j < 10; j++) {
+			if (player1Field[i][j] == 0) continue;
+			else BlockSheet.render(START_WIDTH + BLOCK_SIZE * j, START_HEIGHT + BLOCK_SIZE * (i - 4), &BlockRect[player1Field[i][j]]);
+
+		}
+	}
+}
+
 void unite(Block& block)
 {
 	if (block.collide())

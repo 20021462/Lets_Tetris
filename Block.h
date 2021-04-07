@@ -43,4 +43,5 @@ private:
 
 };
 
+void printField();
 void unite(Block &block);

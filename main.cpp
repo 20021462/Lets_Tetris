@@ -11,16 +11,6 @@ Texture Board;
 
 int player1Field[BOARD_HEIGHT][BOARD_WIDTH] = { 0 };
 
-void print()
-{
-	for (int i = 4; i < 24; i++) {
-		for (int j = 0; j < 10; j++) {
-			if (player1Field[i][j] == 0) continue;
-			if (player1Field[i][j] > BLOCK_TOTAL) BlockSheet.render(150 + 40 * j, 50 + 40 * (i - 4), &BlockRect[player1Field[i][j] - BLOCK_TOTAL]);
-			else BlockSheet.render(150 + 40 * j, 50 + 40 * (i - 4), &BlockRect[player1Field[i][j]]);
-		}
-	}
-}
 
 int main(int argc, char* args[])
 {
@@ -61,7 +51,7 @@ int main(int argc, char* args[])
 					{
 						block.move(0, 1);
 						Board.render(145, 45, NULL);
-						print();
+						printField();
 						SDL_Event e;
 						SDL_PollEvent(&e);
 						block.control(e);
