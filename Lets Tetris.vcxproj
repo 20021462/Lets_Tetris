@@ -148,11 +148,13 @@
     <ClCompile Include="block.cpp" />
     <ClCompile Include="const.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="playerField.cpp" />
     <ClCompile Include="render.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="block.h" />
     <ClInclude Include="const.h" />
+    <ClInclude Include="playerField.h" />
     <ClInclude Include="render.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

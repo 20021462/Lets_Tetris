@@ -63,6 +63,7 @@ int main(int argc, char* args[])
 						}
 						
 					}
+					
 					unite(block);
 
 					/*while (SDL_PollEvent(&e) != 0)

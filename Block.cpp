@@ -92,7 +92,7 @@ bool Block::collide()
 	{
 		for (int j = 0; j < size; j++)
 		{
-			if (matrix[i][j] && (this->y_ + i + 1 == BOARD_HEIGHT || player1Field[this->y_ + i + 1][this->x_ + j] != 0)) return true;
+			if (matrix[i][j] && (this->y_ + i == BOARD_HEIGHT || player1Field[this->y_ + i][this->x_ + j] != 0)) return true;
 		}
 	}
 	return false;
@@ -237,7 +237,4 @@ void Block::print()
 		}
 	}
 }
-
-
-
 

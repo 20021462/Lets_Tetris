@@ -19,19 +19,18 @@ void printField()
 
 void unite(Block& block)
 {
-	if (block.collide())
+	block.move(0, -1);
+	for (int i = 0; i < block.size; i++)
 	{
-		for (int i = 0; i < block.size; i++)
+		for (int j = 0; j < block.size; j++)
 		{
-			for (int j = 0; j < block.size; j++)
+			if (block.matrix[i][j])
 			{
-				if (block.matrix[i][j])
-				{
-					player1Field[block.y_ + i][block.x_ + j] = block.matrix[i][j];
-				}
+				player1Field[block.y_ + i][block.x_ + j] = block.matrix[i][j];
 			}
 		}
 	}
+
 }
 
 void fieldDown(int line)

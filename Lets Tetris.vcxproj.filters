@@ -27,6 +27,9 @@
     <ClCompile Include="const.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="playerField.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="render.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="const.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="playerField.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
