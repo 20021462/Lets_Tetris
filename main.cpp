@@ -5,8 +5,7 @@
 
 int main(int argc, char* args[])
 {
-	int timeMove = 1;
-	long long time_ = 1;
+	long double time_ = Time;
 	srand(time(0));
 	
 	Block block;
@@ -44,7 +43,7 @@ int main(int argc, char* args[])
 						
 						if (SDL_GetTicks() / 1000 > time_)
 						{	
-							time_ += timeMove;
+							time_ += Time;
 							block.move(0, 1);
 						}
 						
