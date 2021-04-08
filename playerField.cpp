@@ -78,7 +78,7 @@ bool lineClear()
 		Point += 8;
 		break;
 	}
-	Level = Point / 5 + 1;
+	Level = Point / 10 + 1;
 	Time = pow(0.8 - (Level - 1) * 0.007, Level - 1);
 	return getPoint;
 }

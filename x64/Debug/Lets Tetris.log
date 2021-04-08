@@ -1,7 +1,2 @@
-﻿  block.cpp
-  main.cpp
-D:\Lets_Tetris\main.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  playerField.cpp
-  Generating Code...
-  LINK : D:\Lets_Tetris\x64\Debug\Lets Tetris.exe not found or not built by the last incremental link; performing full link
+﻿  playerField.cpp
   Lets Tetris.vcxproj -> D:\Lets_Tetris\x64\Debug\Lets Tetris.exe

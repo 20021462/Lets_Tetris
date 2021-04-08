@@ -12,5 +12,3 @@ void printField();
 void unite(Block& block);
 void fieldDown(int line);
 bool lineClear();
-
-
