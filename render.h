@@ -54,8 +54,4 @@ extern SDL_Rect BlockRect[BLOCK_TOTAL];
 extern Texture BlockSheet;
 extern Texture Board;
 
-void print();
-
-void generateBlock(int BlockType);
-
 #pragma once

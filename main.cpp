@@ -7,7 +7,7 @@ int main(int argc, char* args[])
 {
 	long double time_ = Time;
 	srand(time(0));
-	
+
 	Block block;
 
 	if (!initSDL())
@@ -29,6 +29,7 @@ int main(int argc, char* args[])
 			else
 			{
 				bool quit = false;
+				SDL_Event e;
 
 				while (!quit)
 				{
@@ -49,9 +50,9 @@ int main(int argc, char* args[])
 						
 						Board.render(145, 45, NULL);
 						printField();
-						SDL_Event e;
 						SDL_PollEvent(&e);
 						block.control(e);
+						e.type = NULL;
 						e.key.keysym.sym = NULL;
 						block.print();
 						SDL_RenderPresent(mainRenderer);

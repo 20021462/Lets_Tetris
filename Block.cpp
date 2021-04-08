@@ -232,7 +232,7 @@ void Block::print()
 		for (int j = 0; j < 4; j++) {
 			if (matrix[i][j] == 0) continue;
 			int x_print = START_WIDTH + (x_ + j) * BLOCK_SIZE;
-			int y_print = START_HEIGHT + (y_ + i - 4) * BLOCK_SIZE;
+			int y_print = START_HEIGHT + (y_ + i - 2) * BLOCK_SIZE;
 			if (y_print >= START_HEIGHT) BlockSheet.render(x_print, y_print, &BlockRect[matrix[i][j]]);
 		}
 	}

@@ -10,7 +10,7 @@ const int SCREEN_WIDTH = 700;
 const int SCREEN_HEIGHT = 900;
 
 const int BOARD_WIDTH = 10;
-const int BOARD_HEIGHT = 24;
+const int BOARD_HEIGHT = 22;
 
 const int START_WIDTH = 150;
 const int START_HEIGHT = 50;

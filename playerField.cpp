@@ -8,10 +8,10 @@ double Time = 1;
 
 void printField()
 {
-	for (int i = 4; i < 24; i++) {
-		for (int j = 0; j < 10; j++) {
+	for (int i = 2; i < BOARD_HEIGHT; i++) {
+		for (int j = 0; j < BOARD_WIDTH; j++) {
 			if (player1Field[i][j] == 0) continue;
-			else BlockSheet.render(START_WIDTH + BLOCK_SIZE * j, START_HEIGHT + BLOCK_SIZE * (i - 4), &BlockRect[player1Field[i][j]]);
+			else BlockSheet.render(START_WIDTH + BLOCK_SIZE * j, START_HEIGHT + BLOCK_SIZE * (i - 2), &BlockRect[player1Field[i][j]]);
 
 		}
 	}
