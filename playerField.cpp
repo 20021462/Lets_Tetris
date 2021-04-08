@@ -79,6 +79,6 @@ bool lineClear()
 		break;
 	}
 	Level = Point / 10 + 1;
-	Time = pow(0.8 - (Level - 1) * 0.007, Level - 1);
+	Time = max(pow(0.8 - (Level - 1) * 0.007, Level - 1), 0.00706);
 	return getPoint;
 }
