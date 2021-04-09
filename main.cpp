@@ -35,17 +35,17 @@ int main(int argc, char* args[])
 				MainScreen.render(0, 0, NULL);
 				OptionBox.render(785, 950, NULL);
 				SDL_RenderPresent(mainRenderer);
-				SDL_Delay(500);
-				time_ += 5;
+				SDL_Delay(1000);
+				time_ += 1000;
 				showMainScreen = false;
 			}
 
 			block.generate(rand() % 7 + 1);
 			while (!block.collide())
 			{
-				if (SDL_GetTicks() / 1000 > time_)
+				if (SDL_GetTicks() > time_)
 				{
-					time_ += Time;
+					time_ += 500;
 					block.move(0, 1);
 				}
 				MainScreen.render(0, 0, NULL);

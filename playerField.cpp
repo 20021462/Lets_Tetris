@@ -4,7 +4,7 @@ int player1Field[BOARD_HEIGHT][BOARD_WIDTH] = { 0 };
 int Level = 1;
 int Line = 0;
 int Point = 0;
-double Time = 1;
+double Time = 0;
 
 void printField()
 {
@@ -79,7 +79,7 @@ bool lineClear()
 		break;
 	}
 	Level = Point / 10 + 1;
-	Time = max(pow(0.8 - (Level - 1) * 0.007, Level - 1), 0.00706);
+	Time = max(pow(0.8 - (Level - 1) * 0.007, Level - 1), 0.00706)*1000;
 	return getPoint;
 }
 
