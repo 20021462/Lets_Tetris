@@ -110,14 +110,42 @@ int main(int argc, char* args[])
 		{
 			if (!loadBlock())
 			{
+<<<<<<< Updated upstream
 				cout << "Failed to load block sheet" << endl;
+=======
+				MainScreen.render(0, 0, NULL);
+				OptionBox.render(785, 600, NULL);
+				SDL_RenderPresent(mainRenderer);
+				SDL_Delay(1000);
+				time_ += 1000;
+				showMainScreen = false;
+>>>>>>> Stashed changes
 			}
 			else
 			{
+<<<<<<< Updated upstream
 				bool quit = false;
 				SDL_Event e;
 
 				while (!quit)
+=======
+				if (SDL_GetTicks() > time_)
+				{
+					time_ += Time;
+					block.move(0,1);
+				}
+
+				MainScreen.render(0, 0, NULL);
+				Board.render(750, 135, NULL);
+				printField();
+				SDL_PollEvent(&e);
+				if (e.type == SDL_QUIT)
+				{
+					quit = true;
+					break;
+				}
+				if (e.type == SDL_KEYDOWN)
+>>>>>>> Stashed changes
 				{
 <<<<<<< Updated upstream
 					while (SDL_PollEvent(&e) != 0)
@@ -173,6 +201,22 @@ int main(int argc, char* args[])
 						SDL_Delay(500);
 					}
 				}
+<<<<<<< Updated upstream
+=======
+				//block.control(e);
+				e.type = NULL;
+				
+				shade(block); 
+				if(!block.collide())block.print();
+				SDL_RenderPresent(mainRenderer);
+				if (lineClear()) {
+					MainScreen.render(0, 0, NULL);
+					Board.render(750, 135, NULL);
+					block.print();
+					SDL_RenderPresent(mainRenderer);
+				}
+
+>>>>>>> Stashed changes
 			}
 
 		}

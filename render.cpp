@@ -119,7 +119,11 @@ void close()
 
 bool loadBlock()
 {
+<<<<<<< Updated upstream
 	if (!BlockSheet.loadFromFile("texture/Block.png"))
+=======
+	if (!BlockSheet.loadFromFile("texture/pastel_block.png")||!ShadeSheet.loadFromFile("texture/pastel_shade_3.png"))
+>>>>>>> Stashed changes
 	{
 		cout << "Failed to load block sheet" << endl;
 		return false;

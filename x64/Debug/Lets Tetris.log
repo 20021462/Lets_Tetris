@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ﻿  block.cpp
 <<<<<<< Updated upstream
   const.cpp
@@ -6,5 +7,11 @@ D:\C++\Lets_Tetris\main.cpp(92,12): warning C4244: 'argument': conversion from '
   render.cpp
   Generating Code...
 =======
+>>>>>>> Stashed changes
+=======
+﻿  main.cpp
+D:\C++\Lets_Tetris\main.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  playerField.cpp
+  Generating Code...
 >>>>>>> Stashed changes
   Lets Tetris.vcxproj -> D:\C++\Lets_Tetris\x64\Debug\Lets Tetris.exe
