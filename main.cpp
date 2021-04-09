@@ -83,6 +83,7 @@ int main(int argc, char* args[])
 						e.type = NULL;
 						//e.key.keysym.sym = NULL;
 						block.print();
+						shade(block);
 						SDL_RenderPresent(mainRenderer);
 						if (lineClear()) {
 							Board.render(145, 45, NULL);

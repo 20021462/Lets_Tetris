@@ -82,3 +82,16 @@ bool lineClear()
 	Time = max(pow(0.8 - (Level - 1) * 0.007, Level - 1), 0.00706);
 	return getPoint;
 }
+
+void shade(Block& block)
+{
+	Block temp = block;
+	for (int i = 0; i < temp.size; i++)
+		for (int j = 0; j < temp.size; j++)
+		{ 
+			if (temp.matrix[i][j]) temp.matrix[i][j] = 8;
+		}
+	temp.hardDrop();
+	temp.y_--;
+	temp.print();
+}

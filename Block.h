@@ -33,6 +33,7 @@ public:
 	void control(SDL_Event keypress);
 	void hardDrop();
 	void print();
+	
 
 	int matrix[4][4] = { {0} };
 	int size;
@@ -40,10 +41,4 @@ public:
 	int y_;
 private:
 	
-
 };
-
-void printField();
-void unite(Block &block);
-void fieldDown(int line);
-bool lineClear();
