@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="block.cpp" />
+    <ClCompile Include="button.cpp" />
     <ClCompile Include="const.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="playerField.cpp" />
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="block.h" />
+    <ClInclude Include="button.h" />
     <ClInclude Include="const.h" />
     <ClInclude Include="playerField.h" />
     <ClInclude Include="render.h" />

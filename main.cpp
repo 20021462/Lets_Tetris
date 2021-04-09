@@ -17,7 +17,7 @@ int main(int argc, char* args[])
 	else
 	{
 		MainScreen.loadFromFile("texture/homescreen.png");
-		OptionBox.loadFromFile("texture/option_box.png");
+		OptionBox.loadFromFile("texture/option_box_1.png");
 		Board.loadFromFile("texture/pastel_pf.png");
 		loadBlock();
 
@@ -33,7 +33,7 @@ int main(int argc, char* args[])
 			if (showMainScreen)
 			{
 				MainScreen.render(0, 0, NULL);
-				OptionBox.render(785, 600, NULL);
+				OptionBox.render(785, 950, NULL);
 				SDL_RenderPresent(mainRenderer);
 				SDL_Delay(5000);
 				time_ += 5;
