@@ -22,8 +22,8 @@ Button::~Button()
 
 void Button::render()
 {
-	if (buttonChoice != userChoice) buttonTexture.render(x, y, ButtonTexture[NORMAL]);
-	else buttonTexture.render(x, y, ButtonTexture[CHOSEN]);
+	if (buttonChoice != userChoice) buttonTexture.render(x, y, &ButtonTexture[NORMAL]);
+	else buttonTexture.render(x, y, &ButtonTexture[CHOSEN]);
 }
 
 void loadButton()
