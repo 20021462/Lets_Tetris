@@ -6,14 +6,14 @@
 #include <stdlib.h>
 #include <ctime>
 
-const int SCREEN_WIDTH = 700;
-const int SCREEN_HEIGHT = 900;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1080;
 
 const int BOARD_WIDTH = 10;
 const int BOARD_HEIGHT = 22;
 
-const int START_WIDTH = 150;
-const int START_HEIGHT = 50;
+const int START_WIDTH = 755;
+const int START_HEIGHT = 140;
 
 const int BLOCK_SIZE = 40;
 
