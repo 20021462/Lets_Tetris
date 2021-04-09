@@ -21,42 +21,42 @@ void Block::generate(int type)
 	copyMatrix(temp, matrix, size);
 	switch (type)
 	{
-	case Z:
+	case BLOCK_Z:
 		matrix[0][0] = type;
 		matrix[0][1] = type;
 		matrix[1][1] = type;
 		matrix[1][2] = type;
 		this->size = 3;
 		break;
-	case S:
+	case BLOCK_S:
 		matrix[0][1] = type;
 		matrix[0][2] = type;
 		matrix[1][0] = type;
 		matrix[1][1] = type;
 		this->size = 3;
 		break;
-	case J:
+	case BLOCK_J:
 		matrix[0][0] = type;
 		matrix[1][1] = type;
 		matrix[1][2] = type;
 		matrix[1][0] = type;
 		this->size = 3;
 		break;
-	case L:
+	case BLOCK_L:
 		matrix[0][2] = type;
 		matrix[1][1] = type;
 		matrix[1][2] = type;
 		matrix[1][0] = type;
 		this->size = 3;
 		break;
-	case O:
+	case BLOCK_O:
 		matrix[0][0] = type;
 		matrix[0][1] = type;
 		matrix[1][0] = type;
 		matrix[1][1] = type;
 		this->size = 2;
 		break;
-	case I:
+	case BLOCK_I:
 		matrix[1][0] = type;
 		matrix[1][1] = type;
 		matrix[1][2] = type;
@@ -64,7 +64,7 @@ void Block::generate(int type)
 		this->size = 4;
 		x_--;
 		break;
-	case T:
+	case BLOCK_T:
 		matrix[1][0] = type;
 		matrix[1][1] = type;
 		matrix[1][2] = type;
@@ -242,3 +242,14 @@ void Block::print()
 	}
 }
 
+void Block::printShade()
+{
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (matrix[i][j] == 0) continue;
+			int x_print = START_WIDTH + (x_ + j) * BLOCK_SIZE;
+			int y_print = START_HEIGHT + (y_ + i - 2) * BLOCK_SIZE;
+			if (y_print >= START_HEIGHT) ShadeSheet.render(x_print, y_print, &BlockRect[matrix[i][j]]);
+		}
+	}
+}
