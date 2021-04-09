@@ -1,7 +1,14 @@
-﻿  button.cpp
-D:\Lets_Tetris\button.cpp(25,82): error C2664: 'void Texture::render(int,int,SDL_Rect *)': cannot convert argument 3 from 'SDL_Rect' to 'SDL_Rect *'
-D:\Lets_Tetris\button.cpp(25,81): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-D:\Lets_Tetris\render.h(42,7): message : see declaration of 'Texture::render'
-D:\Lets_Tetris\button.cpp(26,55): error C2664: 'void Texture::render(int,int,SDL_Rect *)': cannot convert argument 3 from 'SDL_Rect' to 'SDL_Rect *'
-D:\Lets_Tetris\button.cpp(26,54): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-D:\Lets_Tetris\render.h(42,7): message : see declaration of 'Texture::render'
+﻿  block.cpp
+  button.cpp
+D:\C++\Lets_Tetris\button.cpp(25,82): error C2664: 'void Texture::render(int,int,SDL_Rect *)': cannot convert argument 3 from 'SDL_Rect' to 'SDL_Rect *'
+D:\C++\Lets_Tetris\button.cpp(25,81): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\C++\Lets_Tetris\render.h(42,7): message : see declaration of 'Texture::render'
+D:\C++\Lets_Tetris\button.cpp(26,55): error C2664: 'void Texture::render(int,int,SDL_Rect *)': cannot convert argument 3 from 'SDL_Rect' to 'SDL_Rect *'
+D:\C++\Lets_Tetris\button.cpp(26,54): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\C++\Lets_Tetris\render.h(42,7): message : see declaration of 'Texture::render'
+  const.cpp
+  main.cpp
+D:\C++\Lets_Tetris\main.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  playerField.cpp
+  render.cpp
+  Generating Code...
