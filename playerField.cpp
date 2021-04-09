@@ -86,12 +86,8 @@ bool lineClear()
 void shade(Block& block)
 {
 	Block temp = block;
-	for (int i = 0; i < temp.size; i++)
-		for (int j = 0; j < temp.size; j++)
-		{ 
-			if (temp.matrix[i][j]) temp.matrix[i][j] = 8;
-		}
+	
 	temp.hardDrop();
 	temp.y_--;
-	temp.print();
+	temp.printShade();
 }

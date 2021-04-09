@@ -87,8 +87,8 @@ int main(int argc, char* args[])
 				}
 				//block.control(e);
 				e.type = NULL;
+				shade(block); 
 				block.print();
-				shade(block);
 				SDL_RenderPresent(mainRenderer);
 				if (lineClear()) {
 					MainScreen.render(0, 0, NULL);

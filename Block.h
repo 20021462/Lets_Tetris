@@ -5,16 +5,6 @@
 class Block
 {
 public:
-	enum Block_type
-	{
-		Z=1,
-		S,
-		J,
-		L,
-		O,
-		I,
-		T,
-	};
 
 	Block();
 	~Block();
@@ -33,6 +23,7 @@ public:
 	void control(SDL_Event &keypress);
 	void hardDrop();
 	void print();
+	void printShade();
 	
 
 	int matrix[4][4] = { {0} };

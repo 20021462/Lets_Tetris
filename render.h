@@ -10,8 +10,7 @@ extern SDL_Renderer* mainRenderer;
 
 enum BlockType
 {
-	EMPTY,
-	BLOCK_Z,
+	BLOCK_Z=1,
 	BLOCK_S,
 	BLOCK_J,
 	BLOCK_L,
@@ -55,7 +54,7 @@ extern Texture BlockSheet;
 extern Texture Board;
 extern Texture MainScreen;
 extern Texture OptionBox;
-
+extern Texture ShadeSheet;
 
 
 #pragma once

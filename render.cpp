@@ -5,6 +5,7 @@ SDL_Renderer* mainRenderer = NULL;
 
 SDL_Rect BlockRect[BLOCK_TOTAL];
 Texture BlockSheet;
+Texture ShadeSheet;
 Texture Board;
 Texture MainScreen;
 Texture OptionBox;
@@ -131,7 +132,7 @@ void close()
 
 bool loadBlock()
 {
-	if (!BlockSheet.loadFromFile("texture/pastel_block.png"))
+	if (!BlockSheet.loadFromFile("texture/pastel_block.png")||!ShadeSheet.loadFromFile("texture/pastel_shade.png"))
 	{
 		cout << "Failed to load block sheet" << endl;
 		return false;
