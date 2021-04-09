@@ -35,7 +35,7 @@ int main(int argc, char* args[])
 				MainScreen.render(0, 0, NULL);
 				OptionBox.render(785, 950, NULL);
 				SDL_RenderPresent(mainRenderer);
-				SDL_Delay(5000);
+				SDL_Delay(500);
 				time_ += 5;
 				showMainScreen = false;
 			}
@@ -87,8 +87,10 @@ int main(int argc, char* args[])
 				}
 				//block.control(e);
 				e.type = NULL;
+				
 				shade(block); 
-				block.print();
+				//if(!block.collide())
+					block.print();
 				SDL_RenderPresent(mainRenderer);
 				if (lineClear()) {
 					MainScreen.render(0, 0, NULL);
