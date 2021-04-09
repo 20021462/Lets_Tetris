@@ -84,7 +84,10 @@ int main(int argc, char* args[])
 						//e.key.keysym.sym = NULL;
 						block.print();
 <<<<<<< HEAD
+<<<<<<< HEAD
 						shade(block);
+=======
+>>>>>>> parent of 4ddebcf (8:38 9/4/21)
 =======
 >>>>>>> parent of 4ddebcf (8:38 9/4/21)
 						SDL_RenderPresent(mainRenderer);
