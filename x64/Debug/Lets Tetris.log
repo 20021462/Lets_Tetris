@@ -1,3 +1,13 @@
-﻿  main.cpp
-D:\Lets_Tetris\main.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Lets Tetris.vcxproj -> D:\Lets_Tetris\x64\Debug\Lets Tetris.exe
+﻿  block.cpp
+  const.cpp
+  main.cpp
+D:\C++\Lets_Tetris\main.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\C++\Lets_Tetris\main.cpp(19,3): error C2065: 'MainScreen': undeclared identifier
+D:\C++\Lets_Tetris\main.cpp(20,3): error C2065: 'OptionBox': undeclared identifier
+D:\C++\Lets_Tetris\main.cpp(35,5): error C2065: 'MainScreen': undeclared identifier
+D:\C++\Lets_Tetris\main.cpp(36,5): error C2065: 'OptionBox': undeclared identifier
+D:\C++\Lets_Tetris\main.cpp(51,5): error C2065: 'MainScreen': undeclared identifier
+D:\C++\Lets_Tetris\main.cpp(94,6): error C2065: 'MainScreen': undeclared identifier
+  playerField.cpp
+  render.cpp
+  Generating Code...
