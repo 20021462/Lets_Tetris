@@ -6,8 +6,6 @@ SDL_Renderer* mainRenderer = NULL;
 SDL_Rect BlockRect[BLOCK_TOTAL];
 Texture BlockSheet;
 Texture Board;
-Texture MainScreen;
-Texture OptionBox;
 
 Texture::Texture()
 {
@@ -116,9 +114,6 @@ bool initSDL()
 void close()
 {
 	BlockSheet.free();
-	MainScreen.free();
-	OptionBox.free();
-
 
 	SDL_DestroyRenderer(mainRenderer);
 	SDL_DestroyWindow(mainWindow);

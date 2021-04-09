@@ -197,37 +197,33 @@ void Block::moveLeft()
 	move(-1, 0);
 }
 
-void Block::control(SDL_Event &keypress)
+void Block::control(SDL_Event keypress)
 {
-	if (keypress.type == SDL_KEYDOWN && keypress.key.repeat == 0)
+	switch (keypress.key.keysym.sym)
 	{
-		switch (keypress.key.keysym.sym)
-		{
-			case SDLK_UP:
-				rotate(matrix);
-				break;
+		case SDLK_UP:
+			rotate(matrix);
+			break;
+		
+		case SDLK_DOWN:
+			move(0, 1);
+			break;
 
-			case SDLK_DOWN:
-				move(0, 1);
-				break;
+		case SDLK_RIGHT:
+			moveRight();
+			break;
 
-			case SDLK_RIGHT:
-				moveRight();
-				break;
+		case SDLK_LEFT:
+			moveLeft();
+			break;
+		
+		case SDLK_SPACE:
+			hardDrop();
+			break;
 
-			case SDLK_LEFT:
-				moveLeft();
-				break;
-
-			case SDLK_SPACE:
-				hardDrop();
-				break;
-
-			default:
-				break;
-		}
+		default:
+			break;
 	}
-
 }
 
 void Block::print()
