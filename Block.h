@@ -30,7 +30,7 @@ public:
 	void gravity();
 	void moveRight();
 	void moveLeft();
-	void control(SDL_Event keypress);
+	void control(SDL_Event &keypress);
 	void hardDrop();
 	void print();
 	
