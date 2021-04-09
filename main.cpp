@@ -16,86 +16,90 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		if (!Board.loadFromFile("texture/pastel_pf.png"))
-		{
-			cout << "Failed to load board" << endl;
-		}
-		else
-		{
-			if (!loadBlock())
-			{
-				cout << "Failed to load block sheet" << endl;
-			}
-			else
-			{
-				bool quit = false;
-				SDL_Event e;
+		MainScreen.loadFromFile("texture/homescreen.png");
+		OptionBox.loadFromFile("texture/option_box.png");
+		Board.loadFromFile("texture/pastel_pf.png");
+		loadBlock();
 
-				while (!quit)
+		bool quit = false;
+		SDL_Event e;
+		bool showMainScreen = true;
+
+		while (!quit)
+		{
+			SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+			SDL_RenderClear(mainRenderer);
+			
+			if (showMainScreen)
+			{
+				MainScreen.render(0, 0, NULL);
+				OptionBox.render(785, 600, NULL);
+				SDL_RenderPresent(mainRenderer);
+				SDL_Delay(5000);
+				time_ += 5;
+				showMainScreen = false;
+			}
+
+			block.generate(rand() % 7 + 1);
+			while (!block.collide())
+			{
+				if (SDL_GetTicks() / 1000 > time_)
 				{
-					SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-					SDL_RenderClear(mainRenderer);
-
-					
-					block.generate(rand() % 7 + 1);
-
-					while (!block.collide())
-					{	
-						
-						if (SDL_GetTicks() / 1000 > time_)
-						{	
-							time_ += Time;
-							block.move(0, 1);
-						}
-						
-						Board.render(145, 45, NULL);
-						printField();
-						SDL_PollEvent(&e);
-						if (e.type == SDL_KEYDOWN)
-						{
-							switch (e.key.keysym.sym)
-							{
-								case SDLK_UP:
-									block.rotate(block.matrix);
-									break;
-
-								case SDLK_DOWN:
-									block.move(0, 1);
-									break;
-
-								case SDLK_RIGHT:
-									block.moveRight();
-									break;
-
-								case SDLK_LEFT:
-									block.moveLeft();
-									break;
-
-								case SDLK_SPACE:
-									block.hardDrop();
-									break;
-
-								default:
-									break;
-							}
-						}
-						//block.control(e);
-						e.type = NULL;
-						//e.key.keysym.sym = NULL;
-						block.print();
-						shade(block);
-						SDL_RenderPresent(mainRenderer);
-						if (lineClear()) {
-							Board.render(145, 45, NULL);
-							block.print();
-							SDL_RenderPresent(mainRenderer);
-						}
-						
-					}
-					
-					unite(block);
+					time_ += Time;
+					block.move(0, 1);
 				}
+				MainScreen.render(0, 0, NULL);
+				Board.render(750, 135, NULL);
+				printField();
+				SDL_PollEvent(&e);
+				if (e.type == SDL_QUIT)
+				{
+					quit = true;
+					break;
+				}
+				if (e.type == SDL_KEYDOWN)
+				{
+					switch (e.key.keysym.sym)
+					{
+					case SDLK_UP:
+						block.rotate(block.matrix);
+						break;
+
+					case SDLK_DOWN:
+						block.move(0, 1);
+						break;
+
+					case SDLK_RIGHT:
+						block.moveRight();
+						break;
+
+					case SDLK_LEFT:
+						block.moveLeft();
+						break;
+
+					case SDLK_SPACE:
+						block.hardDrop();
+						break;
+
+					default:
+						break;
+					}
+				}
+				//block.control(e);
+				e.type = NULL;
+				block.print();
+				shade(block);
+				SDL_RenderPresent(mainRenderer);
+				if (lineClear()) {
+					MainScreen.render(0, 0, NULL);
+					Board.render(750, 135, NULL);
+					block.print();
+					SDL_RenderPresent(mainRenderer);
+				}
+
 			}
+
+			unite(block);
 
 		}
 	}
