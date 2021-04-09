@@ -53,9 +53,5 @@ private:
 extern SDL_Rect BlockRect[BLOCK_TOTAL];
 extern Texture BlockSheet;
 extern Texture Board;
-extern Texture MainScreen;
-extern Texture OptionBox;
-
-
 
 #pragma once

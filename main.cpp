@@ -83,7 +83,10 @@ int main(int argc, char* args[])
 						e.type = NULL;
 						//e.key.keysym.sym = NULL;
 						block.print();
+<<<<<<< HEAD
 						shade(block);
+=======
+>>>>>>> parent of 4ddebcf (8:38 9/4/21)
 						SDL_RenderPresent(mainRenderer);
 						if (lineClear()) {
 							Board.render(145, 45, NULL);
