@@ -8,7 +8,6 @@ Texture BlockSheet;
 Texture ShadeSheet;
 Texture Board;
 Texture MainScreen;
-Texture OptionBox;
 
 Texture::Texture()
 {
@@ -118,8 +117,6 @@ void close()
 {
 	BlockSheet.free();
 	MainScreen.free();
-	OptionBox.free();
-
 
 	SDL_DestroyRenderer(mainRenderer);
 	SDL_DestroyWindow(mainWindow);
