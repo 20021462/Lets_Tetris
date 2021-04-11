@@ -3,7 +3,6 @@
 #include "Block.h"
 
 extern int userChoice;
-extern int gameModeChosen;
 
 
 enum ButtonChoice
@@ -28,7 +27,7 @@ public:
 	Button();
 	~Button();
 
-	int buttonId;
+	int buttonChoice;
 	int x, y;
 	Texture buttonTexture;
 
@@ -37,10 +36,6 @@ public:
 private:
 
 };
-
-void loadButton();
-void printButton();
-void controlButton(SDL_Event& keypress);
 
 extern SDL_Rect ButtonTexture[STATE_TOTAL];
 extern Button buttonChoice[CHOOSE_TOTAL];
