@@ -86,13 +86,14 @@ int Block::y()
 	return y_;
 }
 
-bool Block::collide()
+
+bool Block::collide(int(*field)[10])
 {
 	for (int i = 0; i < size; i++)
 	{
 		for (int j = 0; j < size; j++)
 		{
-			if (matrix[i][j] && (this->y_ + i == BOARD_HEIGHT || player1Field[this->y_ + i][this->x_ + j] != 0)) return true;
+			if (matrix[i][j] && (this->y_ + i == BOARD_HEIGHT || field[this->y_ + i][this->x_ + j] != 0)) return true;
 		}
 	}
 	return false;
@@ -104,7 +105,7 @@ void Block::move(int x, int y)
 	y_ += y;
 }
 
-void Block::rotate(int matrix[4][4])
+void Block::rotate(int matrix[4][4], int(*field)[10])
 {
 	int temp[4][4] = { {0} };
 	if (matrix == NULL) matrix = this->matrix;
@@ -140,7 +141,7 @@ void Block::rotate(int matrix[4][4])
 	{
 		for (int j = 0; j < this->size; j++)
 		{
-			if (matrix[i][j] && ((this->y_ + i >= BOARD_HEIGHT) || (player1Field[this->y_ + i][this->x_ + j] != 0)))
+			if (matrix[i][j] && ((this->y_ + i >= BOARD_HEIGHT) || (field[this->y_ + i][this->x_ + j] != 0)))
 			{
 				copyMatrix(temp, matrix, 4);
 				move(-xMove, 0);
@@ -151,29 +152,21 @@ void Block::rotate(int matrix[4][4])
 	}
 }
 
-void Block::gravity()
+void Block::hardDrop(int(*field)[10])
 {
-	if (!collide())
+	while (!collide(field))
 	{
 		move(0, 1);
 	}
 }
 
-void Block::hardDrop()
-{
-	while (!collide())
-	{
-		move(0, 1);
-	}
-}
-
-void Block::moveRight()
+void Block::moveRight(int(*field)[10])
 {
 	for (int i = 0; i < size; i++)
 	{
 		for (int j = 0; j < size; j++)
 		{
-			if (matrix[i][j] && ((this->x_ + j + 1 == BOARD_WIDTH) || (player1Field[this->y_ + i][this->x_ + j + 1] != 0)))
+			if (matrix[i][j] && ((this->x_ + j + 1 == BOARD_WIDTH) || (field[this->y_ + i][this->x_ + j + 1] != 0)))
 			{
 				return;
 			}
@@ -182,13 +175,13 @@ void Block::moveRight()
 	move(1, 0);
 }
 
-void Block::moveLeft()
+void Block::moveLeft(int(*field)[10])
 {
 	for (int i = 0; i < size; i++)
 	{
 		for (int j = 0; j < size; j++)
 		{
-			if (matrix[i][j] && ((this->x_ + j == 0) || (player1Field[this->y_ + i][this->x_ + j - 1] != 0)))
+			if (matrix[i][j] && ((this->x_ + j == 0) || (field[this->y_ + i][this->x_ + j - 1] != 0)))
 			{
 				return;
 			}
@@ -197,7 +190,7 @@ void Block::moveLeft()
 	move(-1, 0);
 }
 
-void Block::control(SDL_Event &keypress)
+/*void Block::control(SDL_Event &keypress)
 {
 	if (keypress.type == SDL_KEYDOWN && keypress.key.repeat == 0)
 	{
@@ -228,7 +221,7 @@ void Block::control(SDL_Event &keypress)
 		}
 	}
 
-}
+}*/
 
 void Block::print()
 {
@@ -253,3 +246,4 @@ void Block::printShade()
 		}
 	}
 }
+

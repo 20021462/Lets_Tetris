@@ -13,15 +13,14 @@ public:
 	int x();
 	int y();
 
-	bool collide();
+	bool collide(int(*field)[10]);
 
 	void move(int x, int y);
-	void rotate(int matrix[4][4]=NULL);
-	void gravity();
-	void moveRight();
-	void moveLeft();
+	void rotate(int matrix[4][4] = NULL, int (*field)[10] = NULL);
+	void moveRight(int(*field)[10]);
+	void moveLeft(int(*field)[10]);
 	void control(SDL_Event &keypress);
-	void hardDrop();
+	void hardDrop(int(*field)[10]);
 	void print();
 	void printShade();
 	

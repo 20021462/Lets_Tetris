@@ -1,23 +1,21 @@
 #include "playerField.h"
 
-int player1Field[BOARD_HEIGHT][BOARD_WIDTH] = { 0 };
-int Level = 1;
-int Line = 0;
-int Point = 0;
-double Time = 1000;
+Field onePlayerMode;
+Field playerOneField;
+Field playerTwoField;
 
-void printField()
+void Field::printField()
 {
 	for (int i = 2; i < BOARD_HEIGHT; i++) {
 		for (int j = 0; j < BOARD_WIDTH; j++) {
-			if (player1Field[i][j] == 0) continue;
-			else BlockSheet.render(START_WIDTH + BLOCK_SIZE * j, START_HEIGHT + BLOCK_SIZE * (i - 2), &BlockRect[player1Field[i][j]]);
+			if (fieldMatrix[i][j] == 0) continue;
+			else BlockSheet.render(START_WIDTH + BLOCK_SIZE * j, START_HEIGHT + BLOCK_SIZE * (i - 2), &BlockRect[fieldMatrix[i][j]]);
 
 		}
 	}
 }
 
-void unite(Block& block)
+void Field::unite(Block& block)
 {
 	block.move(0, -1);
 	for (int i = 0; i < block.size; i++)
@@ -26,26 +24,26 @@ void unite(Block& block)
 		{
 			if (block.matrix[i][j])
 			{
-				player1Field[block.y_ + i][block.x_ + j] = block.matrix[i][j];
+				fieldMatrix[block.y_ + i][block.x_ + j] = block.matrix[i][j];
 			}
 		}
 	}
 
 }
 
-void fieldDown(int line)
+void Field::fieldDown(int line)
 {
 	for (int i = line - 1; i > 0; i--) {
 		for (int j = 0; j < BOARD_WIDTH; j++) {
-			player1Field[i + 1][j] = player1Field[i][j];
+			fieldMatrix[i + 1][j] = fieldMatrix[i][j];
 		}
 	}
 	for (int i = 0; i < BOARD_WIDTH; i++) {
-		player1Field[0][i] = 0;
+		fieldMatrix[0][i] = 0;
 	}
 }
 
-bool lineClear()
+bool Field::lineClear()
 {
 	int lineFull = 0;
 	bool getPoint = false;
@@ -53,7 +51,7 @@ bool lineClear()
 	for (int i = BOARD_HEIGHT - 1; i >= 0; i--) {
 		isFull = true;
 		for (int j = 0; j < BOARD_WIDTH; j++) {
-			if (!player1Field[i][j]) isFull = false;
+			if (!fieldMatrix[i][j]) isFull = false;
 		}
 		if (isFull) {
 			fieldDown(i);
@@ -79,15 +77,44 @@ bool lineClear()
 		break;
 	}
 	Level = Point / 10 + 1;
-	Time = max(pow(0.8 - (Level - 1) * 0.007, Level - 1), 0.00706) * 1000;
+	double tmp = max(pow(0.8 - (Level - 1) * 0.007, Level - 1), 0.00706);
+	Time = tmp * 1000;
 	return getPoint;
 }
 
-void shade(Block& block)
+void Field::shade(Block& block)
 {
 	Block temp = block;
 	
-	temp.hardDrop();
+	temp.hardDrop(fieldMatrix);
 	temp.y_--;
 	temp.printShade();
 }
+
+bool Field::lose()
+{
+	bool lose = false;
+	for (int i = 0; i < BOARD_WIDTH; i++)
+	{
+		if (fieldMatrix[BOARD_HEIGHT - 20][i])
+		{
+			Level = 1;
+			Line = 0;
+			Point = 0;
+			Time = 1000;
+			lose = true;
+			break;
+		}
+	}
+	if (lose == true)
+	{
+		for (int i = 0; i < BOARD_HEIGHT; i++) {
+			for (int j = 0; j < BOARD_WIDTH; j++)
+			{
+				fieldMatrix[i][j] = 0;
+			}
+		}
+	}
+	return lose;
+}
+
