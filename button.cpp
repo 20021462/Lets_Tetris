@@ -47,7 +47,7 @@ void loadButton()
 	for (int i = 0; i < CHOOSE_TOTAL; i++)
 	{
 		buttonChoice[i].buttonId = i;
-		buttonChoice[i].x = 785;
+		buttonChoice[i].x = (SCREEN_WIDTH - BUTTON_WIDTH) / 2;
 		buttonChoice[i].y = 450 + i * (50 + BUTTON_HEIGHT);
 	}
 }
