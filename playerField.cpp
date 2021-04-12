@@ -4,12 +4,12 @@ Field onePlayerMode;
 Field playerOneField;
 Field playerTwoField;
 
-void Field::printField()
+void Field::printField(int x)
 {
 	for (int i = 2; i < BOARD_HEIGHT; i++) {
 		for (int j = 0; j < BOARD_WIDTH; j++) {
 			if (fieldMatrix[i][j] == 0) continue;
-			else BlockSheet.render(START_WIDTH + BLOCK_SIZE * j, START_HEIGHT + BLOCK_SIZE * (i - 2), &BlockRect[fieldMatrix[i][j]]);
+			else BlockSheet.render(x + BLOCK_SIZE * j, START_HEIGHT + BLOCK_SIZE * (i - 2), &BlockRect[fieldMatrix[i][j]]);
 
 		}
 	}
@@ -82,13 +82,13 @@ bool Field::lineClear()
 	return getPoint;
 }
 
-void Field::shade(Block& block)
+void Field::shade(Block& block, int x)
 {
 	Block temp = block;
 	
 	temp.hardDrop(fieldMatrix);
 	temp.y_--;
-	temp.printShade();
+	temp.printShade(x);
 }
 
 bool Field::lose()
@@ -118,3 +118,30 @@ bool Field::lose()
 	return lose;
 }
 
+void Field::sendBlock(int line)
+{
+	int tmp = line;
+	while (tmp > 0)
+	{
+		for (int i = 2; i < BOARD_HEIGHT - 1; i++) {
+			for (int j = 0; j < BOARD_WIDTH; j++) {
+				fieldMatrix[i][j] = fieldMatrix[i + 1][j];
+			}
+		}
+		for (int i = 0; i < BOARD_WIDTH; i++) {
+			fieldMatrix[BOARD_HEIGHT - 1][i] = EMPTY;
+		}
+		tmp--;
+	}
+	srand(time(0));
+	int missingBlock = rand() % BOARD_HEIGHT;
+	for (int i = BOARD_HEIGHT - line; i < BOARD_HEIGHT; i++)
+	{
+		for (int j = 0; j < BOARD_HEIGHT; j++)
+		{
+			if (j == missingBlock) continue;
+			fieldMatrix[i][j] = BLOCK_DEFAULT;
+		}
+	}
+
+}

@@ -21,8 +21,8 @@ public:
 	void moveLeft(int(*field)[10]);
 	void control(SDL_Event &keypress);
 	void hardDrop(int(*field)[10]);
-	void print();
-	void printShade();
+	void print(int x);
+	void printShade(int x);
 	
 
 	int matrix[4][4] = { {0} };

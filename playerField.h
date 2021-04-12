@@ -16,12 +16,14 @@ public :
 	int Point = 0;
 	int Time = 1000;
 
-	void printField();
+	void printField(int x);
 	void unite(Block& block);
 	void fieldDown(int line);
 	bool lineClear();
-	void shade(Block& block);
+	void shade(Block& block, int x);
 	bool lose();
+	void sendBlock(int line);
+
 
 private :
 
