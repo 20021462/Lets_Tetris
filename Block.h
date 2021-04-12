@@ -21,7 +21,7 @@ public:
 	void moveLeft(int(*field)[10]);
 	void control(SDL_Event &keypress);
 	void hardDrop(int(*field)[10]);
-	void print(int x);
+	void print(int x, int size=0);
 	void printShade(int x);
 	
 

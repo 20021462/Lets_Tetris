@@ -39,11 +39,10 @@ public:
 
 	void free();
 
-	void render(int x, int y, SDL_Rect* clip = NULL);
+	void render(int x, int y, SDL_Rect* clip = NULL, int size=0);
 
 private:
 	SDL_Texture* mTexture;
-
 	int mWidth;
 	int mHeight;
 

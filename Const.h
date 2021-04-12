@@ -17,6 +17,11 @@ const int START_HEIGHT = 140;
 
 const int BLOCK_SIZE = 40;
 
+const int playerFieldOneX = 750;
+const int playerFIeldOneY = 135;
+const int playerFIeldTwoX = 0;
+const int playerFieldTwoY = 0;
+
 const int FPS = 4;
 
 void copyMatrix(int matrix[4][4], int temp[4][4], int size);

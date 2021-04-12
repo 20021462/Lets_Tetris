@@ -223,14 +223,14 @@ void Block::moveLeft(int(*field)[10])
 
 }*/
 
-void Block::print(int x)
+void Block::print(int x, int size)
 {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			if (matrix[i][j] == 0) continue;
 			int x_print = x + (x_ + j) * BLOCK_SIZE;
 			int y_print = START_HEIGHT + (y_ + i - 2) * BLOCK_SIZE;
-			if (y_print >= START_HEIGHT) BlockSheet.render(x_print, y_print, &BlockRect[matrix[i][j]]);
+			if (y_print >= START_HEIGHT) BlockSheet.render(x_print, y_print, &BlockRect[matrix[i][j]],size);
 		}
 	}
 }

@@ -136,7 +136,7 @@ int main(int argc, char* args[])
 								e.type = NULL;
 
 								onePlayerMode.shade(block, 755);
-								block.print(755);
+								block.print(755,30);
 								SDL_RenderPresent(mainRenderer);
 								if (onePlayerMode.lineClear()) {
 									MainScreen.render(0, 0, NULL);
