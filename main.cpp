@@ -27,7 +27,7 @@ int main(int argc, char* args[])
 	else
 	{
 		MainScreen.loadFromFile("texture/homescreen.png");
-		Board.loadFromFile("texture/pastel_pf.png");
+		Board.loadFromFile("texture/bg_test.png");
 		loadBlock();
 		loadButton();
 
@@ -95,7 +95,7 @@ int main(int argc, char* args[])
 									block.move(0, 1);
 								}
 								MainScreen.render(0, 0, NULL);
-								Board.render(750, 135, NULL);
+								Board.render(480, 0, NULL);
 								onePlayerMode.printField(755);
 								SDL_PollEvent(&e);
 								if (e.type == SDL_QUIT)
@@ -136,11 +136,11 @@ int main(int argc, char* args[])
 								e.type = NULL;
 
 								onePlayerMode.shade(block, 755);
-								block.print(755,30);
+								if (!block.collide(onePlayerMode.fieldMatrix)) block.print(755);
 								SDL_RenderPresent(mainRenderer);
 								if (onePlayerMode.lineClear()) {
 									MainScreen.render(0, 0, NULL);
-									Board.render(750, 135, NULL);
+									Board.render(480, 0, NULL);
 									onePlayerMode.printField(755);
 									SDL_RenderPresent(mainRenderer);
 								}
@@ -184,8 +184,8 @@ int main(int argc, char* args[])
 									block2.move(0, 1);
 								}
 								MainScreen.render(0, 0, NULL);
-								Board.render(275, 135, NULL);
-								Board.render(1235, 135, NULL);
+								Board.render(0, 0, NULL);
+								Board.render(960, 0, NULL);
 								playerOneField.printField(280);
 								playerTwoField.printField(1240);
 
@@ -269,8 +269,8 @@ int main(int argc, char* args[])
 							if (playerOneField.lineClear() || playerTwoField.lineClear())
 							{
 								MainScreen.render(0, 0, NULL);
-								Board.render(275, 135, NULL);
-								Board.render(1235, 135, NULL);
+								Board.render(0, 0, NULL);
+								Board.render(960, 0, NULL);
 								if (playerOneField.lineClear())
 								{
 									playerTwoField.sendBlock(2);
