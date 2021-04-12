@@ -22,7 +22,7 @@ public :
 	bool lineClear();
 	void shade(Block& block, int x);
 	bool lose();
-	void sendBlock(int line);
+	//void sendBlock(int line);
 
 
 private :

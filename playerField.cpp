@@ -118,7 +118,7 @@ bool Field::lose()
 	return lose;
 }
 
-void Field::sendBlock(int line)
+/*void Field::sendBlock(int line)
 {
 	int tmp = line;
 	while (tmp > 0)
@@ -144,4 +144,4 @@ void Field::sendBlock(int line)
 		}
 	}
 
-}
+}*/

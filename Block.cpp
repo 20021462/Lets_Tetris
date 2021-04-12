@@ -1,6 +1,26 @@
 #include "block.h"
 #include "playerField.h"
 
+short int nextBlock[5];
+
+void generateBlockId(short matrix[], int n)
+{
+	for (int i = 1; i < n; i++)
+	{
+		matrix[i] = rand() % 7 + 1;
+	}
+}
+
+void newBlockGenerate(short matrix[], int n)
+{
+	for (int i = 1; i < n - 1; i++)
+	{
+		matrix[i] = matrix[i + 1];
+	}
+	matrix[n - 1] = rand() % 7 + 1;
+}
+
+
 Block::Block():
 	y_(0),
 	x_(4)

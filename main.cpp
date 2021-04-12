@@ -15,7 +15,7 @@ int main(int argc, char* args[])
 	int tmpLine1 = 0;
 	int tmpLine2 = 0;
 
-	Block block;
+	Block block[5];
 	Block block1;
 	Block block2;
 
@@ -83,20 +83,22 @@ int main(int argc, char* args[])
 					case CHOOSE_ONE_PLAYER_MODE:
 						totalTime += onePlayerMode.Time;
 						totalTime += SDL_GetTicks();
+						generateBlockId(nextBlock, 5);
 
 						while (gameModeChosen == CHOOSE_ONE_PLAYER_MODE)
 						{
-							block.generate(rand() % 7 + 1);
-							while (!block.collide(onePlayerMode.fieldMatrix))
+							block[1].generate(nextBlock[1]);
+							while (!block[1].collide(onePlayerMode.fieldMatrix))
 							{
 								if (SDL_GetTicks() > totalTime)
 								{
 									totalTime += onePlayerMode.Time;
-									block.move(0, 1);
+									block[1].move(0, 1);
 								}
 								MainScreen.render(0, 0, NULL);
 								Board.render(480, 0, NULL);
 								onePlayerMode.printField(755);
+								block[2].print()
 								SDL_PollEvent(&e);
 								if (e.type == SDL_QUIT)
 								{
@@ -109,34 +111,34 @@ int main(int argc, char* args[])
 									switch (e.key.keysym.sym)
 									{
 									case SDLK_UP: case SDLK_w:
-										block.rotate(block.matrix, onePlayerMode.fieldMatrix);
+										block[1].rotate(block[1].matrix, onePlayerMode.fieldMatrix);
 										break;
 
 									case SDLK_DOWN: case SDLK_s:
-										block.move(0, 1);
+										block[1].move(0, 1);
 										break;
 
 									case SDLK_RIGHT: case SDLK_d:
-										block.moveRight(onePlayerMode.fieldMatrix);
+										block[1].moveRight(onePlayerMode.fieldMatrix);
 										break;
 
 									case SDLK_LEFT: case SDLK_a:
-										block.moveLeft(onePlayerMode.fieldMatrix);
+										block[1].moveLeft(onePlayerMode.fieldMatrix);
 										break;
 
 									case SDLK_SPACE: case SDLK_KP_ENTER: case SDLK_RETURN:
-										block.hardDrop(onePlayerMode.fieldMatrix);
+										block[1].hardDrop(onePlayerMode.fieldMatrix);
 										break;
 
 									default:
 										break;
 									}
 								}
-								//block.control(e);
+								//block[1].control(e);
 								e.type = NULL;
 
-								onePlayerMode.shade(block, 755);
-								if (!block.collide(onePlayerMode.fieldMatrix)) block.print(755);
+								onePlayerMode.shade(block[1], 755);
+								if (!block[1].collide(onePlayerMode.fieldMatrix)) block[1].print(755);
 								SDL_RenderPresent(mainRenderer);
 								if (onePlayerMode.lineClear()) {
 									MainScreen.render(0, 0, NULL);
@@ -146,7 +148,8 @@ int main(int argc, char* args[])
 								}
 
 							}
-							onePlayerMode.unite(block);
+							onePlayerMode.unite(block[1]);
+							newBlockGenerate(nextBlock, 5);
 							if (onePlayerMode.lose())
 							{
 								totalTime = 0;
@@ -273,12 +276,12 @@ int main(int argc, char* args[])
 								Board.render(960, 0, NULL);
 								if (playerOneField.lineClear())
 								{
-									playerTwoField.sendBlock(2);
+									//playerTwoField.sendBlock(2);
 									//tmpLine1 = playerOneField.Line;
 								}
 								if (playerTwoField.lineClear())
 								{
-									playerOneField.sendBlock(2);
+									//playerOneField.sendBlock(2);
 									//tmpLine2 = playerTwoField.Line;
 								}
 								playerOneField.printField(280);

@@ -2,6 +2,11 @@
 #include "render.h"
 #include "const.h"
 
+extern short int nextBlock[5];
+
+void generateBlockId(short matrix[], int n);
+void newBlockGenerate(short matrix[], int n);
+
 class Block
 {
 public:
