@@ -7,19 +7,6 @@
 int main(int argc, char* args[])
 {
 	srand(time(0));
-
-	unsigned long long int totalTime = 0;
-	unsigned long long int totalTime1 = 0;
-	unsigned long long int totalTime2 = 0;
-
-	int tmpLine1 = 0;
-	int tmpLine2 = 0;
-
-	Block block[5];
-	Block block1;
-	Block block2;
-
-
 	if (!initSDL())
 	{
 		cout << "Failed to initialize!\n";
@@ -102,10 +89,10 @@ int main(int argc, char* args[])
 
 								MainScreen.render(0, 0, NULL);
 								Board.render(475, 0, NULL);
-								block[0].print(465, 325, 35);
-								block[2].print(1125, 325, 35);
-								block[3].print(1140, 555, 30);
-								block[4].print(1150, 770, 25);
+								block[0].printNext(574, 303, 35);
+								block[2].printNext(1270, 303, 35);
+								block[3].printNext(1275, 567, 30);
+								block[4].printNext(1279, 801, 25);
 								onePlayerMode.printField(755);
 
 								SDL_PollEvent(&e);
@@ -143,8 +130,8 @@ int main(int argc, char* args[])
 										if (!canHold) break;
 										canHold = false;
 										hold(block, nextBlock, 5);
-										block[0].print(465, 325, 30);
-										block[1].print(755, 140);
+										block[0].printNext(574, 303, 35);
+										block[1].print(755);
 										break;
 
 									default:
@@ -154,7 +141,7 @@ int main(int argc, char* args[])
 								e.type = NULL;
 
 								onePlayerMode.shade(block[1], 755);
-								if (!block[1].collide(onePlayerMode.fieldMatrix)) block[1].print(755, 140);
+								if (!block[1].collide(onePlayerMode.fieldMatrix)) block[1].print(755);
 								SDL_RenderPresent(mainRenderer);
 							}
 
@@ -172,35 +159,51 @@ int main(int argc, char* args[])
 						break;
 
 					case CHOOSE_TWO_PLAYER_MODE:
-						totalTime1 += playerOneField.Time;
-						totalTime1 += SDL_GetTicks();
+						p1TotalTime += playerOneField.Time;
+						p1TotalTime += SDL_GetTicks();
+						p2TotalTime += playerTwoField.Time;
+						p2TotalTime += SDL_GetTicks();
+						p1Place = 1;
+						p2Place = 1;
 
-						totalTime2 += playerTwoField.Time;
-						totalTime2 += SDL_GetTicks();
-
-						block1.generate(rand() % 7 + 1);
-						block2.generate(rand() % 7 + 1);
+						generateBlockId(fullList, 50);
 
 						tmpLine1 = 0;
 						tmpLine2 = 0;
 
+						for (int i = 0; i < 5; i++)
+						{
+							p1Block[i].generate(fullList[i]);
+							p2Block[i].generate(fullList[i]);
+						}
+						getBlockId(p1NextBlock, fullList, p1Place);
+						getBlockId(p2NextBlock, fullList, p2Place);
+
 						while ((!playerOneField.lose() || !playerTwoField.lose()) && !quit )
 						{
-							while (!block1.collide(playerOneField.fieldMatrix) && !block2.collide(playerTwoField.fieldMatrix))
+							while (!p1Block[1].collide(playerOneField.fieldMatrix) && !p2Block[1].collide(playerTwoField.fieldMatrix))
 							{
-								if (SDL_GetTicks() > totalTime1)
+								if (SDL_GetTicks() > p1TotalTime)
 								{
-									totalTime1 += playerOneField.Time;
-									block1.move(0, 1);
+									p1TotalTime += playerOneField.Time;
+									p1Block[1].move(0, 1);
 								}
-								if (SDL_GetTicks() > totalTime2)
+								if (SDL_GetTicks() > p2TotalTime)
 								{
-									totalTime2 += playerTwoField.Time;
-									block2.move(0, 1);
+									p2TotalTime += playerTwoField.Time;
+									p2Block[1].move(0, 1);
 								}
 								MainScreen.render(0, 0, NULL);
 								Board.render(0, 0, NULL);
 								Board.render(960, 0, NULL);
+								p1Block[0].printNext(99, 303, 35);
+								p1Block[2].printNext(795, 303, 35);
+								p1Block[3].printNext(800, 567, 30);
+								p1Block[4].printNext(805, 801, 25);
+								p2Block[0].printNext(1059, 303, 35);
+								p2Block[2].printNext(1755, 303, 35);
+								p2Block[3].printNext(1760, 567, 30);
+								p2Block[4].printNext(1765, 801, 25);
 								playerOneField.printField(280);
 								playerTwoField.printField(1240);
 
@@ -215,44 +218,60 @@ int main(int argc, char* args[])
 								{
 									switch (e.key.keysym.sym)
 									{
-									case SDLK_UP:
-										block1.rotate(block1.matrix, playerOneField.fieldMatrix);
-										break;
-
-									case SDLK_DOWN:
-										block1.move(0, 1);
-										break;
-
-									case SDLK_RIGHT:
-										block1.moveRight(playerOneField.fieldMatrix);
-										break;
-
-									case SDLK_LEFT:
-										block1.moveLeft(playerOneField.fieldMatrix);
-										break;
-
-									case SDLK_KP_ENTER: case SDLK_RETURN:
-										block1.hardDrop(playerOneField.fieldMatrix);
-										break;
-
 									case SDLK_w:
-										block2.rotate(block2.matrix, playerTwoField.fieldMatrix);
+										p1Block[1].rotate(p1Block[1].matrix, playerOneField.fieldMatrix);
 										break;
 
 									case SDLK_s:
-										block2.move(0, 1);
+										p1Block[1].move(0, 1);
 										break;
 
 									case SDLK_d:
-										block2.moveRight(playerTwoField.fieldMatrix);
+										p1Block[1].moveRight(playerOneField.fieldMatrix);
 										break;
 
 									case SDLK_a:
-										block2.moveLeft(playerTwoField.fieldMatrix);
+										p1Block[1].moveLeft(playerOneField.fieldMatrix);
 										break;
 
 									case SDLK_SPACE:
-										block2.hardDrop(playerTwoField.fieldMatrix);
+										p1Block[1].hardDrop(playerOneField.fieldMatrix);
+										break;
+
+									case SDLK_c:
+										if (!p1CanHold) break;
+										p1CanHold = false;
+										hold(p1Block, p1NextBlock, 5);
+										p1Block[0].printNext(99, 303, 35);
+										p1Block[1].print(280);
+										break;
+
+									case SDLK_UP:
+										p2Block[1].rotate(p2Block[1].matrix, playerTwoField.fieldMatrix);
+										break;
+
+									case SDLK_DOWN:
+										p2Block[1].move(0, 1);
+										break;
+
+									case SDLK_RIGHT:
+										p2Block[1].moveRight(playerTwoField.fieldMatrix);
+										break;
+
+									case SDLK_LEFT:
+										p2Block[1].moveLeft(playerTwoField.fieldMatrix);
+										break;
+
+									case SDLK_KP_ENTER: case SDLK_RETURN:
+										p2Block[1].hardDrop(playerTwoField.fieldMatrix);
+										break;
+
+									case SDLK_RCTRL:
+										if (!p2CanHold) break;
+										p2CanHold = false;
+										hold(p2Block, p2NextBlock, 5);
+										p2Block[0].printNext(1059, 303, 35);
+										p2Block[1].print(1240);
 										break;
 
 									default:
@@ -261,31 +280,46 @@ int main(int argc, char* args[])
 								}
 								e.type = NULL;
 
-								playerOneField.shade(block1, 280);
-								playerTwoField.shade(block2, 1240);
-								block1.print(280, 140);
-								block2.print(1240, 140);
+								playerOneField.shade(p1Block[1], 280);
+								playerTwoField.shade(p2Block[1], 1240);
+								p1Block[1].print(280);
+								p2Block[1].print(1240);
 
 								SDL_RenderPresent(mainRenderer);
 
 							}
 
-							if (block1.collide(playerOneField.fieldMatrix))
+							if (p1Block[1].collide(playerOneField.fieldMatrix))
 							{
-								playerOneField.unite(block1);
-								block1.generate(rand() % 7 + 1);
+								playerOneField.unite(p1Block[1]);
+								p1Place++;
+								getBlockId(p1NextBlock, fullList, p1Place);
+								for (int i = 1; i < 5; i++)
+								{
+									p1Block[i].generate(p1NextBlock[i]);
+								}
+								p1CanHold = true;
 							}
-							if (block2.collide(playerTwoField.fieldMatrix))
+							if (p2Block[1].collide(playerTwoField.fieldMatrix))
 							{
-								playerTwoField.unite(block2);
-								block2.generate(rand() % 7 + 1);
+								playerTwoField.unite(p2Block[1]);
+								p2Place++;
+								getBlockId(p2NextBlock, fullList, p2Place);
+								for (int i = 1; i < 5; i++)
+								{
+									p2Block[i].generate(p2NextBlock[i]);
+								}
+								p2CanHold = true;
+							}
+							while (p1Place > 1 && p2Place > 1)
+							{
+								newBlockGenerate(fullList, 50);
+								p1Place--;
+								p2Place--;
 							}
 
 							if (playerOneField.lineClear() || playerTwoField.lineClear())
 							{
-								MainScreen.render(0, 0, NULL);
-								Board.render(0, 0, NULL);
-								Board.render(960, 0, NULL);
 								if (playerOneField.lineClear())
 								{
 									//playerTwoField.sendBlock(2);
@@ -296,15 +330,14 @@ int main(int argc, char* args[])
 									//playerOneField.sendBlock(2);
 									//tmpLine2 = playerTwoField.Line;
 								}
-								playerOneField.printField(280);
-								playerTwoField.printField(1240);
-								SDL_RenderPresent(mainRenderer);
 							}
 
 							if (playerOneField.lose() || playerTwoField.lose())
 							{
-								totalTime1 = 0;
-								totalTime2 = 0;
+								playerOneField.reset();
+								playerTwoField.reset();
+								p1TotalTime = 0;
+								p2TotalTime = 0;
 								gameModeChosen = CHOOSE_TOTAL;
 								break;
 							}

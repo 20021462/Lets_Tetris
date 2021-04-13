@@ -118,6 +118,20 @@ bool Field::lose()
 	return lose;
 }
 
+void Field::reset()
+{
+	Level = 1;
+	Line = 0;
+	Point = 0;
+	Time = 1000;
+	for (int i = 0; i < BOARD_HEIGHT; i++) {
+		for (int j = 0; j < BOARD_WIDTH; j++)
+		{
+			fieldMatrix[i][j] = 0;
+		}
+	}
+}
+
 /*void Field::sendBlock(int line)
 {
 	int tmp = line;
