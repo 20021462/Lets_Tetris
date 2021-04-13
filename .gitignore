@@ -1,10 +1,1 @@
-
-.vs/
 .x64\Debug
-*.vcxproj
-*.exe
-*.ilk
-*.log
-*.pdb
-*.tlog
-*.obj

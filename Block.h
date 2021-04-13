@@ -26,7 +26,7 @@ public:
 	void moveLeft(int(*field)[10]);
 	void control(SDL_Event &keypress);
 	void hardDrop(int(*field)[10]);
-	void print(int x, int size=0);
+	void print(int x, int y, int size=0);
 	void printShade(int x);
 	
 
@@ -37,3 +37,5 @@ public:
 private:
 	
 };
+
+void hold(Block blocks[], short matrix[], int n);

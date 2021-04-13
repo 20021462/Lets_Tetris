@@ -85,9 +85,13 @@ int main(int argc, char* args[])
 						totalTime += SDL_GetTicks();
 						generateBlockId(nextBlock, 5);
 
-						while (gameModeChosen == CHOOSE_ONE_PLAYER_MODE)
+						while (!onePlayerMode.lose() && !quit)
 						{
-							block[1].generate(nextBlock[1]);
+							for (int i = 0; i < 5; i++)
+							{
+								block[i].generate(nextBlock[i]);
+							}
+							bool canHold = true;
 							while (!block[1].collide(onePlayerMode.fieldMatrix))
 							{
 								if (SDL_GetTicks() > totalTime)
@@ -95,10 +99,15 @@ int main(int argc, char* args[])
 									totalTime += onePlayerMode.Time;
 									block[1].move(0, 1);
 								}
+
 								MainScreen.render(0, 0, NULL);
-								Board.render(480, 0, NULL);
+								Board.render(475, 0, NULL);
+								block[0].print(465, 325, 30);
+								block[2].print(1125, 325, 30);
+								block[3].print(1140, 555, 27);
+								block[4].print(1150, 770, 25);
 								onePlayerMode.printField(755);
-								block[2].print()
+
 								SDL_PollEvent(&e);
 								if (e.type == SDL_QUIT)
 								{
@@ -130,26 +139,29 @@ int main(int argc, char* args[])
 										block[1].hardDrop(onePlayerMode.fieldMatrix);
 										break;
 
+									case SDLK_c:
+										if (!canHold) break;
+										canHold = false;
+										hold(block, nextBlock, 5);
+										block[0].print(465, 325, 30);
+										block[1].print(755, 140);
+										break;
+
 									default:
 										break;
 									}
 								}
-								//block[1].control(e);
 								e.type = NULL;
 
 								onePlayerMode.shade(block[1], 755);
-								if (!block[1].collide(onePlayerMode.fieldMatrix)) block[1].print(755);
+								if (!block[1].collide(onePlayerMode.fieldMatrix)) block[1].print(755, 140);
 								SDL_RenderPresent(mainRenderer);
-								if (onePlayerMode.lineClear()) {
-									MainScreen.render(0, 0, NULL);
-									Board.render(480, 0, NULL);
-									onePlayerMode.printField(755);
-									SDL_RenderPresent(mainRenderer);
-								}
-
 							}
+
 							onePlayerMode.unite(block[1]);
 							newBlockGenerate(nextBlock, 5);
+
+							onePlayerMode.lineClear();
 							if (onePlayerMode.lose())
 							{
 								totalTime = 0;
@@ -251,8 +263,8 @@ int main(int argc, char* args[])
 
 								playerOneField.shade(block1, 280);
 								playerTwoField.shade(block2, 1240);
-								block1.print(280);
-								block2.print(1240);
+								block1.print(280, 140);
+								block2.print(1240, 140);
 
 								SDL_RenderPresent(mainRenderer);
 

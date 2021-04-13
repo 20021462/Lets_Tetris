@@ -3,8 +3,8 @@
 int userChoice = 0;
 int gameModeChosen = CHOOSE_TOTAL;
 
-const int BUTTON_WIDTH = 350;
-const int BUTTON_HEIGHT = 97;
+const int BUTTON_WIDTH = 300;
+const int BUTTON_HEIGHT = 90;
 
 SDL_Rect ButtonTexture[STATE_TOTAL];
 Button buttonChoice[CHOOSE_TOTAL];
@@ -39,15 +39,15 @@ void loadButton()
 	ButtonTexture[CHOSEN].w = BUTTON_WIDTH;
 	ButtonTexture[CHOSEN].h = BUTTON_HEIGHT;
 
-	buttonChoice[CHOOSE_ONE_PLAYER_MODE].buttonTexture.loadFromFile("texture/option_box_1.png");
-	buttonChoice[CHOOSE_TWO_PLAYER_MODE].buttonTexture.loadFromFile("texture/option_box_2.png");
-	buttonChoice[CHOOSE_HELP].buttonTexture.loadFromFile("texture/option_box_3.png");
-	buttonChoice[CHOOSE_QUIT].buttonTexture.loadFromFile("texture/option_box_4.png");
+	buttonChoice[CHOOSE_ONE_PLAYER_MODE].buttonTexture.loadFromFile("texture/1 PLAYER.png");
+	buttonChoice[CHOOSE_TWO_PLAYER_MODE].buttonTexture.loadFromFile("texture/2 PLAYER.png");
+	buttonChoice[CHOOSE_HELP].buttonTexture.loadFromFile("texture/1 PLAYER.png");
+	buttonChoice[CHOOSE_QUIT].buttonTexture.loadFromFile("texture/QUIT.png");
 
 	for (int i = 0; i < CHOOSE_TOTAL; i++)
 	{
 		buttonChoice[i].buttonId = i;
-		buttonChoice[i].x = 785;
+		buttonChoice[i].x = (SCREEN_WIDTH - BUTTON_WIDTH) / 2;
 		buttonChoice[i].y = 450 + i * (50 + BUTTON_HEIGHT);
 	}
 }

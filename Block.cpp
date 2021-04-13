@@ -94,6 +94,7 @@ void Block::generate(int type)
 	default:
 		break;
 	}
+	//if (this->size == 3) x_ = 3;
 }
 
 int Block::x()
@@ -243,13 +244,24 @@ void Block::moveLeft(int(*field)[10])
 
 }*/
 
-void Block::print(int x, int size)
+void Block::print(int x, int y, int size)
 {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			if (matrix[i][j] == 0) continue;
-			int x_print = x + (x_ + j) * BLOCK_SIZE;
-			int y_print = START_HEIGHT + (y_ + i - 2) * BLOCK_SIZE;
+			int x_print;
+			int y_print;
+
+			if (size == 0)
+			{
+				x_print = x + (x_ + j) * BLOCK_SIZE;
+				y_print = y + (y_ + i - 2) * BLOCK_SIZE;
+			}
+			else
+			{
+				x_print = x + (x_ + j) * size;
+				y_print = y + (y_ + i - 2) * size;
+			}
 			if (y_print >= START_HEIGHT) BlockSheet.render(x_print, y_print, &BlockRect[matrix[i][j]],size);
 		}
 	}
@@ -267,3 +279,19 @@ void Block::printShade(int x)
 	}
 }
 
+void hold(Block blocks[], short matrix[], int n)
+{
+	if (!matrix[0])
+	{
+		matrix[0] = matrix[1];
+		newBlockGenerate(matrix, n);
+	}
+	else
+	{
+		int tmp = matrix[0];
+		matrix[0] = matrix[1];
+		matrix[1] = tmp;
+	}
+	blocks[0].generate(matrix[0]);
+	blocks[1].generate(matrix[1]);
+}
