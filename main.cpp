@@ -13,7 +13,7 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		MainScreen.loadFromFile("texture/mainScreen.png");
+		MainScreen.loadFromFile("texture/mainScreen2.png");
 		Board.loadFromFile("texture/playing_screen.png");
 		loadBlock();
 		loadButton();
