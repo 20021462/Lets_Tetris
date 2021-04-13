@@ -1,3 +1,5 @@
 ﻿  main.cpp
-D:\Lets_Tetris\main.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Lets Tetris.vcxproj -> D:\Lets_Tetris\x64\Debug\Lets Tetris.exe
+D:\Lets_Tetris\main.cpp(11,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\Lets_Tetris\main.cpp(95,50): error C2664: 'bool Texture::loadFromRenderedText(std::string,SDL_Color)': cannot convert argument 1 from 'int' to 'std::string'
+D:\Lets_Tetris\main.cpp(95,50): message : No constructor could take the source type, or constructor overload resolution was ambiguous
+D:\Lets_Tetris\render.h(42,7): message : see declaration of 'Texture::loadFromRenderedText'

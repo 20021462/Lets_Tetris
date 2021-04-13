@@ -26,6 +26,8 @@ bool initSDL();
 
 void close();
 
+bool loadMedia();
+
 bool loadBlock();
 
 class Texture
@@ -36,6 +38,8 @@ public:
 	~Texture();
 
 	bool loadFromFile(string path);
+
+	bool loadFromRenderedText(string textureText, SDL_Color textColor);
 
 	void free();
 
@@ -55,6 +59,7 @@ extern Texture ShadeSheet;
 extern Texture Board;
 extern Texture MainScreen;
 
+extern Texture Score;
 
 
 #pragma once

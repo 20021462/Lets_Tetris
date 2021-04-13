@@ -9,6 +9,10 @@ Texture ShadeSheet;
 Texture Board;
 Texture MainScreen;
 
+Texture Score;
+
+TTF_Font* gFont = NULL;
+
 Texture::Texture()
 {
 	mTexture = NULL;
@@ -48,6 +52,31 @@ bool Texture::loadFromFile(string path)
 		SDL_FreeSurface(loadedSurface);
 	}
 
+	return mTexture != NULL;
+}
+
+bool Texture::loadFromRenderedText(string textureText, SDL_Color textColor)
+{
+	free();
+	SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, textureText.c_str(), textColor);
+	if (textSurface == NULL)
+	{
+		printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
+	}
+	else
+	{
+		mTexture = SDL_CreateTextureFromSurface(mainRenderer, textSurface);
+		if (mTexture == NULL)
+		{
+			printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
+		}
+		else
+		{
+			mWidth = textSurface->w;
+			mHeight = textSurface->h;
+		}
+		SDL_FreeSurface(textSurface);
+	}
 	return mTexture != NULL;
 }
 
@@ -112,6 +141,12 @@ bool initSDL()
 					printf("SDL_image could not initialize! SDL_mage Error: %s\n", IMG_GetError());
 					return false;
 				}
+
+				if (TTF_Init() == -1)
+				{
+					printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+					return false;
+				}
 			}
 		}
 	}
@@ -123,13 +158,45 @@ void close()
 	BlockSheet.free();
 	MainScreen.free();
 
+	Score.free();
+	TTF_CloseFont(gFont);
+	gFont = NULL;
+
+
 	SDL_DestroyRenderer(mainRenderer);
 	SDL_DestroyWindow(mainWindow);
 	mainWindow = NULL;
 	mainRenderer = NULL;
 
+	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
+}
+
+bool loadMedia()
+{
+	//Loading success flag
+	bool success = true;
+
+	//Open the font
+	gFont = TTF_OpenFont("font/UTM Nyala.ttf", 50);
+	if (gFont == NULL)
+	{
+		printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
+		success = false;
+	}
+	else
+	{
+		//Render text
+		SDL_Color textColor = { 255, 255, 255 };
+		if (!Score.loadFromRenderedText("100", textColor))
+		{
+			printf("Failed to render text texture!\n");
+			success = false;
+		}
+	}
+
+	return success;
 }
 
 bool loadBlock()

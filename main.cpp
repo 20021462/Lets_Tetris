@@ -4,6 +4,8 @@
 #include "playerField.h"
 #include "button.h"
 
+SDL_Color textColor = { 255, 255, 255 };
+
 int main(int argc, char* args[])
 {
 	srand(time(0));
@@ -17,6 +19,7 @@ int main(int argc, char* args[])
 		Board.loadFromFile("texture/playing_screen.png");
 		loadBlock();
 		loadButton();
+		loadMedia();
 
 		bool quit = false;
 		SDL_Event e;
@@ -71,6 +74,7 @@ int main(int argc, char* args[])
 						totalTime += onePlayerMode.Time;
 						totalTime += SDL_GetTicks();
 						generateBlockId(nextBlock, 5);
+						MainScreen.render(0, 0, NULL);
 
 						while (!onePlayerMode.lose() && !quit)
 						{
@@ -87,8 +91,9 @@ int main(int argc, char* args[])
 									block[1].move(0, 1);
 								}
 
-								MainScreen.render(0, 0, NULL);
 								Board.render(475, 0, NULL);
+								//Score.loadFromRenderedText(100, textColor);
+								Score.render(580, 580, NULL);
 								block[0].printNext(574, 303, 35);
 								block[2].printNext(1270, 303, 35);
 								block[3].printNext(1275, 567, 30);
@@ -179,6 +184,8 @@ int main(int argc, char* args[])
 						getBlockId(p1NextBlock, fullList, p1Place);
 						getBlockId(p2NextBlock, fullList, p2Place);
 
+						MainScreen.render(0, 0, NULL);
+
 						while ((!playerOneField.lose() || !playerTwoField.lose()) && !quit )
 						{
 							while (!p1Block[1].collide(playerOneField.fieldMatrix) && !p2Block[1].collide(playerTwoField.fieldMatrix))
@@ -193,7 +200,6 @@ int main(int argc, char* args[])
 									p2TotalTime += playerTwoField.Time;
 									p2Block[1].move(0, 1);
 								}
-								MainScreen.render(0, 0, NULL);
 								Board.render(0, 0, NULL);
 								Board.render(960, 0, NULL);
 								p1Block[0].printNext(99, 303, 35);
@@ -282,8 +288,8 @@ int main(int argc, char* args[])
 
 								playerOneField.shade(p1Block[1], 280);
 								playerTwoField.shade(p2Block[1], 1240);
-								p1Block[1].print(280);
-								p2Block[1].print(1240);
+								if (!p1Block[1].collide(playerOneField.fieldMatrix)) p1Block[1].print(280);
+								if (!p2Block[1].collide(playerTwoField.fieldMatrix)) p2Block[1].print(1240);
 
 								SDL_RenderPresent(mainRenderer);
 
