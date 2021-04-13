@@ -27,7 +27,7 @@ int main(int argc, char* args[])
 	else
 	{
 		MainScreen.loadFromFile("texture/homescreen.png");
-		Board.loadFromFile("texture/bg_test.png");
+		Board.loadFromFile("texture/playing_screen.png");
 		loadBlock();
 		loadButton();
 
@@ -102,9 +102,9 @@ int main(int argc, char* args[])
 
 								MainScreen.render(0, 0, NULL);
 								Board.render(475, 0, NULL);
-								block[0].print(465, 325, 30);
-								block[2].print(1125, 325, 30);
-								block[3].print(1140, 555, 27);
+								block[0].print(465, 325, 35);
+								block[2].print(1125, 325, 35);
+								block[3].print(1140, 555, 30);
 								block[4].print(1150, 770, 25);
 								onePlayerMode.printField(755);
 

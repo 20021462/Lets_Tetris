@@ -94,7 +94,7 @@ void Block::generate(int type)
 	default:
 		break;
 	}
-	//if (this->size == 3) x_ = 3;
+	if (this->size == 3) x_ = 3;
 }
 
 int Block::x()
