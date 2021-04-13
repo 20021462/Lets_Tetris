@@ -1,4 +1,15 @@
 #include "const.h"
+#include "Block.h"
+
+unsigned long long int totalTime = 0;
+unsigned long long int p1TotalTime = 0;
+unsigned long long int p2TotalTime = 0;
+int tmpLine1 = 0;
+int tmpLine2 = 0;
+short int p1Place;
+short int p2Place;
+bool p1CanHold = true;
+bool p2CanHold = true;
 
 void copyMatrix(int matrix[4][4], int temp[4][4], int size)
 {

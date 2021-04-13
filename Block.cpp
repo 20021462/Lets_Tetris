@@ -2,9 +2,17 @@
 #include "playerField.h"
 
 short int nextBlock[5];
+short int p1NextBlock[5];
+short int p2NextBlock[5];
+short int fullList[50];
+
+Block block[5];
+Block p1Block[5];
+Block p2Block[5];
 
 void generateBlockId(short matrix[], int n)
 {
+	matrix[0] = 0;
 	for (int i = 1; i < n; i++)
 	{
 		matrix[i] = rand() % 7 + 1;
@@ -20,6 +28,13 @@ void newBlockGenerate(short matrix[], int n)
 	matrix[n - 1] = rand() % 7 + 1;
 }
 
+void getBlockId(short matrix[], short list[], int startPoint)
+{
+	for (int i = 1; i < 5; i++)
+	{
+		matrix[i] = list[startPoint + i - 1];
+	}
+}
 
 Block::Block():
 	y_(0),
@@ -244,8 +259,23 @@ void Block::moveLeft(int(*field)[10])
 
 }*/
 
-void Block::print(int x, int y, int size)
+void Block::print(int x)
 {
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (matrix[i][j] == 0) continue;
+			int x_print = x + (x_ + j) * BLOCK_SIZE;
+			int y_print = START_HEIGHT + (y_ + i - 2) * BLOCK_SIZE;
+			if (y_print >= START_HEIGHT) BlockSheet.render(x_print, y_print, &BlockRect[matrix[i][j]]);
+		}
+	}
+}
+
+void Block::printNext(int x, int y, int size)
+{
+	x_ = -1;
+	if (this->size == 2) x_ = 0;
+	y_ = 0;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			if (matrix[i][j] == 0) continue;
@@ -255,14 +285,14 @@ void Block::print(int x, int y, int size)
 			if (size == 0)
 			{
 				x_print = x + (x_ + j) * BLOCK_SIZE;
-				y_print = y + (y_ + i - 2) * BLOCK_SIZE;
+				y_print = y + (y_ + i) * BLOCK_SIZE;
 			}
 			else
 			{
 				x_print = x + (x_ + j) * size;
-				y_print = y + (y_ + i - 2) * size;
+				y_print = y + (y_ + i) * size;
 			}
-			if (y_print >= START_HEIGHT) BlockSheet.render(x_print, y_print, &BlockRect[matrix[i][j]],size);
+			BlockSheet.render(x_print, y_print, &BlockRect[matrix[i][j]], size);
 		}
 	}
 }
