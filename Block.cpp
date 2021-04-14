@@ -188,12 +188,15 @@ void Block::rotate(int matrix[4][4], int(*field)[10])
 	}
 }
 
-void Block::hardDrop(int(*field)[10])
+void Block::hardDrop(int(*field)[10], int &point)
 {
+	int line = 0;
 	while (!collide(field))
 	{
+		line++;
 		move(0, 1);
 	}
+	point += (line - 1) * 2;
 }
 
 void Block::moveRight(int(*field)[10])

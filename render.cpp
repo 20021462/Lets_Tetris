@@ -9,9 +9,12 @@ Texture ShadeSheet;
 Texture Board;
 Texture MainScreen;
 
-Texture Score;
+Texture scoreTexture;
+Texture lineTexture;
+Texture levelTexture;
 
 TTF_Font* gFont = NULL;
+SDL_Color textColor;
 
 Texture::Texture()
 {
@@ -158,7 +161,9 @@ void close()
 	BlockSheet.free();
 	MainScreen.free();
 
-	Score.free();
+	scoreTexture.free();
+	lineTexture.free();
+	levelTexture.free();
 	TTF_CloseFont(gFont);
 	gFont = NULL;
 
@@ -173,12 +178,10 @@ void close()
 	SDL_Quit();
 }
 
-bool loadMedia()
+bool loadStat()
 {
-	//Loading success flag
 	bool success = true;
 
-	//Open the font
 	gFont = TTF_OpenFont("font/UTM Nyala.ttf", 50);
 	if (gFont == NULL)
 	{
@@ -187,13 +190,7 @@ bool loadMedia()
 	}
 	else
 	{
-		//Render text
-		SDL_Color textColor = { 255, 255, 255 };
-		if (!Score.loadFromRenderedText("100", textColor))
-		{
-			printf("Failed to render text texture!\n");
-			success = false;
-		}
+		textColor = { 0, 0, 0 };
 	}
 
 	return success;

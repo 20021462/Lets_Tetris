@@ -26,7 +26,7 @@ bool initSDL();
 
 void close();
 
-bool loadMedia();
+bool loadStat();
 
 bool loadBlock();
 
@@ -59,7 +59,11 @@ extern Texture ShadeSheet;
 extern Texture Board;
 extern Texture MainScreen;
 
-extern Texture Score;
+extern Texture scoreTexture;
+extern Texture lineTexture;
+extern Texture levelTexture;
 
+extern TTF_Font* gFont;
+extern SDL_Color textColor;
 
 #pragma once

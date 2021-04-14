@@ -4,8 +4,6 @@
 #include "playerField.h"
 #include "button.h"
 
-SDL_Color textColor = { 255, 255, 255 };
-
 int main(int argc, char* args[])
 {
 	srand(time(0));
@@ -19,7 +17,7 @@ int main(int argc, char* args[])
 		Board.loadFromFile("texture/playing_screen.png");
 		loadBlock();
 		loadButton();
-		loadMedia();
+		loadStat();
 
 		bool quit = false;
 		SDL_Event e;
@@ -92,12 +90,11 @@ int main(int argc, char* args[])
 								}
 
 								Board.render(475, 0, NULL);
-								//Score.loadFromRenderedText(100, textColor);
-								Score.render(580, 580, NULL);
 								block[0].printNext(574, 303, 35);
 								block[2].printNext(1270, 303, 35);
 								block[3].printNext(1275, 567, 30);
 								block[4].printNext(1279, 801, 25);
+								onePlayerMode.getStat();
 								onePlayerMode.printField(755);
 
 								SDL_PollEvent(&e);
@@ -117,6 +114,7 @@ int main(int argc, char* args[])
 
 									case SDLK_DOWN: case SDLK_s:
 										block[1].move(0, 1);
+										onePlayerMode.Score++;
 										break;
 
 									case SDLK_RIGHT: case SDLK_d:
@@ -128,7 +126,7 @@ int main(int argc, char* args[])
 										break;
 
 									case SDLK_SPACE: case SDLK_KP_ENTER: case SDLK_RETURN:
-										block[1].hardDrop(onePlayerMode.fieldMatrix);
+										block[1].hardDrop(onePlayerMode.fieldMatrix, onePlayerMode.Score);
 										break;
 
 									case SDLK_c:
@@ -202,14 +200,17 @@ int main(int argc, char* args[])
 								}
 								Board.render(0, 0, NULL);
 								Board.render(960, 0, NULL);
+
 								p1Block[0].printNext(99, 303, 35);
 								p1Block[2].printNext(795, 303, 35);
 								p1Block[3].printNext(800, 567, 30);
 								p1Block[4].printNext(805, 801, 25);
+
 								p2Block[0].printNext(1059, 303, 35);
 								p2Block[2].printNext(1755, 303, 35);
 								p2Block[3].printNext(1760, 567, 30);
 								p2Block[4].printNext(1765, 801, 25);
+
 								playerOneField.printField(280);
 								playerTwoField.printField(1240);
 
@@ -230,6 +231,7 @@ int main(int argc, char* args[])
 
 									case SDLK_s:
 										p1Block[1].move(0, 1);
+										playerOneField.Score++;
 										break;
 
 									case SDLK_d:
@@ -241,7 +243,7 @@ int main(int argc, char* args[])
 										break;
 
 									case SDLK_SPACE:
-										p1Block[1].hardDrop(playerOneField.fieldMatrix);
+										p1Block[1].hardDrop(playerOneField.fieldMatrix, playerOneField.Score);
 										break;
 
 									case SDLK_c:
@@ -258,6 +260,7 @@ int main(int argc, char* args[])
 
 									case SDLK_DOWN:
 										p2Block[1].move(0, 1);
+										playerTwoField.Score++;
 										break;
 
 									case SDLK_RIGHT:
@@ -269,7 +272,7 @@ int main(int argc, char* args[])
 										break;
 
 									case SDLK_KP_ENTER: case SDLK_RETURN:
-										p2Block[1].hardDrop(playerTwoField.fieldMatrix);
+										p2Block[1].hardDrop(playerTwoField.fieldMatrix, playerTwoField.Score);
 										break;
 
 									case SDLK_RCTRL:

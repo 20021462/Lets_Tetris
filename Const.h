@@ -6,6 +6,8 @@
 #include <iomanip>
 #include <stdlib.h>
 #include <ctime>
+#include <sstream>
+
 
 const int SCREEN_WIDTH = 1920;
 const int SCREEN_HEIGHT = 1080;

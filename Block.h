@@ -29,7 +29,7 @@ public:
 	void moveRight(int(*field)[10]);
 	void moveLeft(int(*field)[10]);
 	void control(SDL_Event &keypress);
-	void hardDrop(int(*field)[10]);
+	void hardDrop(int(*field)[10], int& point);
 	void print(int x);
 	void printNext(int x, int y, int size);
 	void printShade(int x);

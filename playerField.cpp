@@ -46,7 +46,7 @@ void Field::fieldDown(int line)
 bool Field::lineClear()
 {
 	int lineFull = 0;
-	bool getPoint = false;
+	bool getScore = false;
 	bool isFull = true;
 	for (int i = BOARD_HEIGHT - 1; i >= 0; i--) {
 		isFull = true;
@@ -57,36 +57,36 @@ bool Field::lineClear()
 			fieldDown(i);
 			lineFull++;
 			i++;
-			getPoint = true;
+			getScore = true;
 		}
 	}
 	Line += lineFull;
 	switch (lineFull)
 	{
 	case 1:
-		Point += 1;
+		Score += 100 * Level;
 		break;
 	case 2:
-		Point += 3;
+		Score += 300 * Level;
 		break;
 	case 3:
-		Point += 5;
+		Score += 500 * Level;
 		break;
 	case 4:
-		Point += 8;
+		Score += 800 * Level;
 		break;
 	}
-	Level = Point / 10 + 1;
+	Level = Line / 5 + 1;
 	double tmp = max(pow(0.8 - (Level - 1) * 0.007, Level - 1), 0.00706);
 	Time = tmp * 1000;
-	return getPoint;
+	return getScore;
 }
 
 void Field::shade(Block& block, int x)
 {
 	Block temp = block;
-	
-	temp.hardDrop(fieldMatrix);
+	int empty;
+	temp.hardDrop(fieldMatrix, empty);
 	temp.y_--;
 	temp.printShade(x);
 }
@@ -100,7 +100,7 @@ bool Field::lose()
 		{
 			Level = 1;
 			Line = 0;
-			Point = 0;
+			Score = 0;
 			Time = 1000;
 			lose = true;
 			break;
@@ -122,7 +122,7 @@ void Field::reset()
 {
 	Level = 1;
 	Line = 0;
-	Point = 0;
+	Score = 0;
 	Time = 1000;
 	for (int i = 0; i < BOARD_HEIGHT; i++) {
 		for (int j = 0; j < BOARD_WIDTH; j++)
@@ -159,3 +159,26 @@ void Field::reset()
 	}
 
 }*/
+
+void Field::getStat()
+{
+	stringstream scoreText;
+	stringstream lineText;
+	stringstream levelText;
+	
+	scoreText.str("");
+	lineText.str("");
+	levelText.str("");
+
+	scoreText << Score;
+	lineText << Line;
+	levelText << Level;
+
+	scoreTexture.loadFromRenderedText(scoreText.str().c_str(), textColor);
+	lineTexture.loadFromRenderedText(lineText.str().c_str(), textColor);
+	levelTexture.loadFromRenderedText(levelText.str().c_str(), textColor);
+
+	scoreTexture.render(580, 580, NULL);
+	lineTexture.render(580, 710, NULL);
+	levelTexture.render(580, 840, NULL);
+}

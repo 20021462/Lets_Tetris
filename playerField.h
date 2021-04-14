@@ -13,7 +13,7 @@ public :
 	int fieldMatrix[BOARD_HEIGHT][BOARD_WIDTH] = { 0 };
 	int Level = 1;
 	int Line = 0;
-	int Point = 0;
+	int Score = 0;
 	int Time = 1000;
 
 	void printField(int x);
@@ -23,6 +23,8 @@ public :
 	void shade(Block& block, int x);
 	bool lose();
 	void reset();
+
+	void getStat();
 	//void sendBlock(int line);
 
 

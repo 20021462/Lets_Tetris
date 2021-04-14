@@ -48,7 +48,7 @@ void loadButton()
 	{
 		buttonChoice[i].buttonId = i;
 		buttonChoice[i].x = (SCREEN_WIDTH - BUTTON_WIDTH) / 2;
-		buttonChoice[i].y = 550 + i * (35+BUTTON_HEIGHT);
+		buttonChoice[i].y = 550 + i * (35 + BUTTON_HEIGHT);
 	}
 }
 
