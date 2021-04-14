@@ -58,7 +58,7 @@ extern Texture BlockSheet;
 extern Texture ShadeSheet;
 extern Texture Board;
 extern Texture MainScreen;
-
+extern Texture playingBackground;
 extern Texture Score;
 
 
