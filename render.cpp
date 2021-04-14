@@ -183,7 +183,7 @@ bool loadStat()
 {
 	bool success = true;
 
-	gFont = TTF_OpenFont("font/UTM Nyala.ttf", 50);
+	gFont = TTF_OpenFont("font/gilroy-light.otf", 50);
 	if (gFont == NULL)
 	{
 		printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
