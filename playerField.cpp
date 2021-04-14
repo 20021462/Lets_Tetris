@@ -170,15 +170,26 @@ void Field::getStat()
 	lineText.str("");
 	levelText.str("");
 
+	if (Score < 100000) scoreText << 0;
+	if (Score < 10000) scoreText << 0;
+	if (Score < 1000) scoreText << 0;
+	if (Score < 100) scoreText << 0;
+	if (Score < 10) scoreText << 0;
+
+	if (Line < 100) lineText << 0;
+	if (Line < 10) lineText << 0;
+
+	if (Level < 100) levelText << 0;
+
 	scoreText << Score;
 	lineText << Line;
 	levelText << Level;
 
-	scoreTexture.loadFromRenderedText(scoreText.str().c_str(), textColor);
-	lineTexture.loadFromRenderedText(lineText.str().c_str(), textColor);
-	levelTexture.loadFromRenderedText(levelText.str().c_str(), textColor);
+	scoreTexture.loadFromRenderedText(scoreText.str().c_str(), scoreColor);
+	lineTexture.loadFromRenderedText(lineText.str().c_str(), lineColor);
+	levelTexture.loadFromRenderedText(levelText.str().c_str(), levelColor);
 
-	scoreTexture.render(580, 580, NULL);
-	lineTexture.render(580, 710, NULL);
-	levelTexture.render(580, 840, NULL);
+	scoreTexture.render(524, 538, NULL);
+	levelTexture.render(517, 681, NULL);
+	lineTexture.render(517, 843, NULL);
 }

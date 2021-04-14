@@ -9,13 +9,14 @@ Texture ShadeSheet;
 Texture Board;
 Texture MainScreen;
 Texture playingBackground;
-
-Texture scoreTexture;
-Texture lineTexture;
-Texture levelTexture;
+Texture onePlayerModeScreen;
+Texture twoPlayerModeScreen;
 
 TTF_Font* gFont = NULL;
-SDL_Color textColor;
+SDL_Color scoreColor;
+SDL_Color levelColor;
+SDL_Color lineColor;
+
 
 Texture::Texture()
 {
@@ -160,11 +161,11 @@ bool initSDL()
 void close()
 {
 	BlockSheet.free();
+	ShadeSheet.free();
 	MainScreen.free();
+	onePlayerModeScreen.free();
+	twoPlayerModeScreen.free();
 
-	scoreTexture.free();
-	lineTexture.free();
-	levelTexture.free();
 	TTF_CloseFont(gFont);
 	gFont = NULL;
 
@@ -183,7 +184,7 @@ bool loadStat()
 {
 	bool success = true;
 
-	gFont = TTF_OpenFont("font/gilroy-light.otf", 50);
+	gFont = TTF_OpenFont("font/gilroy-extrabold.otf", 45);
 	if (gFont == NULL)
 	{
 		printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
@@ -191,7 +192,9 @@ bool loadStat()
 	}
 	else
 	{
-		textColor = { 0, 0, 0 };
+		scoreColor = { 252, 71, 91 };
+		levelColor = { 252, 215, 75 };
+		lineColor = { 145, 197, 235 };
 	}
 
 	return success;

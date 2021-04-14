@@ -60,12 +60,12 @@ extern Texture Board;
 extern Texture MainScreen;
 
 extern Texture playingBackground;
-
-extern Texture scoreTexture;
-extern Texture lineTexture;
-extern Texture levelTexture;
+extern Texture onePlayerModeScreen;
+extern Texture twoPlayerModeScreen;
 
 extern TTF_Font* gFont;
-extern SDL_Color textColor;
+extern SDL_Color scoreColor;
+extern SDL_Color levelColor;
+extern SDL_Color lineColor;
 
 #pragma once

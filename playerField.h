@@ -27,6 +27,9 @@ public :
 	void getStat();
 	//void sendBlock(int line);
 
+	Texture scoreTexture;
+	Texture lineTexture;
+	Texture levelTexture;
 
 private :
 

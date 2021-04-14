@@ -16,6 +16,8 @@ int main(int argc, char* args[])
 		MainScreen.loadFromFile("texture/mainScreen.png");
 		Board.loadFromFile("texture/playingScreen.png");
 		playingBackground.loadFromFile("texture/playingBackground.png");
+		onePlayerModeScreen.loadFromFile("texture/1playerPlayingScreen.png");
+		twoPlayerModeScreen.loadFromFile("texture/2playerPlayingScreen.png");
 		loadBlock();
 		loadButton();
 		loadStat();
@@ -73,7 +75,7 @@ int main(int argc, char* args[])
 						totalTime += onePlayerMode.Time;
 						totalTime += SDL_GetTicks();
 						generateBlockId(nextBlock, 5);
-						playingBackground.render(0, 0, NULL);
+						//playingBackground.render(0, 0, NULL);
 
 						while (!onePlayerMode.lose() && !quit)
 						{
@@ -90,7 +92,8 @@ int main(int argc, char* args[])
 									block[1].move(0, 1);
 								}
 
-								Board.render(475, 0, NULL);
+								onePlayerModeScreen.render(0, 0, NULL);
+								//Board.render(475, 0, NULL);
 								block[0].printNext(574, 283, 35);
 								block[2].printNext(1270, 283, 35);
 								block[3].printNext(1275, 547, 30);
@@ -183,7 +186,7 @@ int main(int argc, char* args[])
 						getBlockId(p1NextBlock, fullList, p1Place);
 						getBlockId(p2NextBlock, fullList, p2Place);
 
-						MainScreen.render(0, 0, NULL);
+						//MainScreen.render(0, 0, NULL);
 
 						while ((!playerOneField.lose() || !playerTwoField.lose()) && !quit )
 						{
@@ -199,8 +202,9 @@ int main(int argc, char* args[])
 									p2TotalTime += playerTwoField.Time;
 									p2Block[1].move(0, 1);
 								}
-								Board.render(0, 0, NULL);
-								Board.render(960, 0, NULL);
+								twoPlayerModeScreen.render(0, 0, NULL);
+								//Board.render(0, 0, NULL);
+								//Board.render(960, 0, NULL);
 								p1Block[0].printNext(99, 283, 35);
 								p1Block[2].printNext(795, 283, 35);
 								p1Block[3].printNext(800, 547, 30);
