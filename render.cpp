@@ -8,6 +8,7 @@ Texture BlockSheet;
 Texture ShadeSheet;
 Texture Board;
 Texture MainScreen;
+Texture playingBackground;
 
 Texture scoreTexture;
 Texture lineTexture;

@@ -13,8 +13,9 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		MainScreen.loadFromFile("texture/mainScreen2.png");
-		Board.loadFromFile("texture/playing_screen.png");
+		MainScreen.loadFromFile("texture/mainScreen.png");
+		Board.loadFromFile("texture/playingScreen.png");
+		playingBackground.loadFromFile("texture/playingBackground.png");
 		loadBlock();
 		loadButton();
 		loadStat();
@@ -90,11 +91,12 @@ int main(int argc, char* args[])
 								}
 
 								Board.render(475, 0, NULL);
-								block[0].printNext(574, 303, 35);
-								block[2].printNext(1270, 303, 35);
-								block[3].printNext(1275, 567, 30);
-								block[4].printNext(1279, 801, 25);
-								onePlayerMode.getStat();
+								//Score.loadFromRenderedText(100, textColor);
+								Score.render(580, 580, NULL);
+								block[0].printNext(574, 303-20, 35);
+								block[2].printNext(1270, 303-20, 35);
+								block[3].printNext(1275, 567 - 20, 30);
+								block[4].printNext(1279, 801 - 20, 25);
 								onePlayerMode.printField(755);
 
 								SDL_PollEvent(&e);
@@ -133,7 +135,7 @@ int main(int argc, char* args[])
 										if (!canHold) break;
 										canHold = false;
 										hold(block, nextBlock, 5);
-										block[0].printNext(574, 303, 35);
+										block[0].printNext(574, 303 - 20, 35);
 										block[1].print(755);
 										break;
 
@@ -200,17 +202,14 @@ int main(int argc, char* args[])
 								}
 								Board.render(0, 0, NULL);
 								Board.render(960, 0, NULL);
-
-								p1Block[0].printNext(99, 303, 35);
-								p1Block[2].printNext(795, 303, 35);
-								p1Block[3].printNext(800, 567, 30);
-								p1Block[4].printNext(805, 801, 25);
-
-								p2Block[0].printNext(1059, 303, 35);
-								p2Block[2].printNext(1755, 303, 35);
-								p2Block[3].printNext(1760, 567, 30);
-								p2Block[4].printNext(1765, 801, 25);
-
+								p1Block[0].printNext(99, 303 - 20, 35);
+								p1Block[2].printNext(795, 303 - 20, 35);
+								p1Block[3].printNext(800, 567 - 20, 30);
+								p1Block[4].printNext(805, 801 - 20, 25);
+								p2Block[0].printNext(1059, 303 - 20, 35);
+								p2Block[2].printNext(1755, 303 - 20, 35);
+								p2Block[3].printNext(1760, 567 - 20, 30);
+								p2Block[4].printNext(1765, 801 - 20, 25);
 								playerOneField.printField(280);
 								playerTwoField.printField(1240);
 
@@ -250,7 +249,7 @@ int main(int argc, char* args[])
 										if (!p1CanHold) break;
 										p1CanHold = false;
 										hold(p1Block, p1NextBlock, 5);
-										p1Block[0].printNext(99, 303, 35);
+										p1Block[0].printNext(99, 303 - 20, 35);
 										p1Block[1].print(280);
 										break;
 
@@ -279,7 +278,7 @@ int main(int argc, char* args[])
 										if (!p2CanHold) break;
 										p2CanHold = false;
 										hold(p2Block, p2NextBlock, 5);
-										p2Block[0].printNext(1059, 303, 35);
+										p2Block[0].printNext(1059, 303 - 20, 35);
 										p2Block[1].print(1240);
 										break;
 
