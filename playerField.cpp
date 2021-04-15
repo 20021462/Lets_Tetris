@@ -76,9 +76,8 @@ bool Field::lineClear()
 		Score += 800 * Level;
 		break;
 	}
-	Level = Line / 5 + 1;
-	double tmp = max(pow(0.8 - (Level - 1) * 0.007, Level - 1), 0.00706);
-	Time = tmp * 1000;
+	Level = min(Line / 5 + 1, 15);
+	Time = pow(0.8 - (Level - 1) * 0.007, Level - 1) * 1000;
 	return getScore;
 }
 
@@ -160,7 +159,7 @@ void Field::reset()
 
 }*/
 
-void Field::getStat()
+void Field::getStat(int x)
 {
 	stringstream scoreText;
 	stringstream lineText;
@@ -189,7 +188,7 @@ void Field::getStat()
 	lineTexture.loadFromRenderedText(lineText.str().c_str(), lineColor);
 	levelTexture.loadFromRenderedText(levelText.str().c_str(), levelColor);
 
-	scoreTexture.render(onePlayerModeScreen.mWidth / 4 + 49, 538, NULL);
-	levelTexture.render(onePlayerModeScreen.mWidth / 4 + 105, 692, NULL);
-	lineTexture.render(onePlayerModeScreen.mWidth / 4 + 92, 855, NULL);
+	scoreTexture.render(onePlayerModeScreen.mWidth / 4 + 49 + x, 538, NULL);
+	levelTexture.render(onePlayerModeScreen.mWidth / 4 + 105 + x, 692, NULL);
+	lineTexture.render(onePlayerModeScreen.mWidth / 4 + 92 + x, 855, NULL);
 }

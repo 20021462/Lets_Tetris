@@ -24,7 +24,7 @@ public :
 	bool lose();
 	void reset();
 
-	void getStat();
+	void getStat(int x);
 	//void sendBlock(int line);
 
 	Texture scoreTexture;

@@ -1,3 +1,3 @@
 ﻿  playerField.cpp
-D:\C++\Lets_Tetris\playerField.cpp(81,13): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-  Lets Tetris.vcxproj -> D:\C++\Lets_Tetris\x64\Debug\Lets Tetris.exe
+D:\Lets_Tetris\playerField.cpp(80,51): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Lets Tetris.vcxproj -> D:\Lets_Tetris\x64\Debug\Lets Tetris.exe

@@ -57,10 +57,8 @@ private:
 extern SDL_Rect BlockRect[BLOCK_TOTAL];
 extern Texture BlockSheet;
 extern Texture ShadeSheet;
-extern Texture Board;
 extern Texture MainScreen;
 
-extern Texture playingBackground;
 extern Texture onePlayerModeScreen;
 extern Texture twoPlayerModeScreen;
 

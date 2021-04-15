@@ -14,8 +14,6 @@ int main(int argc, char* args[])
 	else
 	{
 		MainScreen.loadFromFile("texture/mainScreen.png");
-		Board.loadFromFile("texture/playingScreen.png");
-		playingBackground.loadFromFile("texture/playingBackground.png");
 		onePlayerModeScreen.loadFromFile("texture/1playerPlayingScreen.png");
 		twoPlayerModeScreen.loadFromFile("texture/2playerPlayingScreen.png");
 		loadBlock();
@@ -75,7 +73,6 @@ int main(int argc, char* args[])
 						totalTime += onePlayerMode.Time;
 						totalTime += SDL_GetTicks();
 						generateBlockId(nextBlock, 5);
-						//playingBackground.render(0, 0, NULL);
 
 						while (!onePlayerMode.lose() && !quit)
 						{
@@ -93,12 +90,11 @@ int main(int argc, char* args[])
 								}
 
 								onePlayerModeScreen.render(0, 0, NULL);
-								//Board.render(475, 0, NULL);
 								block[0].printNext(574, 283, 35);
 								block[2].printNext(1270, 283, 35);
 								block[3].printNext(1275, 547, 30);
 								block[4].printNext(1279, 781, 25);
-								onePlayerMode.getStat();
+								onePlayerMode.getStat(0);
 								onePlayerMode.printField(755);
 
 								SDL_PollEvent(&e);
@@ -213,6 +209,8 @@ int main(int argc, char* args[])
 								p2Block[2].printNext(1755, 283, 35);
 								p2Block[3].printNext(1760, 547, 30);
 								p2Block[4].printNext(1765, 781, 25);
+								playerOneField.getStat(-475);
+								playerTwoField.getStat(485);
 								playerOneField.printField(280);
 								playerTwoField.printField(1240);
 

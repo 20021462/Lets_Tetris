@@ -6,9 +6,7 @@ SDL_Renderer* mainRenderer = NULL;
 SDL_Rect BlockRect[BLOCK_TOTAL];
 Texture BlockSheet;
 Texture ShadeSheet;
-Texture Board;
 Texture MainScreen;
-Texture playingBackground;
 Texture onePlayerModeScreen;
 Texture twoPlayerModeScreen;
 
