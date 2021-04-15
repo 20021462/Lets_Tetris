@@ -36,6 +36,14 @@ void getBlockId(short matrix[], short list[], int startPoint)
 	}
 }
 
+void freeList(short matrix[], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		matrix[i] = 0;
+	}
+}
+
 Block::Block():
 	y_(0),
 	x_(4)

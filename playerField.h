@@ -15,13 +15,14 @@ public :
 	int Line = 0;
 	int Score = 0;
 	int Time = 1000;
+	bool lose = false;
 
 	void printField(int x);
 	void unite(Block& block);
 	void fieldDown(int line);
 	bool lineClear();
 	void shade(Block& block, int x);
-	bool lose();
+	bool checkLose();
 	void reset();
 
 	void getStat(int x);

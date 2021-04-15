@@ -90,31 +90,16 @@ void Field::shade(Block& block, int x)
 	temp.printShade(x);
 }
 
-bool Field::lose()
+bool Field::checkLose()
 {
-	bool lose = false;
 	for (int i = 0; i < BOARD_WIDTH; i++)
 	{
 		if (fieldMatrix[BOARD_HEIGHT - 20][i])
 		{
-			Level = 1;
-			Line = 0;
-			Score = 0;
-			Time = 1000;
-			lose = true;
-			break;
+			return true;
 		}
 	}
-	if (lose == true)
-	{
-		for (int i = 0; i < BOARD_HEIGHT; i++) {
-			for (int j = 0; j < BOARD_WIDTH; j++)
-			{
-				fieldMatrix[i][j] = 0;
-			}
-		}
-	}
-	return lose;
+	return false;
 }
 
 void Field::reset()
