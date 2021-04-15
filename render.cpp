@@ -9,6 +9,7 @@ Texture ShadeSheet;
 Texture MainScreen;
 Texture onePlayerModeScreen;
 Texture twoPlayerModeScreen;
+Texture pauseBackground;
 
 TTF_Font* gFont = NULL;
 SDL_Color scoreColor;
@@ -163,6 +164,7 @@ void close()
 	MainScreen.free();
 	onePlayerModeScreen.free();
 	twoPlayerModeScreen.free();
+	pauseBackground.free();
 
 	TTF_CloseFont(gFont);
 	gFont = NULL;

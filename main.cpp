@@ -16,6 +16,7 @@ int main(int argc, char* args[])
 		MainScreen.loadFromFile("texture/mainScreen.png");
 		onePlayerModeScreen.loadFromFile("texture/1playerPlayingScreen.png");
 		twoPlayerModeScreen.loadFromFile("texture/2playerPlayingScreen.png");
+		pauseBackground.loadFromFile("texture/pauseBackground.png");
 		loadBlock();
 		loadButton();
 		loadStat();
@@ -135,6 +136,17 @@ int main(int argc, char* args[])
 										hold(block, nextBlock, 5);
 										block[0].printNext(574, 303 - 20, 35);
 										block[1].print(755);
+										break;
+
+									case SDLK_p:
+										onePlayerModeScreen.render(0, 0, NULL);
+										//onePlayerMode.getStat(0);
+										pauseBackground.render(0, 0, NULL);
+										userChoice = PAUSE_RESUME;
+										printPauseButton();
+										SDL_RenderPresent(mainRenderer);
+										userChoice = 0;
+										SDL_Delay(5000);
 										break;
 
 									default:

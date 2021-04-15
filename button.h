@@ -4,6 +4,7 @@
 
 extern int userChoice;
 extern int gameModeChosen;
+extern int pauseModeChosen;
 
 
 enum ButtonChoice
@@ -13,6 +14,14 @@ enum ButtonChoice
 	CHOOSE_HELP,
 	CHOOSE_QUIT,
 	CHOOSE_TOTAL,
+};
+
+enum PauseButton
+{
+	PAUSE_NEW_GAME,
+	PAUSE_RESUME,
+	PAUSE_HOME,
+	PAUSE_TOTAL,
 };
 
 enum ButtonState
@@ -32,7 +41,7 @@ public:
 	int x, y;
 	Texture buttonTexture;
 
-	void render();
+	void render(SDL_Rect rect[]);
 
 private:
 
@@ -40,8 +49,10 @@ private:
 
 void loadButton();
 void printButton();
-void controlButton(SDL_Event& keypress);
+void printPauseButton();
 
 extern SDL_Rect ButtonTexture[STATE_TOTAL];
 extern Button buttonChoice[CHOOSE_TOTAL];
+extern SDL_Rect PauseButtonTexture[STATE_TOTAL];
+extern Button pauseButton[PAUSE_TOTAL];
 

@@ -1,3 +1,5 @@
-﻿  playerField.cpp
-D:\Lets_Tetris\playerField.cpp(80,51): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+﻿  button.cpp
+  main.cpp
+D:\Lets_Tetris\main.cpp(9,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
   Lets Tetris.vcxproj -> D:\Lets_Tetris\x64\Debug\Lets Tetris.exe

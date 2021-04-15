@@ -61,6 +61,7 @@ extern Texture MainScreen;
 
 extern Texture onePlayerModeScreen;
 extern Texture twoPlayerModeScreen;
+extern Texture pauseBackground;
 
 extern TTF_Font* gFont;
 extern SDL_Color scoreColor;

@@ -2,12 +2,17 @@
 
 int userChoice = 0;
 int gameModeChosen = CHOOSE_TOTAL;
+int pauseModeChosen = PAUSE_TOTAL;
 
 const int BUTTON_WIDTH = 500;
 const int BUTTON_HEIGHT = 90;
 
+const int PAUSE_BUTTON_SIZE = 150;
+
 SDL_Rect ButtonTexture[STATE_TOTAL];
+SDL_Rect PauseButtonTexture[STATE_TOTAL];
 Button buttonChoice[CHOOSE_TOTAL];
+Button pauseButton[PAUSE_TOTAL];
 
 Button::Button()
 {
@@ -21,10 +26,10 @@ Button::~Button()
 
 }
 
-void Button::render()
+void Button::render(SDL_Rect rect[])
 {
-	if (buttonId != userChoice) buttonTexture.render(x, y, &ButtonTexture[NORMAL]);
-	else buttonTexture.render(x, y, &ButtonTexture[CHOSEN]);
+	if (buttonId != userChoice) buttonTexture.render(x, y, &rect[NORMAL]);
+	else buttonTexture.render(x, y, &rect[CHOSEN]);
 }
 
 void loadButton()
@@ -50,41 +55,43 @@ void loadButton()
 		buttonChoice[i].x = (SCREEN_WIDTH - BUTTON_WIDTH) / 2;
 		buttonChoice[i].y = 550 + i * (35 + BUTTON_HEIGHT);
 	}
+
+	PauseButtonTexture[NORMAL].x = 0;
+	PauseButtonTexture[NORMAL].y = 0;
+	PauseButtonTexture[NORMAL].w = PAUSE_BUTTON_SIZE;
+	PauseButtonTexture[NORMAL].h = PAUSE_BUTTON_SIZE;
+
+	PauseButtonTexture[CHOSEN].x = PAUSE_BUTTON_SIZE;
+	PauseButtonTexture[CHOSEN].y = 0;
+	PauseButtonTexture[CHOSEN].w = PAUSE_BUTTON_SIZE;
+	PauseButtonTexture[CHOSEN].h = PAUSE_BUTTON_SIZE;
+
+	pauseButton[PAUSE_RESUME].buttonTexture.loadFromFile("texture/playButton.png");
+	pauseButton[PAUSE_NEW_GAME].buttonTexture.loadFromFile("texture/replayButton.png");
+	pauseButton[PAUSE_HOME].buttonTexture.loadFromFile("texture/homeButton.png");
+
+	for (int i = 0; i < PAUSE_TOTAL; i++)
+	{
+		pauseButton[i].buttonId = i;
+		pauseButton[i].x = 662 + i * 223;
+		pauseButton[i].y = 513;
+	}
+
 }
 
 void printButton()
 {
 	for (int i = 0; i < CHOOSE_TOTAL; i++)
 	{
-		buttonChoice[i].render();
+		buttonChoice[i].render(ButtonTexture);
 	}
 
 }
 
-void controlButton(SDL_Event& keypress)
+void printPauseButton()
 {
-	if (keypress.type == SDL_KEYDOWN && keypress.key.repeat == 0)
+	for (int i = 0; i < PAUSE_TOTAL; i++)
 	{
-		switch (keypress.key.keysym.sym)
-		{
-			case SDLK_UP:
-				if (userChoice == 0) userChoice = CHOOSE_TOTAL - 1;
-				else userChoice--;
-				break;
-
-			case SDLK_DOWN:
-				if (userChoice == CHOOSE_TOTAL) userChoice = 0;
-				else userChoice++;
-				break;
-
-			case SDLK_SPACE:
-				gameModeChosen = userChoice;
-				break;
-
-			default:
-				break;
-		}
+		pauseButton[i].render(PauseButtonTexture);
 	}
-
 }
-
