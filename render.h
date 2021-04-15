@@ -44,11 +44,12 @@ public:
 	void free();
 
 	void render(int x, int y, SDL_Rect* clip = NULL, int size=0);
+	int mWidth;
+	int mHeight;
 
 private:
 	SDL_Texture* mTexture;
-	int mWidth;
-	int mHeight;
+	
 
 
 };

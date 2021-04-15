@@ -189,7 +189,7 @@ void Field::getStat()
 	lineTexture.loadFromRenderedText(lineText.str().c_str(), lineColor);
 	levelTexture.loadFromRenderedText(levelText.str().c_str(), levelColor);
 
-	scoreTexture.render(524, 538, NULL);
-	levelTexture.render(517, 681, NULL);
-	lineTexture.render(517, 843, NULL);
+	scoreTexture.render(onePlayerModeScreen.mWidth / 4 + 49, 538, NULL);
+	levelTexture.render(onePlayerModeScreen.mWidth / 4 + 105, 692, NULL);
+	lineTexture.render(onePlayerModeScreen.mWidth / 4 + 92, 855, NULL);
 }
