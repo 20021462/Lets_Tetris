@@ -29,7 +29,7 @@ Button::~Button()
 void Button::render(SDL_Rect rect[])
 {
 	if (buttonId != userChoice) buttonTexture.render(x, y, &rect[NORMAL]);
-	else if (&rect[1] == &PauseButtonTexture[1]) buttonTexture.render(x, y - 120, &rect[CHOSEN]);
+	else if (&rect[1] == &PauseButtonTexture[1]) buttonTexture.render(x, y - 114, &rect[CHOSEN]);
 	else buttonTexture.render(x, y, &rect[CHOSEN]);
 }
 
@@ -75,7 +75,7 @@ void loadButton()
 	{
 		pauseButton[i].buttonId = i;
 		pauseButton[i].x = 680 + i * 215;
-		pauseButton[i].y = 533;
+		pauseButton[i].y = 556;
 	}
 
 }
