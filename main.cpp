@@ -14,6 +14,7 @@ int main(int argc, char* args[])
 	else
 	{
 		MainScreen.loadFromFile("texture/mainScreen.png");
+		HelpScreen.loadFromFile("texture/help_screen.png");
 		onePlayerModeScreen.loadFromFile("texture/1playerPlayingScreen.png");
 		twoPlayerModeScreen.loadFromFile("texture/2playerPlayingScreen.png");
 		pauseBackground.loadFromFile("texture/pauseBackground.png");
@@ -483,6 +484,14 @@ int main(int argc, char* args[])
 				}
 				break;
 
+			case CHOOSE_HELP:
+				MainScreen.render(0, 0, NULL);
+				printButton();
+				HelpScreen.render(0, 0, NULL);
+				SDL_RenderPresent(mainRenderer);
+				SDL_PollEvent(&e);
+				if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) gameModeChosen = CHOOSE_TOTAL;
+				break;
 
 			case CHOOSE_QUIT:
 				quit = true;

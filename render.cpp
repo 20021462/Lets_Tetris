@@ -7,6 +7,8 @@ SDL_Rect BlockRect[BLOCK_TOTAL];
 Texture BlockSheet;
 Texture ShadeSheet;
 Texture MainScreen;
+Texture HelpScreen;
+
 Texture onePlayerModeScreen;
 Texture twoPlayerModeScreen;
 Texture pauseBackground;
@@ -162,6 +164,7 @@ void close()
 	BlockSheet.free();
 	ShadeSheet.free();
 	MainScreen.free();
+	HelpScreen.free();
 	onePlayerModeScreen.free();
 	twoPlayerModeScreen.free();
 	pauseBackground.free();
