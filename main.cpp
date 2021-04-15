@@ -154,11 +154,11 @@ int main(int argc, char* args[])
 										{
 										case SDLK_RIGHT: case SDLK_d:
 											if (userChoice == PAUSE_TOTAL - 1) userChoice = 0;
-											userChoice++;
+											else userChoice++;
 											break;
 										case SDLK_LEFT: case SDLK_a:
 											if (userChoice == 0) userChoice = PAUSE_TOTAL - 1;
-											userChoice--;
+											else userChoice--;
 											break;
 										case SDLK_SPACE: case SDLK_RETURN:
 											pauseModeChosen = userChoice;
@@ -363,11 +363,11 @@ int main(int argc, char* args[])
 										{
 										case SDLK_RIGHT: case SDLK_d:
 											if (userChoice == PAUSE_TOTAL - 1) userChoice = 0;
-											userChoice++;
+											else userChoice++;
 											break;
 										case SDLK_LEFT: case SDLK_a:
 											if (userChoice == 0) userChoice = PAUSE_TOTAL - 1;
-											userChoice--;
+											else userChoice--;
 											break;
 										case SDLK_SPACE: case SDLK_RETURN:
 											pauseModeChosen = userChoice;

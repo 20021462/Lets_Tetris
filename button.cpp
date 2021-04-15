@@ -7,7 +7,7 @@ int pauseModeChosen = PAUSE_TOTAL;
 const int BUTTON_WIDTH = 500;
 const int BUTTON_HEIGHT = 90;
 
-const int PAUSE_BUTTON_SIZE = 150;
+const int PAUSE_BUTTON_SIZE = 130;
 
 SDL_Rect ButtonTexture[STATE_TOTAL];
 SDL_Rect PauseButtonTexture[STATE_TOTAL];
@@ -29,6 +29,7 @@ Button::~Button()
 void Button::render(SDL_Rect rect[])
 {
 	if (buttonId != userChoice) buttonTexture.render(x, y, &rect[NORMAL]);
+	else if (&rect[1] == &PauseButtonTexture[1]) buttonTexture.render(x, y - 120, &rect[CHOSEN]);
 	else buttonTexture.render(x, y, &rect[CHOSEN]);
 }
 
@@ -57,14 +58,14 @@ void loadButton()
 	}
 
 	PauseButtonTexture[NORMAL].x = 0;
-	PauseButtonTexture[NORMAL].y = 0;
+	PauseButtonTexture[NORMAL].y = PAUSE_BUTTON_SIZE;
 	PauseButtonTexture[NORMAL].w = PAUSE_BUTTON_SIZE;
 	PauseButtonTexture[NORMAL].h = PAUSE_BUTTON_SIZE;
 
 	PauseButtonTexture[CHOSEN].x = PAUSE_BUTTON_SIZE;
 	PauseButtonTexture[CHOSEN].y = 0;
 	PauseButtonTexture[CHOSEN].w = PAUSE_BUTTON_SIZE;
-	PauseButtonTexture[CHOSEN].h = PAUSE_BUTTON_SIZE;
+	PauseButtonTexture[CHOSEN].h = PAUSE_BUTTON_SIZE * 2;
 
 	pauseButton[PAUSE_RESUME].buttonTexture.loadFromFile("texture/playButton.png");
 	pauseButton[PAUSE_NEW_GAME].buttonTexture.loadFromFile("texture/replayButton.png");
@@ -73,8 +74,8 @@ void loadButton()
 	for (int i = 0; i < PAUSE_TOTAL; i++)
 	{
 		pauseButton[i].buttonId = i;
-		pauseButton[i].x = 662 + i * 223;
-		pauseButton[i].y = 513;
+		pauseButton[i].x = 680 + i * 215;
+		pauseButton[i].y = 533;
 	}
 
 }
