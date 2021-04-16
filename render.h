@@ -2,6 +2,11 @@
 
 using namespace std;
 
+extern Mix_Chunk* gScratch;
+extern Mix_Chunk* gHigh;
+extern Mix_Chunk* gMedium;
+extern Mix_Chunk* gLow;
+
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;
 
@@ -29,6 +34,8 @@ void close();
 bool loadStat();
 
 bool loadBlock();
+
+bool loadMedia();
 
 class Texture
 {

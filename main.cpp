@@ -4,6 +4,7 @@
 #include "playerField.h"
 #include "button.h"
 
+
 int main(int argc, char* args[])
 {
 	srand(time(0));
@@ -20,10 +21,13 @@ int main(int argc, char* args[])
 		loadBlock();
 		loadButton();
 		loadStat();
+		loadMedia();
 
 		bool quit = false;
 		SDL_Event e;
 
+
+		
 		while (!quit)
 		{
 			SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -111,19 +115,23 @@ int main(int argc, char* args[])
 									{
 									case SDLK_UP: case SDLK_w:
 										block[1].rotate(block[1].matrix, onePlayerMode.fieldMatrix);
+										Mix_PlayChannel(-1, gHigh, 0);
 										break;
 
 									case SDLK_DOWN: case SDLK_s:
 										block[1].move(0, 1);
 										onePlayerMode.Score++;
+										Mix_PlayChannel(-1, gMedium, 0);
 										break;
 
 									case SDLK_RIGHT: case SDLK_d:
 										block[1].moveRight(onePlayerMode.fieldMatrix);
+										Mix_PlayChannel(-1, gLow, 0);
 										break;
 
 									case SDLK_LEFT: case SDLK_a:
 										block[1].moveLeft(onePlayerMode.fieldMatrix);
+										Mix_PlayChannel(-1, gScratch, 0);
 										break;
 
 									case SDLK_SPACE: case SDLK_KP_ENTER: case SDLK_RETURN:

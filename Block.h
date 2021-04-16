@@ -1,6 +1,7 @@
 #pragma once
 #include "render.h"
 #include "const.h"
+#include <SDL_mixer.h>
 
 extern short int nextBlock[5];
 extern short int p1NextBlock[5];
