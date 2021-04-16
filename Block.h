@@ -11,6 +11,7 @@ extern short int fullList[50];
 void generateBlockId(short matrix[], int n);
 void newBlockGenerate(short matrix[], int n);
 void getBlockId(short matrix[], short list[], int startPoint);
+void freeList(short matrix[], int n);
 
 class Block
 {
