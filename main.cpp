@@ -38,6 +38,7 @@ int main(int argc, char* args[])
 			switch (gameModeChosen)
 			{
 			case CHOOSE_TOTAL:
+				Mix_PlayMusic(gMusic, -1);
 				MainScreen.render(0, 0, NULL);
 				printButton();
 				SDL_RenderPresent(mainRenderer);

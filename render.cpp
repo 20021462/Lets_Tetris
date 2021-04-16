@@ -1,5 +1,6 @@
 #include "render.h"
 
+Mix_Music* gMusic = NULL;
 Mix_Chunk* gScratch = NULL;
 Mix_Chunk* gHigh = NULL;
 Mix_Chunk* gMedium = NULL;
@@ -177,6 +178,14 @@ bool loadMedia()
 	//Loading success flag
 	bool success = true;
 
+	//Load music
+	gMusic = Mix_LoadMUS("21_sound_effects_and_music/beat.wav");
+	if (gMusic == NULL)
+	{
+		printf("Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+
 	//Load sound effects
 	gScratch = Mix_LoadWAV("21_sound_effects_and_music/scratch.wav");
 	if (gScratch == NULL)
@@ -222,6 +231,17 @@ void close()
 	TTF_CloseFont(gFont);
 	gFont = NULL;
 
+	Mix_FreeChunk(gScratch);
+	Mix_FreeChunk(gHigh);
+	Mix_FreeChunk(gMedium);
+	Mix_FreeChunk(gLow);
+	gScratch = NULL;
+	gHigh = NULL;
+	gMedium = NULL;
+	gLow = NULL;
+	Mix_FreeMusic(gMusic);
+	gMusic = NULL;
+
 
 	SDL_DestroyRenderer(mainRenderer);
 	SDL_DestroyWindow(mainWindow);
@@ -231,6 +251,7 @@ void close()
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
+	Mix_Quit();
 }
 
 bool loadStat()
