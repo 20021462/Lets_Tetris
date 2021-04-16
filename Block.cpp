@@ -1,5 +1,6 @@
 #include "block.h"
 #include "playerField.h"
+#include "SDL_mixer.h"
 
 short int nextBlock[5];
 short int p1NextBlock[5];
@@ -156,6 +157,7 @@ void Block::rotate(int matrix[4][4], int(*field)[10])
 	copyMatrix(matrix, temp, 4);
 	horizontalReflectioin(matrix,this->size);
 	transpose(matrix, this->size);
+
 
 	int xMove = 0;
 	for (int i = 0; i < size; i++)

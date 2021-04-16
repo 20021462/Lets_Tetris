@@ -1,5 +1,10 @@
 #include "render.h"
 
+Mix_Chunk* gScratch = NULL;
+Mix_Chunk* gHigh = NULL;
+Mix_Chunk* gMedium = NULL;
+Mix_Chunk* gLow = NULL;
+
 SDL_Window* mainWindow = NULL;
 SDL_Renderer* mainRenderer = NULL;
 
@@ -115,7 +120,7 @@ void Texture::render(int x, int y, SDL_Rect* clip, int size)
 
 bool initSDL()
 {
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
 	{
 		cout << "SDL couldn't initialize ! Error : " << SDL_GetError() << endl;
 		return false;
@@ -153,10 +158,55 @@ bool initSDL()
 					printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
 					return false;
 				}
+
+				if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+				{
+					printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+					return false;
+				}
 			}
 		}
 	}
+
+
 	return true;
+}
+
+bool loadMedia()
+{
+	//Loading success flag
+	bool success = true;
+
+	//Load sound effects
+	gScratch = Mix_LoadWAV("21_sound_effects_and_music/scratch.wav");
+	if (gScratch == NULL)
+	{
+		printf("Failed to load scratch sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+
+	gHigh = Mix_LoadWAV("21_sound_effects_and_music/high.wav");
+	if (gHigh == NULL)
+	{
+		printf("Failed to load high sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+
+	gMedium = Mix_LoadWAV("21_sound_effects_and_music/medium.wav");
+	if (gMedium == NULL)
+	{
+		printf("Failed to load medium sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+
+	gLow = Mix_LoadWAV("21_sound_effects_and_music/low.wav");
+	if (gLow == NULL)
+	{
+		printf("Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+
+	return success;
 }
 
 void close()
