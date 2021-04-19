@@ -30,6 +30,8 @@ enum BlockType
 
 bool initSDL();
 
+void loadTexture();
+
 void close();
 
 bool loadStat();
@@ -69,13 +71,20 @@ extern Texture MainScreen;
 extern Texture HelpScreen;
 extern Texture GameOver;
 
+extern Texture GameOver2;
+extern Texture Winner;
+extern Texture Loser;
+
 extern Texture onePlayerModeScreen;
 extern Texture twoPlayerModeScreen;
 extern Texture pauseBackground;
+extern Texture countDown[3];
 
 extern TTF_Font* gFont;
 extern SDL_Color scoreColor;
 extern SDL_Color levelColor;
 extern SDL_Color lineColor;
+extern SDL_Color loseColor;
+
 
 #pragma once

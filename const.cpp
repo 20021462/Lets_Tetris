@@ -10,6 +10,8 @@ short int p1Place;
 short int p2Place;
 bool p1CanHold = true;
 bool p2CanHold = true;
+bool p1Lose = false;
+bool p2Lose = false;
 
 void copyMatrix(int matrix[4][4], int temp[4][4], int size)
 {

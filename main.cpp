@@ -14,12 +14,7 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		MainScreen.loadFromFile("texture/mainScreen.png");
-		HelpScreen.loadFromFile("texture/help_screen.png");
-		GameOver.loadFromFile("texture/Gameover.png");
-		onePlayerModeScreen.loadFromFile("texture/1playerPlayingScreen.png");
-		twoPlayerModeScreen.loadFromFile("texture/2playerPlayingScreen.png");
-		pauseBackground.loadFromFile("texture/pauseBackground.png");
+		loadTexture();
 		loadBlock();
 		loadButton();
 		loadStat();
@@ -181,6 +176,13 @@ int main(int argc, char* args[])
 								switch (pauseModeChosen)
 								{
 								case PAUSE_RESUME:
+									for (int i = 0; i < 3; i++)
+									{
+										onePlayerModeScreen.render(0, 0, NULL);
+										countDown[i].render(0, 0, NULL);
+										SDL_RenderPresent(mainRenderer);
+										SDL_Delay(1000);
+									}
 									totalTime = SDL_GetTicks();
 									totalTime += onePlayerMode.Time;
 									break;
@@ -225,9 +227,10 @@ int main(int argc, char* args[])
 					if (onePlayerMode.checkLose())
 					{
 						GameOver.render(0, 0, NULL);
-						onePlayerMode.printScore(1030, 665, 100);
+						onePlayerMode.printScore(1030, 665, 100, scoreColor);
 						SDL_RenderPresent(mainRenderer);
 						SDL_Event returnMain;
+						returnMain.type = 0;
 						SDL_PollEvent(&returnMain);
 						while (returnMain.type != SDL_KEYDOWN) SDL_PollEvent(&returnMain);
 						onePlayerMode.reset();
@@ -244,7 +247,8 @@ int main(int argc, char* args[])
 				p1TotalTime += SDL_GetTicks();
 				p2TotalTime += playerTwoField.Time;
 				p2TotalTime += SDL_GetTicks();
-
+				p1Lose = false;
+				p2Lose = false;
 				p1Place = 1;
 				p2Place = 1;
 
@@ -261,16 +265,19 @@ int main(int argc, char* args[])
 				getBlockId(p1NextBlock, fullList, p1Place);
 				getBlockId(p2NextBlock, fullList, p2Place);
 
-				while (!playerOneField.checkLose() && !playerTwoField.checkLose() && !quitMode && !quit)
+				while ((!playerOneField.checkLose() || !playerTwoField.checkLose()) && !quitMode && !quit)
 				{
-					while (!p1Block[1].collide(playerOneField.fieldMatrix) && !p2Block[1].collide(playerTwoField.fieldMatrix) && !quitMode && !quit)
+					while (((!p1Block[1].collide(playerOneField.fieldMatrix) && !p2Block[1].collide(playerTwoField.fieldMatrix)) 
+						|| (p1Lose && !p2Block[1].collide(playerTwoField.fieldMatrix)) 
+						|| (p2Lose && !p1Block[1].collide(playerOneField.fieldMatrix)))
+						&& !quitMode && !quit)
 					{
-						if (SDL_GetTicks() > p1TotalTime && !playerOneField.checkLose())
+						if (SDL_GetTicks() > p1TotalTime && !p1Lose)
 						{
 							p1TotalTime += playerOneField.Time;
 							p1Block[1].move(0, 1);
 						}
-						if (SDL_GetTicks() > p2TotalTime && !playerTwoField.checkLose())
+						if (SDL_GetTicks() > p2TotalTime && !p2Lose)
 						{
 							p2TotalTime += playerTwoField.Time;
 							p2Block[1].move(0, 1);
@@ -291,6 +298,17 @@ int main(int argc, char* args[])
 						playerOneField.printField(280);
 						playerTwoField.printField(1240);
 
+						if (p1Lose)
+						{
+							GameOver2.render(0, 0, NULL);
+							playerOneField.printScore(532, 703, 60, scoreColor);
+						}
+						if (p2Lose)
+						{
+							GameOver2.render(960, 0, NULL);
+							playerTwoField.printScore(1492, 703, 60, scoreColor);
+						}
+
 						SDL_PollEvent(&e);
 						if (e.type == SDL_QUIT)
 						{
@@ -300,66 +318,77 @@ int main(int argc, char* args[])
 						}
 						if (e.type == SDL_KEYDOWN)
 						{
+							if (!p1Lose)
+							{
+								switch (e.key.keysym.sym)
+								{
+								case SDLK_w:
+									p1Block[1].rotate(p1Block[1].matrix, playerOneField.fieldMatrix);
+									break;
+
+								case SDLK_s:
+									p1Block[1].move(0, 1);
+									playerOneField.Score++;
+									break;
+
+								case SDLK_d:
+									p1Block[1].moveRight(playerOneField.fieldMatrix);
+									break;
+
+								case SDLK_a:
+									p1Block[1].moveLeft(playerOneField.fieldMatrix);
+									break;
+
+								case SDLK_SPACE:
+									p1Block[1].hardDrop(playerOneField.fieldMatrix, playerOneField.Score);
+									break;
+
+								case SDLK_c:
+									if (!p1CanHold) break;
+									p1CanHold = false;
+									hold(p1Block, p1NextBlock, 5);
+									p1Block[0].printNext(99, 303 - 20, 35);
+									p1Block[1].print(280);
+									break;
+								}
+							}
+							if (!p2Lose)
+							{
+								switch (e.key.keysym.sym)
+								{
+								case SDLK_UP:
+									p2Block[1].rotate(p2Block[1].matrix, playerTwoField.fieldMatrix);
+									break;
+
+								case SDLK_DOWN:
+									p2Block[1].move(0, 1);
+									playerTwoField.Score++;
+									break;
+
+								case SDLK_RIGHT:
+									p2Block[1].moveRight(playerTwoField.fieldMatrix);
+									break;
+
+								case SDLK_LEFT:
+									p2Block[1].moveLeft(playerTwoField.fieldMatrix);
+									break;
+
+								case SDLK_KP_ENTER: case SDLK_RETURN:
+									p2Block[1].hardDrop(playerTwoField.fieldMatrix, playerTwoField.Score);
+									break;
+
+								case SDLK_RCTRL:
+									if (!p2CanHold) break;
+									p2CanHold = false;
+									hold(p2Block, p2NextBlock, 5);
+									p2Block[0].printNext(1059, 303 - 20, 35);
+									p2Block[1].print(1240);
+									break;
+
+								}
+							}
 							switch (e.key.keysym.sym)
 							{
-							case SDLK_w:
-								p1Block[1].rotate(p1Block[1].matrix, playerOneField.fieldMatrix);
-								break;
-
-							case SDLK_s:
-								p1Block[1].move(0, 1);
-								playerOneField.Score++;
-								break;
-
-							case SDLK_d:
-								p1Block[1].moveRight(playerOneField.fieldMatrix);
-								break;
-
-							case SDLK_a:
-								p1Block[1].moveLeft(playerOneField.fieldMatrix);
-								break;
-
-							case SDLK_SPACE:
-								p1Block[1].hardDrop(playerOneField.fieldMatrix, playerOneField.Score);
-								break;
-
-							case SDLK_c:
-								if (!p1CanHold) break;
-								p1CanHold = false;
-								hold(p1Block, p1NextBlock, 5);
-								p1Block[0].printNext(99, 303 - 20, 35);
-								p1Block[1].print(280);
-								break;
-
-							case SDLK_UP:
-								p2Block[1].rotate(p2Block[1].matrix, playerTwoField.fieldMatrix);
-								break;
-
-							case SDLK_DOWN:
-								p2Block[1].move(0, 1);
-								playerTwoField.Score++;
-								break;
-
-							case SDLK_RIGHT:
-								p2Block[1].moveRight(playerTwoField.fieldMatrix);
-								break;
-
-							case SDLK_LEFT:
-								p2Block[1].moveLeft(playerTwoField.fieldMatrix);
-								break;
-
-							case SDLK_KP_ENTER: case SDLK_RETURN:
-								p2Block[1].hardDrop(playerTwoField.fieldMatrix, playerTwoField.Score);
-								break;
-
-							case SDLK_RCTRL:
-								if (!p2CanHold) break;
-								p2CanHold = false;
-								hold(p2Block, p2NextBlock, 5);
-								p2Block[0].printNext(1059, 303 - 20, 35);
-								p2Block[1].print(1240);
-								break;
-
 							case SDLK_ESCAPE: case SDLK_p:
 								userChoice = PAUSE_RESUME;
 								while (pauseModeChosen == PAUSE_TOTAL)
@@ -395,6 +424,13 @@ int main(int argc, char* args[])
 								switch (pauseModeChosen)
 								{
 								case PAUSE_RESUME:
+									for (int i = 0; i < 3; i++)
+									{
+										twoPlayerModeScreen.render(0, 0, NULL);
+										countDown[i].render(0, 0, NULL);
+										SDL_RenderPresent(mainRenderer);
+										SDL_Delay(1000);
+									}
 									p1TotalTime = SDL_GetTicks();
 									p1TotalTime += playerOneField.Time;
 									p2TotalTime = SDL_GetTicks();
@@ -442,7 +478,7 @@ int main(int argc, char* args[])
 					}
 					if (quitMode) break;
 
-					if (p1Block[1].collide(playerOneField.fieldMatrix))
+					if (p1Block[1].collide(playerOneField.fieldMatrix) && !p1Lose)
 					{
 						playerOneField.unite(p1Block[1]);
 						p1Place++;
@@ -453,7 +489,7 @@ int main(int argc, char* args[])
 						}
 						p1CanHold = true;
 					}
-					if (p2Block[1].collide(playerTwoField.fieldMatrix))
+					if (p2Block[1].collide(playerTwoField.fieldMatrix) && !p2Lose)
 					{
 						playerTwoField.unite(p2Block[1]);
 						p2Place++;
@@ -485,8 +521,54 @@ int main(int argc, char* args[])
 						}
 					}
 
-					if (playerOneField.checkLose() || playerTwoField.checkLose())
+					if (playerOneField.checkLose()) p1Lose = true;
+					if (playerTwoField.checkLose()) p2Lose = true;
+
+					if (playerOneField.checkLose() && playerTwoField.checkLose())
 					{
+						twoPlayerModeScreen.render(0, 0, NULL);
+
+						p1Block[0].printNext(99, 283, 35);
+						p1Block[2].printNext(795, 283, 35);
+						p1Block[3].printNext(800, 547, 30);
+						p1Block[4].printNext(805, 781, 25);
+						p2Block[0].printNext(1059, 283, 35);
+						p2Block[2].printNext(1755, 283, 35);
+						p2Block[3].printNext(1760, 547, 30);
+						p2Block[4].printNext(1765, 781, 25);
+
+						playerOneField.getStat(-475);
+						playerTwoField.getStat(485);
+						playerOneField.printField(280);
+						playerTwoField.printField(1240);
+
+						if (playerOneField.Score > playerTwoField.Score)
+						{
+							Winner.render(0, 0, NULL);
+							Loser.render(960, 0, NULL);
+							playerOneField.printScore(532, 703, 60, scoreColor);
+							playerTwoField.printScore(1492, 703, 60, loseColor);
+						}
+						else if (playerTwoField.Score > playerOneField.Score)
+						{
+							Winner.render(960, 0, NULL);
+							Loser.render(0, 0, NULL);
+							playerOneField.printScore(532, 703, 60, loseColor);
+							playerTwoField.printScore(1492, 703, 60, scoreColor);
+						}
+						else
+						{
+							GameOver2.render(0, 0, NULL);
+							GameOver2.render(960, 0, NULL);
+							playerOneField.printScore(532, 703, 60, scoreColor);
+							playerTwoField.printScore(1492, 703, 60, scoreColor);
+						}
+
+						SDL_RenderPresent(mainRenderer);
+						SDL_Event returnMain;
+						returnMain.type = 0;
+						SDL_PollEvent(&returnMain);
+						while (returnMain.type != SDL_KEYDOWN) SDL_PollEvent(&returnMain);
 						playerOneField.reset();
 						playerTwoField.reset();
 						p1TotalTime = 0;

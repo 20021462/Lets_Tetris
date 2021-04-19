@@ -30,6 +30,8 @@ extern short int p1Place;
 extern short int p2Place;
 extern bool p1CanHold;
 extern bool p2CanHold;
+extern bool p1Lose;
+extern bool p2Lose;
 
 void copyMatrix(int matrix[4][4], int temp[4][4], int size);
 void horizontalReflectioin(int matrix[4][4], int size);

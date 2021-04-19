@@ -26,7 +26,7 @@ public :
 	void reset();
 
 	void getStat(int x);
-	void printScore(int x, int y, int size);
+	void printScore(int x, int y, int size, SDL_Color color);
 	//void sendBlock(int line);
 
 	Texture scoreTexture;

@@ -16,15 +16,20 @@ Texture MainScreen;
 Texture HelpScreen;
 Texture GameOver;
 
+Texture GameOver2;
+Texture Winner;
+Texture Loser;
+
 Texture onePlayerModeScreen;
 Texture twoPlayerModeScreen;
 Texture pauseBackground;
+Texture countDown[3];
 
 TTF_Font* gFont = NULL;
 SDL_Color scoreColor;
 SDL_Color levelColor;
 SDL_Color lineColor;
-
+SDL_Color loseColor;
 
 Texture::Texture()
 {
@@ -174,6 +179,23 @@ bool initSDL()
 	return true;
 }
 
+void loadTexture()
+{
+	MainScreen.loadFromFile("texture/mainScreen.png");
+	HelpScreen.loadFromFile("texture/help_screen.png");
+	GameOver.loadFromFile("texture/Gameover.png");
+	GameOver2.loadFromFile("texture/Yourscore.png");
+	Winner.loadFromFile("texture/Winner.png");
+	Loser.loadFromFile("texture/Loser.png");
+	onePlayerModeScreen.loadFromFile("texture/1playerPlayingScreen.png");
+	twoPlayerModeScreen.loadFromFile("texture/2playerPlayingScreen.png");
+	pauseBackground.loadFromFile("texture/pauseBackground.png");
+	countDown[0].loadFromFile("texture/3.png");
+	countDown[1].loadFromFile("texture/2.png");
+	countDown[2].loadFromFile("texture/1.png");
+
+}
+
 bool loadMedia()
 {
 	//Loading success flag
@@ -226,6 +248,9 @@ void close()
 	MainScreen.free();
 	HelpScreen.free();
 	GameOver.free();
+	GameOver2.free();
+	Winner.free();
+	Loser.free();
 	onePlayerModeScreen.free();
 	twoPlayerModeScreen.free();
 	pauseBackground.free();
@@ -271,6 +296,7 @@ bool loadStat()
 		scoreColor = { 252, 71, 91 };
 		levelColor = { 252, 215, 75 };
 		lineColor = { 145, 197, 235 };
+		loseColor = { 255, 255, 255 };
 	}
 
 	return success;

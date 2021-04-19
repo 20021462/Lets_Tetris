@@ -178,7 +178,7 @@ void Field::getStat(int x)
 	lineTexture.render(onePlayerModeScreen.mWidth / 4 + 92 + x, 855, NULL);
 }
 
-void Field::printScore(int x, int y, int size)
+void Field::printScore(int x, int y, int size, SDL_Color color)
 {
 	stringstream scoreText;
 
@@ -191,7 +191,7 @@ void Field::printScore(int x, int y, int size)
 
 	TTF_Font* scoreFont = NULL;
 	scoreFont = TTF_OpenFont("font/gilroy-extrabold.otf", size);
-	scoreTexture.loadFromRenderedText(scoreText.str().c_str(), scoreColor, scoreFont);
+	scoreTexture.loadFromRenderedText(scoreText.str().c_str(), color, scoreFont);
 
 	scoreTexture.render(x, y, NULL);
 }
