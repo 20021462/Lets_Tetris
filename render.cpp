@@ -14,6 +14,7 @@ Texture BlockSheet;
 Texture ShadeSheet;
 Texture MainScreen;
 Texture HelpScreen;
+Texture GameOver;
 
 Texture onePlayerModeScreen;
 Texture twoPlayerModeScreen;
@@ -67,10 +68,10 @@ bool Texture::loadFromFile(string path)
 	return mTexture != NULL;
 }
 
-bool Texture::loadFromRenderedText(string textureText, SDL_Color textColor)
+bool Texture::loadFromRenderedText(string textureText, SDL_Color textColor, TTF_Font *font)
 {
 	free();
-	SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, textureText.c_str(), textColor);
+	SDL_Surface* textSurface = TTF_RenderText_Solid(font, textureText.c_str(), textColor);
 	if (textSurface == NULL)
 	{
 		printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
@@ -224,6 +225,7 @@ void close()
 	ShadeSheet.free();
 	MainScreen.free();
 	HelpScreen.free();
+	GameOver.free();
 	onePlayerModeScreen.free();
 	twoPlayerModeScreen.free();
 	pauseBackground.free();

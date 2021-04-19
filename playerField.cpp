@@ -169,11 +169,29 @@ void Field::getStat(int x)
 	lineText << Line;
 	levelText << Level;
 
-	scoreTexture.loadFromRenderedText(scoreText.str().c_str(), scoreColor);
-	lineTexture.loadFromRenderedText(lineText.str().c_str(), lineColor);
-	levelTexture.loadFromRenderedText(levelText.str().c_str(), levelColor);
+	scoreTexture.loadFromRenderedText(scoreText.str().c_str(), scoreColor, gFont);
+	lineTexture.loadFromRenderedText(lineText.str().c_str(), lineColor, gFont);
+	levelTexture.loadFromRenderedText(levelText.str().c_str(), levelColor, gFont);
 
 	scoreTexture.render(onePlayerModeScreen.mWidth / 4 + 49 + x, 538, NULL);
 	levelTexture.render(onePlayerModeScreen.mWidth / 4 + 105 + x, 692, NULL);
 	lineTexture.render(onePlayerModeScreen.mWidth / 4 + 92 + x, 855, NULL);
+}
+
+void Field::printScore(int x, int y, int size)
+{
+	stringstream scoreText;
+
+	if (Score < 100000) scoreText << 0;
+	if (Score < 10000) scoreText << 0;
+	if (Score < 1000) scoreText << 0;
+	if (Score < 100) scoreText << 0;
+	if (Score < 10) scoreText << 0;
+	scoreText << Score;
+
+	TTF_Font* scoreFont = NULL;
+	scoreFont = TTF_OpenFont("font/gilroy-extrabold.otf", size);
+	scoreTexture.loadFromRenderedText(scoreText.str().c_str(), scoreColor, scoreFont);
+
+	scoreTexture.render(x, y, NULL);
 }

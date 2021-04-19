@@ -47,7 +47,7 @@ public:
 
 	bool loadFromFile(string path);
 
-	bool loadFromRenderedText(string textureText, SDL_Color textColor);
+	bool loadFromRenderedText(string textureText, SDL_Color textColor, TTF_Font *font);
 
 	void free();
 
@@ -67,6 +67,7 @@ extern Texture BlockSheet;
 extern Texture ShadeSheet;
 extern Texture MainScreen;
 extern Texture HelpScreen;
+extern Texture GameOver;
 
 extern Texture onePlayerModeScreen;
 extern Texture twoPlayerModeScreen;
