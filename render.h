@@ -2,11 +2,11 @@
 
 using namespace std;
 
-extern Mix_Chunk* gScratch;
+extern Mix_Chunk* gameOverSound;
 extern Mix_Chunk* gHigh;
 extern Mix_Chunk* gMedium;
 extern Mix_Chunk* gLow;
-extern Mix_Music* gMusic;
+
 extern Mix_Music* ingameMusic;
 extern Mix_Music* homeScreenMusic;
 

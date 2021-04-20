@@ -122,7 +122,7 @@ int main(int argc, char* args[])
 							{
 							case SDLK_UP: case SDLK_w:
 								block[1].rotate(block[1].matrix, onePlayerMode.fieldMatrix);
-								//Mix_PlayChannel(-1, gHigh, 0);
+								//Mix_PlayChannel(-1, gameOverSound, 0);
 								break;
 
 							case SDLK_DOWN: case SDLK_s:
@@ -236,7 +236,9 @@ int main(int argc, char* args[])
 
 					onePlayerMode.lineClear();
 					if (onePlayerMode.checkLose())
-					{
+					{	
+						Mix_HaltMusic();
+						Mix_PlayChannel(-1, gameOverSound, 0);
 						GameOver.render(0, 0, NULL);
 						onePlayerMode.printScore(1030, 665, 100, scoreColor);
 						SDL_RenderPresent(mainRenderer);
@@ -246,7 +248,9 @@ int main(int argc, char* args[])
 						while (returnMain.type != SDL_KEYDOWN) SDL_PollEvent(&returnMain);
 						onePlayerMode.reset();
 						totalTime = 0;
+						
 						gameModeChosen = CHOOSE_TOTAL;
+						
 						break;
 					}
 				}
@@ -546,6 +550,8 @@ int main(int argc, char* args[])
 
 					if (playerOneField.checkLose() && playerTwoField.checkLose())
 					{
+						Mix_HaltMusic();
+						Mix_PlayChannel(-1, gameOverSound, 0);
 						twoPlayerModeScreen.render(0, 0, NULL);
 
 						p1Block[0].printNext(99, 283, 35);
