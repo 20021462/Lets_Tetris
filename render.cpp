@@ -5,7 +5,8 @@ Mix_Chunk* gScratch = NULL;
 Mix_Chunk* gHigh = NULL;
 Mix_Chunk* gMedium = NULL;
 Mix_Chunk* gLow = NULL;
-Mix_Music* playingBackgroundMusic = NULL;
+Mix_Music* ingameMusic = NULL;
+Mix_Music* homeScreenMusic=NULL;
 
 SDL_Window* mainWindow = NULL;
 SDL_Renderer* mainRenderer = NULL;
@@ -209,7 +210,13 @@ bool loadMedia()
 		printf("Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError());
 		success = false;
 	}
-	playingBackgroundMusic = Mix_LoadMUS("music/playingBackgroundMusic.wav");
+	ingameMusic = Mix_LoadMUS("music/ingameMusic.wav");
+	if (gMusic == NULL)
+	{
+		printf("Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+	homeScreenMusic = Mix_LoadMUS("music/homeScreenMusic.wav");
 	if (gMusic == NULL)
 	{
 		printf("Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError());

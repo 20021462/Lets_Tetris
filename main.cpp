@@ -20,13 +20,18 @@ int main(int argc, char* args[])
 		loadStat();
 		loadMedia();
 
+		bool music = false;
 		bool quit = false;
 		SDL_Event e;
 
-
 		
 		while (!quit)
-		{
+		{	
+			if (!music)
+			{
+				Mix_PlayMusic(homeScreenMusic, -1);
+				music = true;
+			}
 			SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 			SDL_RenderClear(mainRenderer);
 			
@@ -34,7 +39,7 @@ int main(int argc, char* args[])
 			switch (gameModeChosen)
 			{
 			case CHOOSE_TOTAL:
-				Mix_PlayMusic(gMusic, -1);
+				
 				MainScreen.render(0, 0, NULL);
 				printButton();
 				SDL_RenderPresent(mainRenderer);
@@ -71,13 +76,18 @@ int main(int argc, char* args[])
 				break;
 
 			case CHOOSE_ONE_PLAYER_MODE:
-				//Mix_PlayMusic(playingBackgroundMusic, -1);
+				music = false;
 				totalTime += onePlayerMode.Time;
 				totalTime += SDL_GetTicks();
 				generateBlockId(nextBlock, 5);
 
 				while (!onePlayerMode.checkLose() && !quitMode && !quit)
-				{
+				{	
+					if (!music)
+					{
+						Mix_PlayMusic(ingameMusic, -1);
+						music = true;
+					}
 					for (int i = 0; i < 5; i++)
 					{
 						block[i].generate(nextBlock[i]);
@@ -240,10 +250,14 @@ int main(int argc, char* args[])
 						break;
 					}
 				}
-
+				
+				music = false;
 				break;
 
 			case CHOOSE_TWO_PLAYER_MODE:
+				
+				music = false;
+
 				p1TotalTime += playerOneField.Time;
 				p1TotalTime += SDL_GetTicks();
 				p2TotalTime += playerTwoField.Time;
@@ -268,6 +282,11 @@ int main(int argc, char* args[])
 
 				while ((!playerOneField.checkLose() || !playerTwoField.checkLose()) && !quitMode && !quit)
 				{
+					if (!music)
+					{
+						Mix_PlayMusic(ingameMusic, -1);
+						music = true;
+					}
 					while (((!p1Block[1].collide(playerOneField.fieldMatrix) && !p2Block[1].collide(playerTwoField.fieldMatrix)) 
 						|| (p1Lose && !p2Block[1].collide(playerTwoField.fieldMatrix)) 
 						|| (p2Lose && !p1Block[1].collide(playerOneField.fieldMatrix)))
@@ -578,6 +597,7 @@ int main(int argc, char* args[])
 						break;
 					}
 				}
+				music = false;
 				break;
 
 			case CHOOSE_HELP:
