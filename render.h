@@ -7,6 +7,7 @@ extern Mix_Chunk* gHigh;
 extern Mix_Chunk* gMedium;
 extern Mix_Chunk* gLow;
 extern Mix_Music* gMusic;
+extern Mix_Music* playingBackgroundMusic;
 
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;

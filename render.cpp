@@ -5,6 +5,7 @@ Mix_Chunk* gScratch = NULL;
 Mix_Chunk* gHigh = NULL;
 Mix_Chunk* gMedium = NULL;
 Mix_Chunk* gLow = NULL;
+Mix_Music* playingBackgroundMusic = NULL;
 
 SDL_Window* mainWindow = NULL;
 SDL_Renderer* mainRenderer = NULL;
@@ -202,36 +203,41 @@ bool loadMedia()
 	bool success = true;
 
 	//Load music
-	gMusic = Mix_LoadMUS("21_sound_effects_and_music/beat.wav");
+	gMusic= Mix_LoadMUS("music/beat.wav");
 	if (gMusic == NULL)
 	{
 		printf("Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError());
 		success = false;
 	}
-
+	playingBackgroundMusic = Mix_LoadMUS("music/playingBackgroundMusic.wav");
+	if (gMusic == NULL)
+	{
+		printf("Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
 	//Load sound effects
-	gScratch = Mix_LoadWAV("21_sound_effects_and_music/scratch.wav");
+	gScratch = Mix_LoadWAV("music/scratch.wav");
 	if (gScratch == NULL)
 	{
 		printf("Failed to load scratch sound effect! SDL_mixer Error: %s\n", Mix_GetError());
 		success = false;
 	}
 
-	gHigh = Mix_LoadWAV("21_sound_effects_and_music/high.wav");
+	gHigh = Mix_LoadWAV("music/high.wav");
 	if (gHigh == NULL)
 	{
 		printf("Failed to load high sound effect! SDL_mixer Error: %s\n", Mix_GetError());
 		success = false;
 	}
 
-	gMedium = Mix_LoadWAV("21_sound_effects_and_music/medium.wav");
+	gMedium = Mix_LoadWAV("music/medium.wav");
 	if (gMedium == NULL)
 	{
 		printf("Failed to load medium sound effect! SDL_mixer Error: %s\n", Mix_GetError());
 		success = false;
 	}
 
-	gLow = Mix_LoadWAV("21_sound_effects_and_music/low.wav");
+	gLow = Mix_LoadWAV("music/low.wav");
 	if (gLow == NULL)
 	{
 		printf("Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError());

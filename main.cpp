@@ -29,12 +29,12 @@ int main(int argc, char* args[])
 		{
 			SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 			SDL_RenderClear(mainRenderer);
-
+			
 			bool quitMode = false;
 			switch (gameModeChosen)
 			{
 			case CHOOSE_TOTAL:
-				//Mix_PlayMusic(gMusic, -1);
+				Mix_PlayMusic(gMusic, -1);
 				MainScreen.render(0, 0, NULL);
 				printButton();
 				SDL_RenderPresent(mainRenderer);
@@ -71,6 +71,7 @@ int main(int argc, char* args[])
 				break;
 
 			case CHOOSE_ONE_PLAYER_MODE:
+				//Mix_PlayMusic(playingBackgroundMusic, -1);
 				totalTime += onePlayerMode.Time;
 				totalTime += SDL_GetTicks();
 				generateBlockId(nextBlock, 5);
