@@ -33,6 +33,8 @@ extern bool p2CanHold;
 extern bool p1Lose;
 extern bool p2Lose;
 
+extern bool music;
+
 void copyMatrix(int matrix[4][4], int temp[4][4], int size);
 void horizontalReflectioin(int matrix[4][4], int size);
 void transpose(int matrix[4][4], int size);

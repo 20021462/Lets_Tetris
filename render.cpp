@@ -2,8 +2,8 @@
 
 
 Mix_Chunk* gameOverSound = NULL;
-Mix_Chunk* gHigh = NULL;
-Mix_Chunk* gMedium = NULL;
+Mix_Chunk* moveSound = NULL;
+Mix_Chunk* countSound = NULL;
 Mix_Chunk* gLow = NULL;
 
 Mix_Music* ingameMusic = NULL;
@@ -227,17 +227,17 @@ bool loadMedia()
 		success = false;
 	}
 
-	gHigh = Mix_LoadWAV("music/high.wav");
-	if (gHigh == NULL)
+	moveSound = Mix_LoadWAV("music/moveSound.wav");
+	if (moveSound == NULL)
 	{
-		printf("Failed to load high sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		printf("Failed to load move sound effect! SDL_mixer Error: %s\n", Mix_GetError());
 		success = false;
 	}
 
-	gMedium = Mix_LoadWAV("music/medium.wav");
-	if (gMedium == NULL)
+	countSound = Mix_LoadWAV("music/3,2,1.wav");
+	if (countSound == NULL)
 	{
-		printf("Failed to load medium sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		printf("Failed to load count sound effect! SDL_mixer Error: %s\n", Mix_GetError());
 		success = false;
 	}
 
@@ -249,6 +249,18 @@ bool loadMedia()
 	}
 
 	return success;
+}
+
+void stopMusic()
+{
+	Mix_HaltMusic();
+	music = false;
+}
+
+void playMusic(Mix_Music* name)
+{
+	Mix_PlayMusic(name, -1);
+	music = true;;
 }
 
 void close()
@@ -269,12 +281,12 @@ void close()
 	gFont = NULL;
 
 	Mix_FreeChunk(gameOverSound);
-	Mix_FreeChunk(gHigh);
-	Mix_FreeChunk(gMedium);
+	Mix_FreeChunk(moveSound);
+	Mix_FreeChunk(countSound);
 	Mix_FreeChunk(gLow);
 	gameOverSound = NULL;
-	gHigh = NULL;
-	gMedium = NULL;
+	moveSound = NULL;
+	countSound = NULL;
 	gLow = NULL;
 
 	Mix_FreeMusic(homeScreenMusic);

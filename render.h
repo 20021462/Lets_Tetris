@@ -3,8 +3,8 @@
 using namespace std;
 
 extern Mix_Chunk* gameOverSound;
-extern Mix_Chunk* gHigh;
-extern Mix_Chunk* gMedium;
+extern Mix_Chunk* moveSound;
+extern Mix_Chunk* countSound;
 extern Mix_Chunk* gLow;
 
 extern Mix_Music* ingameMusic;
@@ -41,6 +41,10 @@ bool loadStat();
 bool loadBlock();
 
 bool loadMedia();
+
+void stopMusic();
+
+void playMusic(Mix_Music* name);
 
 class Texture
 {

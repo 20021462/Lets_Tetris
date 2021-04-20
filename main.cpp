@@ -7,7 +7,7 @@
 
 int main(int argc, char* args[])
 {
-	srand(time(0));
+	srand(time(NULL));
 	if (!initSDL())
 	{
 		cout << "Failed to initialize!\n";
@@ -20,18 +20,15 @@ int main(int argc, char* args[])
 		loadStat();
 		loadMedia();
 
-		bool music = false;
+		
 		bool quit = false;
 		SDL_Event e;
 
 		
 		while (!quit)
 		{	
-			if (!music)
-			{
-				Mix_PlayMusic(homeScreenMusic, -1);
-				music = true;
-			}
+			if (!music)	playMusic(homeScreenMusic);
+	
 			SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 			SDL_RenderClear(mainRenderer);
 			
@@ -76,18 +73,13 @@ int main(int argc, char* args[])
 				break;
 
 			case CHOOSE_ONE_PLAYER_MODE:
-				music = false;
+				stopMusic();
 				totalTime += onePlayerMode.Time;
 				totalTime += SDL_GetTicks();
 				generateBlockId(nextBlock, 5);
 
 				while (!onePlayerMode.checkLose() && !quitMode && !quit)
 				{	
-					if (!music)
-					{
-						Mix_PlayMusic(ingameMusic, -1);
-						music = true;
-					}
 					for (int i = 0; i < 5; i++)
 					{
 						block[i].generate(nextBlock[i]);
@@ -95,6 +87,8 @@ int main(int argc, char* args[])
 					bool canHold = true;
 					while (!block[1].collide(onePlayerMode.fieldMatrix) && !quitMode && !quit)
 					{
+						if (!music) playMusic(ingameMusic);
+
 						if (SDL_GetTicks() > totalTime)
 						{
 							totalTime += onePlayerMode.Time;
@@ -128,17 +122,17 @@ int main(int argc, char* args[])
 							case SDLK_DOWN: case SDLK_s:
 								block[1].move(0, 1);
 								onePlayerMode.Score++;
-								//Mix_PlayChannel(-1, gMedium, 0);
+								Mix_PlayChannel(-1, moveSound, 0);
 								break;
 
 							case SDLK_RIGHT: case SDLK_d:
 								block[1].moveRight(onePlayerMode.fieldMatrix);
-								//Mix_PlayChannel(-1, gLow, 0);
+								Mix_PlayChannel(-1, moveSound, 0);
 								break;
 
 							case SDLK_LEFT: case SDLK_a:
 								block[1].moveLeft(onePlayerMode.fieldMatrix);
-								//Mix_PlayChannel(-1, gScratch, 0);
+								Mix_PlayChannel(-1, moveSound, 0);
 								break;
 
 							case SDLK_SPACE: case SDLK_KP_ENTER: case SDLK_RETURN:
@@ -154,6 +148,7 @@ int main(int argc, char* args[])
 								break;
 
 							case SDLK_ESCAPE: case SDLK_p:
+								stopMusic();
 								userChoice = PAUSE_RESUME;
 								while (pauseModeChosen == PAUSE_TOTAL)
 								{
@@ -192,8 +187,11 @@ int main(int argc, char* args[])
 										onePlayerModeScreen.render(0, 0, NULL);
 										countDown[i].render(0, 0, NULL);
 										SDL_RenderPresent(mainRenderer);
+										Mix_PlayChannel(-1, countSound, 0);
 										SDL_Delay(1000);
+										
 									}
+									Mix_PlayChannel(-1, countSound, 0);
 									totalTime = SDL_GetTicks();
 									totalTime += onePlayerMode.Time;
 									break;
@@ -237,7 +235,7 @@ int main(int argc, char* args[])
 					onePlayerMode.lineClear();
 					if (onePlayerMode.checkLose())
 					{	
-						Mix_HaltMusic();
+						stopMusic();
 						Mix_PlayChannel(-1, gameOverSound, 0);
 						GameOver.render(0, 0, NULL);
 						onePlayerMode.printScore(1030, 665, 100, scoreColor);
@@ -255,12 +253,12 @@ int main(int argc, char* args[])
 					}
 				}
 				
-				music = false;
+				
 				break;
 
 			case CHOOSE_TWO_PLAYER_MODE:
 				
-				music = false;
+				stopMusic();
 
 				p1TotalTime += playerOneField.Time;
 				p1TotalTime += SDL_GetTicks();
@@ -286,16 +284,14 @@ int main(int argc, char* args[])
 
 				while ((!playerOneField.checkLose() || !playerTwoField.checkLose()) && !quitMode && !quit)
 				{
-					if (!music)
-					{
-						Mix_PlayMusic(ingameMusic, -1);
-						music = true;
-					}
+					
 					while (((!p1Block[1].collide(playerOneField.fieldMatrix) && !p2Block[1].collide(playerTwoField.fieldMatrix)) 
 						|| (p1Lose && !p2Block[1].collide(playerTwoField.fieldMatrix)) 
 						|| (p2Lose && !p1Block[1].collide(playerOneField.fieldMatrix)))
 						&& !quitMode && !quit)
+
 					{
+						if (!music) playMusic(ingameMusic);
 						if (SDL_GetTicks() > p1TotalTime && !p1Lose)
 						{
 							p1TotalTime += playerOneField.Time;
@@ -348,23 +344,28 @@ int main(int argc, char* args[])
 								{
 								case SDLK_w:
 									p1Block[1].rotate(p1Block[1].matrix, playerOneField.fieldMatrix);
+									//Mix_PlayChannel(-1, moveSound, 0);
 									break;
 
 								case SDLK_s:
 									p1Block[1].move(0, 1);
 									playerOneField.Score++;
+									Mix_PlayChannel(-1, moveSound, 0);
 									break;
 
 								case SDLK_d:
 									p1Block[1].moveRight(playerOneField.fieldMatrix);
+									Mix_PlayChannel(-1, moveSound, 0);
 									break;
 
 								case SDLK_a:
 									p1Block[1].moveLeft(playerOneField.fieldMatrix);
+									Mix_PlayChannel(-1, moveSound, 0);
 									break;
 
 								case SDLK_SPACE:
 									p1Block[1].hardDrop(playerOneField.fieldMatrix, playerOneField.Score);
+
 									break;
 
 								case SDLK_c:
@@ -386,15 +387,18 @@ int main(int argc, char* args[])
 
 								case SDLK_DOWN:
 									p2Block[1].move(0, 1);
+									Mix_PlayChannel(-1, moveSound, 0);
 									playerTwoField.Score++;
 									break;
 
 								case SDLK_RIGHT:
 									p2Block[1].moveRight(playerTwoField.fieldMatrix);
+									Mix_PlayChannel(-1, moveSound, 0);
 									break;
 
 								case SDLK_LEFT:
 									p2Block[1].moveLeft(playerTwoField.fieldMatrix);
+									Mix_PlayChannel(-1, moveSound, 0);
 									break;
 
 								case SDLK_KP_ENTER: case SDLK_RETURN:
@@ -414,6 +418,7 @@ int main(int argc, char* args[])
 							switch (e.key.keysym.sym)
 							{
 							case SDLK_ESCAPE: case SDLK_p:
+								stopMusic();
 								userChoice = PAUSE_RESUME;
 								while (pauseModeChosen == PAUSE_TOTAL)
 								{
@@ -453,8 +458,10 @@ int main(int argc, char* args[])
 										twoPlayerModeScreen.render(0, 0, NULL);
 										countDown[i].render(0, 0, NULL);
 										SDL_RenderPresent(mainRenderer);
+										Mix_PlayChannel(-1, countSound, 0);
 										SDL_Delay(1000);
 									}
+									Mix_PlayChannel(-1, countSound, 0);
 									p1TotalTime = SDL_GetTicks();
 									p1TotalTime += playerOneField.Time;
 									p2TotalTime = SDL_GetTicks();
