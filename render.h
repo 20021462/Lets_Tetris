@@ -5,7 +5,9 @@ using namespace std;
 extern Mix_Chunk* gameOverSound;
 extern Mix_Chunk* moveSound;
 extern Mix_Chunk* countSound;
-extern Mix_Chunk* gLow;
+extern Mix_Chunk* rotateSound;
+extern Mix_Chunk* lineClearSound;
+extern Mix_Chunk* holdSound;
 
 extern Mix_Music* ingameMusic;
 extern Mix_Music* homeScreenMusic;
@@ -18,8 +20,7 @@ extern SDL_Renderer* mainRenderer;
 
 enum BlockType
 {
-	EMPTY,
-	BLOCK_Z,
+	BLOCK_Z=1,
 	BLOCK_S,
 	BLOCK_J,
 	BLOCK_L,
@@ -29,6 +30,14 @@ enum BlockType
 	BLOCK_DEFAULT,
 	BLOCK_TOTAL
 };
+
+//enum soundEffect
+//{
+//	gameOverSound,
+//	moveSound,
+//	countSound,
+//	rotateSound
+//};
 
 bool initSDL();
 

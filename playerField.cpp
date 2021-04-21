@@ -61,6 +61,8 @@ bool Field::lineClear()
 		}
 	}
 	Line += lineFull;
+
+	if (lineFull) Mix_PlayChannel(-1, lineClearSound, 0);
 	switch (lineFull)
 	{
 	case 1:

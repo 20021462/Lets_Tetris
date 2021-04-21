@@ -27,7 +27,7 @@ int main(int argc, char* args[])
 		
 		while (!quit)
 		{	
-			if (!music)	playMusic(homeScreenMusic);
+			playMusic(homeScreenMusic);
 	
 			SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 			SDL_RenderClear(mainRenderer);
@@ -87,7 +87,7 @@ int main(int argc, char* args[])
 					bool canHold = true;
 					while (!block[1].collide(onePlayerMode.fieldMatrix) && !quitMode && !quit)
 					{
-						if (!music) playMusic(ingameMusic);
+						playMusic(ingameMusic);
 
 						if (SDL_GetTicks() > totalTime)
 						{
@@ -116,7 +116,7 @@ int main(int argc, char* args[])
 							{
 							case SDLK_UP: case SDLK_w:
 								block[1].rotate(block[1].matrix, onePlayerMode.fieldMatrix);
-								//Mix_PlayChannel(-1, gameOverSound, 0);
+								Mix_PlayChannel(-1, rotateSound, 0);
 								break;
 
 							case SDLK_DOWN: case SDLK_s:
@@ -142,6 +142,7 @@ int main(int argc, char* args[])
 							case SDLK_c:
 								if (!canHold) break;
 								canHold = false;
+								Mix_PlayChannel(-1, holdSound, 0);
 								hold(block, nextBlock, 5);
 								block[0].printNext(574, 303 - 20, 35);
 								block[1].print(755);
@@ -291,7 +292,7 @@ int main(int argc, char* args[])
 						&& !quitMode && !quit)
 
 					{
-						if (!music) playMusic(ingameMusic);
+						playMusic(ingameMusic);
 						if (SDL_GetTicks() > p1TotalTime && !p1Lose)
 						{
 							p1TotalTime += playerOneField.Time;
@@ -344,7 +345,7 @@ int main(int argc, char* args[])
 								{
 								case SDLK_w:
 									p1Block[1].rotate(p1Block[1].matrix, playerOneField.fieldMatrix);
-									//Mix_PlayChannel(-1, moveSound, 0);
+									Mix_PlayChannel(-1, rotateSound, 0);
 									break;
 
 								case SDLK_s:
@@ -371,6 +372,7 @@ int main(int argc, char* args[])
 								case SDLK_c:
 									if (!p1CanHold) break;
 									p1CanHold = false;
+									Mix_PlayChannel(-1, holdSound, 0);
 									hold(p1Block, p1NextBlock, 5);
 									p1Block[0].printNext(99, 303 - 20, 35);
 									p1Block[1].print(280);
@@ -382,6 +384,7 @@ int main(int argc, char* args[])
 								switch (e.key.keysym.sym)
 								{
 								case SDLK_UP:
+									Mix_PlayChannel(-1, rotateSound, 0);
 									p2Block[1].rotate(p2Block[1].matrix, playerTwoField.fieldMatrix);
 									break;
 
@@ -407,6 +410,7 @@ int main(int argc, char* args[])
 
 								case SDLK_RCTRL:
 									if (!p2CanHold) break;
+									Mix_PlayChannel(-1, holdSound, 0);
 									p2CanHold = false;
 									hold(p2Block, p2NextBlock, 5);
 									p2Block[0].printNext(1059, 303 - 20, 35);

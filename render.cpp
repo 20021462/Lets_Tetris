@@ -4,7 +4,9 @@
 Mix_Chunk* gameOverSound = NULL;
 Mix_Chunk* moveSound = NULL;
 Mix_Chunk* countSound = NULL;
-Mix_Chunk* gLow = NULL;
+Mix_Chunk* rotateSound = NULL;
+Mix_Chunk* lineClearSound = NULL;
+Mix_Chunk* holdSound = NULL;
 
 Mix_Music* ingameMusic = NULL;
 Mix_Music* homeScreenMusic=NULL;
@@ -227,7 +229,7 @@ bool loadMedia()
 		success = false;
 	}
 
-	moveSound = Mix_LoadWAV("music/moveSound.wav");
+	moveSound = Mix_LoadWAV("music/Move.wav");
 	if (moveSound == NULL)
 	{
 		printf("Failed to load move sound effect! SDL_mixer Error: %s\n", Mix_GetError());
@@ -241,10 +243,24 @@ bool loadMedia()
 		success = false;
 	}
 
-	gLow = Mix_LoadWAV("music/low.wav");
-	if (gLow == NULL)
+	rotateSound = Mix_LoadWAV("music/rotate.wav");
+	if (rotateSound == NULL)
 	{
-		printf("Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		printf("Failed to load rotate sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+
+	lineClearSound = Mix_LoadWAV("music/lineClear.wav");
+	if (lineClearSound == NULL)
+	{
+		printf("Failed to load lineClear sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+
+	holdSound = Mix_LoadWAV("music/holdSound.wav");
+	if (lineClearSound == NULL)
+	{
+		printf("Failed to load hold sound effect! SDL_mixer Error: %s\n", Mix_GetError());
 		success = false;
 	}
 
@@ -259,7 +275,7 @@ void stopMusic()
 
 void playMusic(Mix_Music* name)
 {
-	Mix_PlayMusic(name, -1);
+	if(!music) Mix_PlayMusic(name, -1);
 	music = true;;
 }
 
@@ -283,11 +299,13 @@ void close()
 	Mix_FreeChunk(gameOverSound);
 	Mix_FreeChunk(moveSound);
 	Mix_FreeChunk(countSound);
-	Mix_FreeChunk(gLow);
+	Mix_FreeChunk(rotateSound);
+	Mix_FreeChunk(lineClearSound);
+	lineClearSound = NULL;
 	gameOverSound = NULL;
 	moveSound = NULL;
 	countSound = NULL;
-	gLow = NULL;
+	rotateSound = NULL;
 
 	Mix_FreeMusic(homeScreenMusic);
 	Mix_FreeMusic(ingameMusic);
