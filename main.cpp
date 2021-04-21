@@ -54,15 +54,18 @@ int main(int argc, char* args[])
 					case SDLK_UP: case SDLK_w:
 						if (userChoice == 0) userChoice = CHOOSE_TOTAL - 1;
 						else userChoice--;
+						Mix_PlayChannel(-1, switchChoicesSound, 0);
 						break;
 
 					case SDLK_DOWN: case SDLK_s:
 						if (userChoice == CHOOSE_TOTAL - 1) userChoice = 0;
 						else userChoice++;
+						Mix_PlayChannel(-1, switchChoicesSound, 0);
 						break;
 
 					case SDLK_SPACE: case SDLK_KP_ENTER: case SDLK_RETURN:
 						gameModeChosen = userChoice;
+						Mix_PlayChannel(-1, switchChoicesSound, 0);
 						break;
 
 					default:
@@ -166,13 +169,16 @@ int main(int argc, char* args[])
 										case SDLK_RIGHT: case SDLK_d:
 											if (userChoice == PAUSE_TOTAL - 1) userChoice = 0;
 											else userChoice++;
+											Mix_PlayChannel(-1, switchChoicesSound, 0);
 											break;
 										case SDLK_LEFT: case SDLK_a:
 											if (userChoice == 0) userChoice = PAUSE_TOTAL - 1;
 											else userChoice--;
+											Mix_PlayChannel(-1, switchChoicesSound, 0);
 											break;
 										case SDLK_SPACE: case SDLK_RETURN:
 											pauseModeChosen = userChoice;
+											Mix_PlayChannel(-1, switchChoicesSound, 0);
 											break;
 										default:
 											break;
@@ -226,6 +232,7 @@ int main(int argc, char* args[])
 
 						onePlayerMode.shade(block[1], 760);
 						if (!block[1].collide(onePlayerMode.fieldMatrix)) block[1].print(760);
+						else Mix_PlayChannel(-1, collideSound, 0);
 						SDL_RenderPresent(mainRenderer);
 					}
 					if (quitMode) break;
@@ -440,13 +447,16 @@ int main(int argc, char* args[])
 										case SDLK_RIGHT: case SDLK_d:
 											if (userChoice == PAUSE_TOTAL - 1) userChoice = 0;
 											else userChoice++;
+											Mix_PlayChannel(-1, switchChoicesSound, 0);
 											break;
 										case SDLK_LEFT: case SDLK_a:
 											if (userChoice == 0) userChoice = PAUSE_TOTAL - 1;
 											else userChoice--;
+											Mix_PlayChannel(-1, switchChoicesSound, 0);
 											break;
 										case SDLK_SPACE: case SDLK_RETURN:
 											pauseModeChosen = userChoice;
+											Mix_PlayChannel(-1, switchChoicesSound, 0);
 											break;
 										default:
 											break;
@@ -505,8 +515,12 @@ int main(int argc, char* args[])
 						}
 						playerOneField.shade(p1Block[1], 280);
 						playerTwoField.shade(p2Block[1], 1240);
+
 						if (!p1Block[1].collide(playerOneField.fieldMatrix)) p1Block[1].print(280);
+						else Mix_PlayChannel(-1, collideSound, 0);
+
 						if (!p2Block[1].collide(playerTwoField.fieldMatrix)) p2Block[1].print(1240);
+						else Mix_PlayChannel(-1, collideSound, 0);
 
 						SDL_RenderPresent(mainRenderer);
 

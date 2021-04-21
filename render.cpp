@@ -7,6 +7,8 @@ Mix_Chunk* countSound = NULL;
 Mix_Chunk* rotateSound = NULL;
 Mix_Chunk* lineClearSound = NULL;
 Mix_Chunk* holdSound = NULL;
+Mix_Chunk* collideSound = NULL;
+Mix_Chunk* switchChoicesSound = NULL;
 
 Mix_Music* ingameMusic = NULL;
 Mix_Music* homeScreenMusic=NULL;
@@ -264,6 +266,20 @@ bool loadMedia()
 		success = false;
 	}
 
+	collideSound = Mix_LoadWAV("music/collideSound.wav");
+	if (collideSound == NULL)
+	{
+		printf("Failed to load collide sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+
+	switchChoicesSound = Mix_LoadWAV("music/switchChoicesSound.wav");
+	if (collideSound == NULL)
+	{
+		printf("Failed to load switch choices sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+
 	return success;
 }
 
@@ -301,6 +317,8 @@ void close()
 	Mix_FreeChunk(countSound);
 	Mix_FreeChunk(rotateSound);
 	Mix_FreeChunk(lineClearSound);
+	Mix_FreeChunk(collideSound);
+	collideSound = NULL;
 	lineClearSound = NULL;
 	gameOverSound = NULL;
 	moveSound = NULL;

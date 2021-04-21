@@ -8,6 +8,8 @@ extern Mix_Chunk* countSound;
 extern Mix_Chunk* rotateSound;
 extern Mix_Chunk* lineClearSound;
 extern Mix_Chunk* holdSound;
+extern Mix_Chunk* collideSound;
+extern Mix_Chunk* switchChoicesSound;
 
 extern Mix_Music* ingameMusic;
 extern Mix_Music* homeScreenMusic;
