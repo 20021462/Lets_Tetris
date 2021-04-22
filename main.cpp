@@ -268,6 +268,7 @@ int main(int argc, char* args[])
 						GameOver.render(0, 0, NULL);
 						onePlayerMode.printScore(1030, 665, 100, scoreColor);
 						SDL_RenderPresent(mainRenderer);
+						SDL_Delay(2000);
 						SDL_Event returnMain;
 						returnMain.type = 0;
 						SDL_PollEvent(&returnMain);
@@ -541,10 +542,10 @@ int main(int argc, char* args[])
 						playerTwoField.shade(p2Block[1], 1240);
 
 						if (!p1Block[1].collide(playerOneField.fieldMatrix)) p1Block[1].print(280);
-						else Mix_PlayChannel(-1, collideSound, 0);
+						else if (!p1Lose) Mix_PlayChannel(-1, collideSound, 0);
 
 						if (!p2Block[1].collide(playerTwoField.fieldMatrix)) p2Block[1].print(1240);
-						else Mix_PlayChannel(-1, collideSound, 0);
+						else if (!p2Lose) Mix_PlayChannel(-1, collideSound, 0);
 
 						SDL_RenderPresent(mainRenderer);
 
@@ -640,6 +641,7 @@ int main(int argc, char* args[])
 						}
 
 						SDL_RenderPresent(mainRenderer);
+						SDL_Delay(2000);
 						SDL_Event returnMain;
 						returnMain.type = 0;
 						SDL_PollEvent(&returnMain);
