@@ -1,11 +1,7 @@
 #pragma once
 #include "const.h"
 #include "block.h"
-
-//extern int Level;
-//extern int Line;
-//extern int Point;
-//extern double Time;
+#include "sound.h"
 
 class Field
 {

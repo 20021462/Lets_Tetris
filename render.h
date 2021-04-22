@@ -2,18 +2,6 @@
 
 using namespace std;
 
-extern Mix_Chunk* gameOverSound;
-extern Mix_Chunk* moveSound;
-extern Mix_Chunk* countSound;
-extern Mix_Chunk* rotateSound;
-extern Mix_Chunk* lineClearSound;
-extern Mix_Chunk* holdSound;
-extern Mix_Chunk* collideSound;
-extern Mix_Chunk* switchChoicesSound;
-
-extern Mix_Music* ingameMusic;
-extern Mix_Music* homeScreenMusic;
-
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;
 
@@ -50,12 +38,6 @@ void close();
 bool loadStat();
 
 bool loadBlock();
-
-bool loadMedia();
-
-void stopMusic();
-
-void playMusic(Mix_Music* name);
 
 class Texture
 {

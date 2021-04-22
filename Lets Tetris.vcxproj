@@ -151,6 +151,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="playerField.cpp" />
     <ClCompile Include="render.cpp" />
+    <ClCompile Include="sound.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="block.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="const.h" />
     <ClInclude Include="playerField.h" />
     <ClInclude Include="render.h" />
+    <ClInclude Include="sound.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

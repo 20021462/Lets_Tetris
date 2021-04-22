@@ -9,6 +9,7 @@
 #include <ctime>
 #include <sstream>
 
+using namespace std;
 
 const int SCREEN_WIDTH = 1920;
 const int SCREEN_HEIGHT = 1080;
@@ -32,8 +33,6 @@ extern bool p1CanHold;
 extern bool p2CanHold;
 extern bool p1Lose;
 extern bool p2Lose;
-
-extern bool music;
 
 void copyMatrix(int matrix[4][4], int temp[4][4], int size);
 void horizontalReflectioin(int matrix[4][4], int size);

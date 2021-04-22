@@ -3,7 +3,7 @@
 #include "block.h"
 #include "playerField.h"
 #include "button.h"
-
+#include "sound.h"
 
 int main(int argc, char* args[])
 {
@@ -77,6 +77,8 @@ int main(int argc, char* args[])
 
 			case CHOOSE_ONE_PLAYER_MODE:
 				stopMusic();
+				playMusic(ingameMusic[2]);
+
 				totalTime += onePlayerMode.Time;
 				totalTime += SDL_GetTicks();
 				generateBlockId(nextBlock, 5);
@@ -90,7 +92,6 @@ int main(int argc, char* args[])
 					bool canHold = true;
 					while (!block[1].collide(onePlayerMode.fieldMatrix) && !quitMode && !quit)
 					{
-						playMusic(ingameMusic);
 
 						if (SDL_GetTicks() > totalTime)
 						{
@@ -267,6 +268,7 @@ int main(int argc, char* args[])
 			case CHOOSE_TWO_PLAYER_MODE:
 				
 				stopMusic();
+				playMusic(ingameMusic[1]);
 
 				p1TotalTime += playerOneField.Time;
 				p1TotalTime += SDL_GetTicks();
@@ -299,7 +301,6 @@ int main(int argc, char* args[])
 						&& !quitMode && !quit)
 
 					{
-						playMusic(ingameMusic);
 						if (SDL_GetTicks() > p1TotalTime && !p1Lose)
 						{
 							p1TotalTime += playerOneField.Time;
@@ -649,5 +650,6 @@ int main(int argc, char* args[])
 	}
 
 	close();
+	closeMusic();
 	return 0;
 }
