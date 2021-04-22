@@ -27,7 +27,6 @@ int main(int argc, char* args[])
 		
 		while (!quit)
 		{	
-			playMusic(homeScreenMusic);
 	
 			SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 			SDL_RenderClear(mainRenderer);
@@ -36,9 +35,12 @@ int main(int argc, char* args[])
 			switch (gameModeChosen)
 			{
 			case CHOOSE_TOTAL:
-				
+				if (Mix_PlayingMusic() == 0) Mix_PlayMusic(homeScreenMusic, -1);
+				if (mute) Mix_PauseMusic();
+
 				MainScreen.render(0, 0, NULL);
 				printButton();
+				printMute();
 				SDL_RenderPresent(mainRenderer);
 				SDL_PollEvent(&e);
 				if (e.type == SDL_QUIT)
@@ -68,6 +70,19 @@ int main(int argc, char* args[])
 						Mix_PlayChannel(-1, switchChoicesSound, 0);
 						break;
 
+					case SDLK_m:
+						if (Mix_PausedMusic() == 1)
+						{
+							Mix_ResumeMusic();
+							mute = false;
+						}
+						else
+						{
+							Mix_PauseMusic();
+							mute = true;
+						}
+						break;
+
 					default:
 						break;
 					}
@@ -76,9 +91,9 @@ int main(int argc, char* args[])
 				break;
 
 			case CHOOSE_ONE_PLAYER_MODE:
-				stopMusic();
-				playMusic(ingameMusic[2]);
-
+				Mix_HaltMusic();
+				Mix_PlayMusic(ingameMusic[2], -1);
+				if (mute) Mix_PauseMusic();
 				totalTime += onePlayerMode.Time;
 				totalTime += SDL_GetTicks();
 				generateBlockId(nextBlock, 5);
@@ -106,6 +121,7 @@ int main(int argc, char* args[])
 						block[4].printNext(1284, 781, 25);
 						onePlayerMode.getStat(0);
 						onePlayerMode.printField(760);
+						printMute();
 
 						SDL_PollEvent(&e);
 						if (e.type == SDL_QUIT)
@@ -153,7 +169,7 @@ int main(int argc, char* args[])
 								break;
 
 							case SDLK_ESCAPE: case SDLK_p:
-								stopMusic();
+								Mix_PauseMusic();
 								userChoice = PAUSE_RESUME;
 								while (pauseModeChosen == PAUSE_TOTAL)
 								{
@@ -202,6 +218,7 @@ int main(int argc, char* args[])
 									Mix_PlayChannel(-1, countSound, 0);
 									totalTime = SDL_GetTicks();
 									totalTime += onePlayerMode.Time;
+									Mix_ResumeMusic();
 									break;
 								case PAUSE_NEW_GAME:
 									totalTime = 0;
@@ -214,6 +231,7 @@ int main(int argc, char* args[])
 									onePlayerMode.reset();
 									quitMode = true;
 									gameModeChosen = CHOOSE_TOTAL;
+									Mix_HaltMusic();
 									break;
 								}
 								pauseModeChosen = PAUSE_TOTAL;
@@ -224,6 +242,7 @@ int main(int argc, char* args[])
 							default:
 								break;
 							}
+							changeMusic(e);
 						}
 						e.type = NULL;
 						if (quitMode) {
@@ -244,7 +263,7 @@ int main(int argc, char* args[])
 					onePlayerMode.lineClear();
 					if (onePlayerMode.checkLose())
 					{	
-						stopMusic();
+						Mix_HaltMusic();
 						Mix_PlayChannel(-1, gameOverSound, 0);
 						GameOver.render(0, 0, NULL);
 						onePlayerMode.printScore(1030, 665, 100, scoreColor);
@@ -266,9 +285,9 @@ int main(int argc, char* args[])
 				break;
 
 			case CHOOSE_TWO_PLAYER_MODE:
-				
-				stopMusic();
-				playMusic(ingameMusic[1]);
+				Mix_HaltMusic();
+				Mix_PlayMusic(ingameMusic[2], -1);
+				if (mute) Mix_PauseMusic();
 
 				p1TotalTime += playerOneField.Time;
 				p1TotalTime += SDL_GetTicks();
@@ -326,6 +345,8 @@ int main(int argc, char* args[])
 						playerTwoField.getStat(485);
 						playerOneField.printField(280);
 						playerTwoField.printField(1240);
+
+						printMute();
 
 						if (p1Lose)
 						{
@@ -430,7 +451,7 @@ int main(int argc, char* args[])
 							switch (e.key.keysym.sym)
 							{
 							case SDLK_ESCAPE: case SDLK_p:
-								stopMusic();
+								Mix_PauseMusic();
 								userChoice = PAUSE_RESUME;
 								while (pauseModeChosen == PAUSE_TOTAL)
 								{
@@ -481,6 +502,7 @@ int main(int argc, char* args[])
 									p1TotalTime += playerOneField.Time;
 									p2TotalTime = SDL_GetTicks();
 									p2TotalTime += playerTwoField.Time;
+									Mix_ResumeMusic();
 									break;
 								case PAUSE_NEW_GAME:
 									p1TotalTime = 0;
@@ -497,6 +519,7 @@ int main(int argc, char* args[])
 									playerTwoField.reset();
 									quitMode = true;
 									gameModeChosen = CHOOSE_TOTAL;
+									Mix_HaltMusic();
 									break;
 								}
 								pauseModeChosen = PAUSE_TOTAL;
@@ -629,12 +652,12 @@ int main(int argc, char* args[])
 						break;
 					}
 				}
-				music = false;
 				break;
 
 			case CHOOSE_HELP:
 				MainScreen.render(0, 0, NULL);
 				printButton();
+				printMute();
 				HelpScreen.render(0, 0, NULL);
 				SDL_RenderPresent(mainRenderer);
 				SDL_PollEvent(&e);

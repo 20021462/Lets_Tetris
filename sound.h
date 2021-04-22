@@ -12,12 +12,12 @@ extern Mix_Chunk* switchChoicesSound;
 extern Mix_Music* ingameMusic[10];
 extern Mix_Music* homeScreenMusic;
 
-extern bool music;
+extern bool mute;
 
 bool loadMedia();
 
-void stopMusic();
-
-void playMusic(Mix_Music* name);
-
 void closeMusic();
+
+void changeMusic(SDL_Event e);
+
+void printMute();

@@ -18,6 +18,8 @@ Texture onePlayerModeScreen;
 Texture twoPlayerModeScreen;
 Texture pauseBackground;
 Texture countDown[3];
+Texture Mute;
+Texture Unmute;
 
 TTF_Font* gFont = NULL;
 SDL_Color scoreColor;
@@ -187,7 +189,8 @@ void loadTexture()
 	countDown[0].loadFromFile("texture/3.png");
 	countDown[1].loadFromFile("texture/2.png");
 	countDown[2].loadFromFile("texture/1.png");
-
+	Mute.loadFromFile("texture/mute.png");
+	Unmute.loadFromFile("texture/unmute.png");
 }
 
 void close()
@@ -203,6 +206,8 @@ void close()
 	onePlayerModeScreen.free();
 	twoPlayerModeScreen.free();
 	pauseBackground.free();
+	Mute.free();
+	Unmute.free();
 
 	TTF_CloseFont(gFont);
 	gFont = NULL;

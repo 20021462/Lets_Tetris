@@ -78,6 +78,8 @@ extern Texture onePlayerModeScreen;
 extern Texture twoPlayerModeScreen;
 extern Texture pauseBackground;
 extern Texture countDown[3];
+extern Texture Mute;
+extern Texture Unmute;
 
 extern TTF_Font* gFont;
 extern SDL_Color scoreColor;

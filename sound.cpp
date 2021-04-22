@@ -1,4 +1,5 @@
 #include "sound.h"
+#include "render.h"
 #include <sstream>
 
 Mix_Chunk* gameOverSound = NULL;
@@ -13,16 +14,17 @@ Mix_Chunk* switchChoicesSound = NULL;
 Mix_Music* ingameMusic[10];
 Mix_Music* homeScreenMusic = NULL;
 
-bool music = false;
+bool mute = false;
+
 
 bool loadMedia()
 {
 	bool success = true;
 	
-	for (int i = 2; i <= 2; i++)
+	for (int i = 0; i <= 3; i++)
 	{
 		stringstream path;
-		path << "music/ingameMusic" << i << ".flac";
+		path << "music/ingameMusic" << i << ".mp3";
 		ingameMusic[i] = Mix_LoadMUS(path.str().c_str());
 		if (ingameMusic[i] == NULL)
 		{
@@ -31,7 +33,7 @@ bool loadMedia()
 		}
 	}
 
-	homeScreenMusic = Mix_LoadMUS("music/homeScreenMusic.wav");
+	homeScreenMusic = Mix_LoadMUS("music/homeScreenMusicWibu.flac");
 	if (homeScreenMusic == NULL)
 	{
 		printf("Failed to load homeScreenMusic! SDL_mixer Error: %s\n", Mix_GetError());
@@ -97,18 +99,6 @@ bool loadMedia()
 	return success;
 }
 
-void stopMusic()
-{
-	Mix_HaltMusic();
-	music = false;
-}
-
-void playMusic(Mix_Music* name)
-{
-	if (!music) Mix_PlayMusic(name, -1);
-	music = true;;
-}
-
 void closeMusic()
 {
 	Mix_FreeChunk(gameOverSound);
@@ -125,6 +115,55 @@ void closeMusic()
 	rotateSound = NULL;
 
 	Mix_FreeMusic(homeScreenMusic);
-	Mix_FreeMusic(ingameMusic[1]);
 	homeScreenMusic = NULL;
+
+	for (int i = 0; i <= 3; i++)
+	{
+		Mix_FreeMusic(ingameMusic[i]);
+		ingameMusic[i] = NULL;
+	}
+}
+
+void changeMusic(SDL_Event e)
+{
+	if (e.type == SDL_KEYDOWN )
+	{
+		switch (e.key.keysym.sym)
+		{
+		case SDLK_0:
+			Mix_PlayMusic(ingameMusic[0], -1);
+			break;
+
+		case SDLK_1:
+			Mix_PlayMusic(ingameMusic[1], -1);
+			break;
+
+		case SDLK_2:
+			Mix_PlayMusic(ingameMusic[2], -1);
+			break;
+
+		case SDLK_3:
+			Mix_PlayMusic(ingameMusic[1], -1);
+			break;
+
+		case SDLK_m:
+			if (Mix_PausedMusic() == 1)
+			{
+				Mix_ResumeMusic();
+				mute = false;
+			}
+			else
+			{
+				Mix_PauseMusic();
+				mute = true;
+			}
+			break;
+		}
+	}
+}
+
+void printMute()
+{
+	if (mute) Mute.render(1840, 30, NULL);
+	else Unmute.render(1840, 30, NULL);
 }
