@@ -21,7 +21,7 @@ bool loadMedia()
 {
 	bool success = true;
 	
-	for (int i = 0; i <= 3; i++)
+	for (int i = 0; i <= 4; i++)
 	{
 		stringstream path;
 		path << "music/ingameMusic" << i << ".mp3";
@@ -33,7 +33,7 @@ bool loadMedia()
 		}
 	}
 
-	homeScreenMusic = Mix_LoadMUS("music/homeScreenMusicWibu.flac");
+	homeScreenMusic = Mix_LoadMUS("music/homeScreenMusic1.wav");
 	if (homeScreenMusic == NULL)
 	{
 		printf("Failed to load homeScreenMusic! SDL_mixer Error: %s\n", Mix_GetError());
@@ -89,7 +89,7 @@ bool loadMedia()
 		success = false;
 	}
 
-	switchChoicesSound = Mix_LoadWAV("music/switchChoicesSound.wav");
+	switchChoicesSound = Mix_LoadWAV("music/holdSound.wav");
 	if (collideSound == NULL)
 	{
 		printf("Failed to load switch choices sound effect! SDL_mixer Error: %s\n", Mix_GetError());
@@ -143,7 +143,11 @@ void changeMusic(SDL_Event e)
 			break;
 
 		case SDLK_3:
-			Mix_PlayMusic(ingameMusic[1], -1);
+			Mix_PlayMusic(ingameMusic[3], -1);
+			break;
+
+		case SDLK_4:
+			Mix_PlayMusic(ingameMusic[4], -1);
 			break;
 
 		case SDLK_m:

@@ -92,7 +92,7 @@ int main(int argc, char* args[])
 
 			case CHOOSE_ONE_PLAYER_MODE:
 				Mix_HaltMusic();
-				Mix_PlayMusic(ingameMusic[2], -1);
+				Mix_PlayMusic(ingameMusic[0], -1);
 				if (mute) Mix_PauseMusic();
 				totalTime += onePlayerMode.Time;
 				totalTime += SDL_GetTicks();
@@ -286,7 +286,7 @@ int main(int argc, char* args[])
 
 			case CHOOSE_TWO_PLAYER_MODE:
 				Mix_HaltMusic();
-				Mix_PlayMusic(ingameMusic[2], -1);
+				Mix_PlayMusic(ingameMusic[0], -1);
 				if (mute) Mix_PauseMusic();
 
 				p1TotalTime += playerOneField.Time;
@@ -526,9 +526,11 @@ int main(int argc, char* args[])
 								userChoice = 0;
 								break;
 
+								
 							default:
 								break;
 							}
+							changeMusic(e);
 						}
 						e.type = NULL;
 						if (quitMode) {
