@@ -148,6 +148,7 @@
     <ClCompile Include="block.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="const.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="playerField.cpp" />
     <ClCompile Include="render.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="block.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="const.h" />
+    <ClInclude Include="game.h" />
     <ClInclude Include="playerField.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="sound.h" />
