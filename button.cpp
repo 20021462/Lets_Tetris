@@ -1,5 +1,6 @@
 #include "button.h"
 
+int helpChoice = 0;
 int userChoice = 0;
 int gameModeChosen = CHOOSE_TOTAL;
 int pauseModeChosen = PAUSE_TOTAL;

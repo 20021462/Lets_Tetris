@@ -23,10 +23,8 @@ void game::play()
 		loadStat();
 		loadMedia();
 
-
 		//bool quit = false;
 		//SDL_Event e;
-
 
 		while (!quit)
 		{
@@ -35,6 +33,7 @@ void game::play()
 			SDL_RenderClear(mainRenderer);
 
 			//bool quitMode = false;
+			quitMode = false;
 			switch (gameModeChosen)
 			{
 			case CHOOSE_TOTAL:
@@ -660,13 +659,39 @@ void game::play()
 				break;
 
 			case CHOOSE_HELP:
+			
 				MainScreen.render(0, 0, NULL);
 				printButton();
 				printMute();
-				HelpScreen.render(0, 0, NULL);
+				HelpScreen[helpChoice].render(0, 0, NULL);
 				SDL_RenderPresent(mainRenderer);
 				SDL_PollEvent(&e);
-				if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) gameModeChosen = CHOOSE_TOTAL;
+				e.type = NULL;
+				if (e.type = SDL_KEYDOWN)
+				{
+					switch (e.key.keysym.sym)
+					{
+					case SDLK_RIGHT: case SDLK_d:
+						if (helpChoice < 2)
+						{
+							helpChoice++;
+							Mix_PlayChannel(-1, switchChoicesSound, 0);
+						}
+						break;
+					case SDLK_LEFT: case SDLK_a:
+						if (helpChoice > 0)
+						{
+							helpChoice--;
+							Mix_PlayChannel(-1, switchChoicesSound, 0);
+						}
+						break;
+					case SDLK_ESCAPE: gameModeChosen = CHOOSE_TOTAL;
+					default:
+						break;
+					}
+					e.type = NULL;
+				}
+				//if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) gameModeChosen = CHOOSE_TOTAL;
 				break;
 
 			case CHOOSE_QUIT:

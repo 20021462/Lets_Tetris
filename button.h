@@ -2,10 +2,18 @@
 #include "const.h"
 #include "Block.h"
 
+extern int helpChoice;
 extern int userChoice;
 extern int gameModeChosen;
 extern int pauseModeChosen;
 
+enum HelpChoices
+{
+	HELP_1,
+	HELP_2,
+	HELP_3,
+	HELP_TOTAL,
+};
 
 enum ButtonChoice
 {

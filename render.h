@@ -67,7 +67,7 @@ extern SDL_Rect BlockRect[BLOCK_TOTAL];
 extern Texture BlockSheet;
 extern Texture ShadeSheet;
 extern Texture MainScreen;
-extern Texture HelpScreen;
+extern Texture HelpScreen[3];
 extern Texture GameOver;
 
 extern Texture GameOver2;

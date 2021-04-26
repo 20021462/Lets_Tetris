@@ -7,7 +7,7 @@ SDL_Rect BlockRect[BLOCK_TOTAL];
 Texture BlockSheet;
 Texture ShadeSheet;
 Texture MainScreen;
-Texture HelpScreen;
+Texture HelpScreen[3];
 Texture GameOver;
 
 Texture GameOver2;
@@ -178,7 +178,9 @@ bool initSDL()
 void loadTexture()
 {
 	MainScreen.loadFromFile("texture/mainScreen.png");
-	HelpScreen.loadFromFile("texture/help_screen.png");
+	HelpScreen[0].loadFromFile("texture/help_screen.png");
+	HelpScreen[1].loadFromFile("texture/help_screen_2.png");
+	HelpScreen[2].loadFromFile("texture/help_screen_3.png");
 	GameOver.loadFromFile("texture/Gameover.png");
 	GameOver2.loadFromFile("texture/Yourscore.png");
 	Winner.loadFromFile("texture/Winner.png");
@@ -198,7 +200,9 @@ void close()
 	BlockSheet.free();
 	ShadeSheet.free();
 	MainScreen.free();
-	HelpScreen.free();
+	HelpScreen[0].free();
+	HelpScreen[1].free();
+	HelpScreen[2].free();
 	GameOver.free();
 	GameOver2.free();
 	Winner.free();
