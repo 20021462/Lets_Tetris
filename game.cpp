@@ -666,9 +666,10 @@ void game::play()
 				HelpScreen[helpChoice].render(0, 0, NULL);
 				SDL_RenderPresent(mainRenderer);
 				SDL_PollEvent(&e);
-				e.type = NULL;
-				if (e.type = SDL_KEYDOWN)
-				{
+				
+				if (e.type == SDL_KEYDOWN)
+				{	
+					
 					switch (e.key.keysym.sym)
 					{
 					case SDLK_RIGHT: case SDLK_d:
