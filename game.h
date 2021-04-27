@@ -17,6 +17,7 @@ public:
 	SDL_Event e;
 
 	void play();
+	void pause();
 private:
 
 };

@@ -453,6 +453,7 @@ void game::play()
 							switch (e.key.keysym.sym)
 							{
 							case SDLK_ESCAPE: case SDLK_p:
+								
 								Mix_PauseMusic();
 								userChoice = PAUSE_RESUME;
 								while (pauseModeChosen == PAUSE_TOTAL)
@@ -705,4 +706,81 @@ void game::play()
 
 	close();
 	closeMusic();
+}
+
+void game::pause()
+{
+	Mix_PauseMusic();
+	userChoice = PAUSE_RESUME;
+	while (pauseModeChosen == PAUSE_TOTAL)
+	{
+		twoPlayerModeScreen.render(0, 0, NULL);
+		playerOneField.getStat(-475);
+		playerTwoField.getStat(485);
+		pauseBackground.render(0, 0, NULL);
+		printPauseButton();
+		SDL_RenderPresent(mainRenderer);
+		SDL_PollEvent(&e);
+		if (e.type == SDL_KEYDOWN)
+		{
+			switch (e.key.keysym.sym)
+			{
+			case SDLK_RIGHT: case SDLK_d:
+				if (userChoice == PAUSE_TOTAL - 1) userChoice = 0;
+				else userChoice++;
+				Mix_PlayChannel(-1, switchChoicesSound, 0);
+				break;
+			case SDLK_LEFT: case SDLK_a:
+				if (userChoice == 0) userChoice = PAUSE_TOTAL - 1;
+				else userChoice--;
+				Mix_PlayChannel(-1, switchChoicesSound, 0);
+				break;
+			case SDLK_SPACE: case SDLK_RETURN:
+				pauseModeChosen = userChoice;
+				Mix_PlayChannel(-1, switchChoicesSound, 0);
+				break;
+			default:
+				break;
+			}
+		}
+		e.type = NULL;
+	}
+	switch (pauseModeChosen)
+	{
+	case PAUSE_RESUME:
+		for (int i = 0; i < 3; i++)
+		{
+			twoPlayerModeScreen.render(0, 0, NULL);
+			countDown[i].render(0, 0, NULL);
+			SDL_RenderPresent(mainRenderer);
+			Mix_PlayChannel(-1, countSound, 0);
+			SDL_Delay(1000);
+		}
+		Mix_PlayChannel(-1, countSound, 0);
+		p1TotalTime = SDL_GetTicks();
+		p1TotalTime += playerOneField.Time;
+		p2TotalTime = SDL_GetTicks();
+		p2TotalTime += playerTwoField.Time;
+		Mix_ResumeMusic();
+		break;
+	case PAUSE_NEW_GAME:
+		p1TotalTime = 0;
+		p2TotalTime = 0;
+		playerOneField.reset();
+		playerTwoField.reset();
+		quitMode = true;
+		gameModeChosen = CHOOSE_TWO_PLAYER_MODE;
+		break;
+	case PAUSE_HOME:
+		p1TotalTime = 0;
+		p2TotalTime = 0;
+		playerOneField.reset();
+		playerTwoField.reset();
+		quitMode = true;
+		gameModeChosen = CHOOSE_TOTAL;
+		Mix_HaltMusic();
+		break;
+	}
+	pauseModeChosen = PAUSE_TOTAL;
+	userChoice = 0;
 }
