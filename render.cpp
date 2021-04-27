@@ -8,8 +8,9 @@ Texture BlockSheet;
 Texture ShadeSheet;
 Texture MainScreen;
 Texture HelpScreen[3];
-Texture GameOver;
+Texture HighScoreScreen;
 
+Texture GameOver;
 Texture GameOver2;
 Texture Winner;
 Texture Loser;
@@ -181,6 +182,7 @@ void loadTexture()
 	HelpScreen[0].loadFromFile("texture/help_screen.png");
 	HelpScreen[1].loadFromFile("texture/help_screen_2.png");
 	HelpScreen[2].loadFromFile("texture/help_screen_3.png");
+	HighScoreScreen.loadFromFile("texture/highScoreScreen.png");
 	GameOver.loadFromFile("texture/Gameover.png");
 	GameOver2.loadFromFile("texture/Yourscore.png");
 	Winner.loadFromFile("texture/Winner.png");
@@ -203,6 +205,7 @@ void close()
 	HelpScreen[0].free();
 	HelpScreen[1].free();
 	HelpScreen[2].free();
+	HighScoreScreen.free();
 	GameOver.free();
 	GameOver2.free();
 	Winner.free();
@@ -212,6 +215,7 @@ void close()
 	pauseBackground.free();
 	Mute.free();
 	Unmute.free();
+
 
 	TTF_CloseFont(gFont);
 	gFont = NULL;

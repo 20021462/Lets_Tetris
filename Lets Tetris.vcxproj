@@ -149,6 +149,7 @@
     <ClCompile Include="button.cpp" />
     <ClCompile Include="const.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="score.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="playerField.cpp" />
     <ClCompile Include="render.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="playerField.h" />
     <ClInclude Include="render.h" />
+    <ClInclude Include="score.h" />
     <ClInclude Include="sound.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

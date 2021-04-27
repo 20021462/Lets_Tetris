@@ -117,11 +117,11 @@ void closeMusic()
 	Mix_FreeMusic(homeScreenMusic);
 	homeScreenMusic = NULL;
 
-	for (int i = 0; i <= 3; i++)
+	/*for (int i = 0; i <= 4; i++)
 	{
 		Mix_FreeMusic(ingameMusic[i]);
-		ingameMusic[i] = NULL;
-	}
+		//ingameMusic[i] = NULL;
+	}*/
 }
 
 void changeMusic(SDL_Event e)

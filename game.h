@@ -5,6 +5,7 @@
 #include "playerField.h"
 #include "button.h"
 #include "sound.h"
+#include "score.h"
 
 class game
 {

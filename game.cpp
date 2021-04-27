@@ -22,9 +22,11 @@ void game::play()
 		loadButton();
 		loadStat();
 		loadMedia();
+		setColor();
+		getScore();
 
-		//bool quit = false;
-		//SDL_Event e;
+		bool quit = false;
+		SDL_Event e;
 
 		while (!quit)
 		{
@@ -32,7 +34,6 @@ void game::play()
 			SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 			SDL_RenderClear(mainRenderer);
 
-			//bool quitMode = false;
 			quitMode = false;
 			switch (gameModeChosen)
 			{
@@ -94,7 +95,7 @@ void game::play()
 
 			case CHOOSE_ONE_PLAYER_MODE:
 				Mix_HaltMusic();
-				Mix_PlayMusic(ingameMusic[0], -1);
+				Mix_PlayMusic(ingameMusic[1], -1);
 				if (mute) Mix_PauseMusic();
 				totalTime += onePlayerMode.Time;
 				totalTime += SDL_GetTicks();
@@ -270,6 +271,7 @@ void game::play()
 						GameOver.render(0, 0, NULL);
 						onePlayerMode.printScore(1030, 665, 100, scoreColor);
 						SDL_RenderPresent(mainRenderer);
+						SDL_Delay(2000);
 						SDL_Event returnMain;
 						returnMain.type = 0;
 						SDL_PollEvent(&returnMain);
@@ -288,7 +290,7 @@ void game::play()
 
 			case CHOOSE_TWO_PLAYER_MODE:
 				Mix_HaltMusic();
-				Mix_PlayMusic(ingameMusic[0], -1);
+				Mix_PlayMusic(ingameMusic[1], -1);
 				if (mute) Mix_PauseMusic();
 
 				p1TotalTime += playerOneField.Time;
@@ -546,10 +548,10 @@ void game::play()
 						playerTwoField.shade(p2Block[1], 1240);
 
 						if (!p1Block[1].collide(playerOneField.fieldMatrix)) p1Block[1].print(280);
-						else Mix_PlayChannel(-1, collideSound, 0);
+						else if (!p1Lose) Mix_PlayChannel(-1, collideSound, 0);
 
 						if (!p2Block[1].collide(playerTwoField.fieldMatrix)) p2Block[1].print(1240);
-						else Mix_PlayChannel(-1, collideSound, 0);
+						else if (!p2Lose) Mix_PlayChannel(-1, collideSound, 0);
 
 						SDL_RenderPresent(mainRenderer);
 
@@ -645,6 +647,7 @@ void game::play()
 						}
 
 						SDL_RenderPresent(mainRenderer);
+						SDL_Delay(2000);
 						SDL_Event returnMain;
 						returnMain.type = 0;
 						SDL_PollEvent(&returnMain);
@@ -668,6 +671,12 @@ void game::play()
 				SDL_RenderPresent(mainRenderer);
 				SDL_PollEvent(&e);
 				
+				if (e.type == SDL_QUIT)
+				{
+					quit = true;
+					gameModeChosen = -1;
+					break;
+				}
 				if (e.type == SDL_KEYDOWN)
 				{	
 					
@@ -694,6 +703,23 @@ void game::play()
 					e.type = NULL;
 				}
 				//if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) gameModeChosen = CHOOSE_TOTAL;
+				break;
+
+			case CHOOSE_HIGH_SCORE:
+				MainScreen.render(0, 0, NULL);
+				printButton();
+				printMute();
+				HighScoreScreen.render(0, 0, NULL);
+				printHighScore();
+				SDL_RenderPresent(mainRenderer);
+				SDL_PollEvent(&e);
+				if (e.type == SDL_QUIT)
+				{
+					quit = true;
+					gameModeChosen = -1;
+					break;
+				}
+				if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) gameModeChosen = CHOOSE_TOTAL;
 				break;
 
 			case CHOOSE_QUIT:

@@ -68,8 +68,9 @@ extern Texture BlockSheet;
 extern Texture ShadeSheet;
 extern Texture MainScreen;
 extern Texture HelpScreen[3];
-extern Texture GameOver;
+extern Texture HighScoreScreen;
 
+extern Texture GameOver;
 extern Texture GameOver2;
 extern Texture Winner;
 extern Texture Loser;

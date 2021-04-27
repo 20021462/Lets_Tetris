@@ -49,13 +49,14 @@ void loadButton()
 	buttonChoice[CHOOSE_ONE_PLAYER_MODE].buttonTexture.loadFromFile("texture/1player.png");
 	buttonChoice[CHOOSE_TWO_PLAYER_MODE].buttonTexture.loadFromFile("texture/2player.png");
 	buttonChoice[CHOOSE_HELP].buttonTexture.loadFromFile("texture/help.png");
+	buttonChoice[CHOOSE_HIGH_SCORE].buttonTexture.loadFromFile("texture/highScore.png");
 	buttonChoice[CHOOSE_QUIT].buttonTexture.loadFromFile("texture/quit.png");
 
 	for (int i = 0; i < CHOOSE_TOTAL; i++)
 	{
 		buttonChoice[i].buttonId = i;
 		buttonChoice[i].x = (SCREEN_WIDTH - BUTTON_WIDTH) / 2;
-		buttonChoice[i].y = 550 + i * (35 + BUTTON_HEIGHT);
+		buttonChoice[i].y = 480 + i * (25 + BUTTON_HEIGHT);
 	}
 
 	PauseButtonTexture[NORMAL].x = 0;
