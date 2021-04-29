@@ -1,5 +1,5 @@
-Tu 180000
-Tu1 140000
-Tu2 100000
-Tu3 0 
-Tu4 0
+A 448
+B 382
+Alter 378
+NguyenTrungTu 314
+Player 296

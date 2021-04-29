@@ -56,7 +56,7 @@ void loadButton()
 	{
 		buttonChoice[i].buttonId = i;
 		buttonChoice[i].x = (SCREEN_WIDTH - BUTTON_WIDTH) / 2;
-		buttonChoice[i].y = 480 + i * (25 + BUTTON_HEIGHT);
+		buttonChoice[i].y = 510 + i * (25 + BUTTON_HEIGHT);
 	}
 
 	PauseButtonTexture[NORMAL].x = 0;

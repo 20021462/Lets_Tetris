@@ -71,6 +71,7 @@ extern Texture HelpScreen[3];
 extern Texture HighScoreScreen;
 
 extern Texture GameOver;
+extern Texture GameOverHighScore;
 extern Texture GameOver2;
 extern Texture Winner;
 extern Texture Loser;

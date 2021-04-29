@@ -11,6 +11,7 @@ Texture HelpScreen[3];
 Texture HighScoreScreen;
 
 Texture GameOver;
+Texture GameOverHighScore;
 Texture GameOver2;
 Texture Winner;
 Texture Loser;
@@ -184,6 +185,7 @@ void loadTexture()
 	HelpScreen[2].loadFromFile("texture/help_screen_3.png");
 	HighScoreScreen.loadFromFile("texture/highScoreScreen.png");
 	GameOver.loadFromFile("texture/Gameover.png");
+	GameOverHighScore.loadFromFile("texture/Gameover_highscore.png");
 	GameOver2.loadFromFile("texture/Yourscore.png");
 	Winner.loadFromFile("texture/Winner.png");
 	Loser.loadFromFile("texture/Loser.png");
@@ -207,6 +209,7 @@ void close()
 	HelpScreen[2].free();
 	HighScoreScreen.free();
 	GameOver.free();
+	GameOverHighScore.free();
 	GameOver2.free();
 	Winner.free();
 	Loser.free();

@@ -266,16 +266,47 @@ void game::play()
 					onePlayerMode.lineClear();
 					if (onePlayerMode.checkLose())
 					{
+						while (!SDL_PollEvent(&e)) e.type = NULL;
 						Mix_HaltMusic();
 						Mix_PlayChannel(-1, gameOverSound, 0);
-						GameOver.render(0, 0, NULL);
-						onePlayerMode.printScore(1030, 665, 100, scoreColor);
-						SDL_RenderPresent(mainRenderer);
-						SDL_Delay(2000);
-						SDL_Event returnMain;
-						returnMain.type = 0;
-						SDL_PollEvent(&returnMain);
-						while (returnMain.type != SDL_KEYDOWN) SDL_PollEvent(&returnMain);
+						if (newHighScore(onePlayerMode.Score)) {
+							SDL_StartTextInput();
+							string tmp = "Player";
+							while (e.key.keysym.sym != SDLK_RETURN)
+							{
+								onePlayerModeScreen.render(0, 0, NULL);
+								block[0].printNext(579, 283, 35);
+								block[2].printNext(1275, 283, 35);
+								block[3].printNext(1280, 547, 30);
+								block[4].printNext(1284, 781, 25);
+								onePlayerMode.getStat(0);
+								onePlayerMode.printField(760);
+								printMute();
+								GameOverHighScore.render(0, 0, NULL);
+								onePlayerMode.printScore(1040, 867, 100, scoreColor);
+								SDL_PollEvent(&e);
+								nameInput(tmp, e);
+								SDL_RenderPresent(mainRenderer);
+								e.type = NULL;
+							}
+							if (tmp.length() == 0) tmp = "Player";
+							pointer->name = tmp;
+							rewriteFile();
+							getScore();
+							e.type = NULL;
+							SDL_StopTextInput();
+						}
+						//SDL_Delay(2000);
+						else {
+							onePlayerModeScreen.render(0, 0, NULL);
+							GameOver.render(0, 0, NULL);
+							onePlayerMode.printScore(1030, 665, 100, scoreColor);
+							SDL_RenderPresent(mainRenderer);
+							SDL_Event returnMain;
+							SDL_PollEvent(&returnMain);
+							while (returnMain.key.keysym.sym != SDLK_RETURN) SDL_PollEvent(&returnMain);
+							returnMain.key.keysym.sym = NULL;
+						}
 						onePlayerMode.reset();
 						totalTime = 0;
 
@@ -608,6 +639,8 @@ void game::play()
 					{
 						Mix_HaltMusic();
 						Mix_PlayChannel(-1, gameOverSound, 0);
+						while (!SDL_PollEvent(&e)) e.type = NULL;
+
 						twoPlayerModeScreen.render(0, 0, NULL);
 
 						p1Block[0].printNext(99, 283, 35);
@@ -651,7 +684,8 @@ void game::play()
 						SDL_Event returnMain;
 						returnMain.type = 0;
 						SDL_PollEvent(&returnMain);
-						while (returnMain.type != SDL_KEYDOWN) SDL_PollEvent(&returnMain);
+						while (returnMain.key.keysym.sym != SDLK_RETURN) SDL_PollEvent(&returnMain);
+						returnMain.key.keysym.sym = NULL;
 						playerOneField.reset();
 						playerTwoField.reset();
 						p1TotalTime = 0;
