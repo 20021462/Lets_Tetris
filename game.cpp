@@ -283,7 +283,7 @@ void game::play()
 								onePlayerMode.printField(760);
 								printMute();
 								GameOverHighScore.render(0, 0, NULL);
-								onePlayerMode.printScore(1040, 867, 100, scoreColor);
+								onePlayerMode.printScore(1170, 859, 100, scoreColor);
 								SDL_PollEvent(&e);
 								nameInput(tmp, e);
 								SDL_RenderPresent(mainRenderer);

@@ -115,7 +115,7 @@ void nameInput(string &name, SDL_Event e)
 	}
 	else if (e.type == SDL_TEXTINPUT)
 	{
-		if (!(SDL_GetModState() & KMOD_CTRL && (e.text.text[0] == 'c' || e.text.text[0] == 'C' || e.text.text[0] == 'v' || e.text.text[0] == 'V')) && name.length() <= 15 && e.text.text[0] != ' ')
+		if (!(SDL_GetModState() & KMOD_CTRL && (e.text.text[0] == 'c' || e.text.text[0] == 'C' || e.text.text[0] == 'v' || e.text.text[0] == 'V')) && name.length() <= 13 && e.text.text[0] != ' ')
 		{
 			Mix_PlayChannel(-1, moveSound, 0);
 			name += e.text.text;
@@ -133,5 +133,5 @@ void nameInput(string &name, SDL_Event e)
 			inputTextTexture.loadFromRenderedText(" ", scoreColor, textInput);
 		}
 	}
-	inputTextTexture.render(890, 700, NULL);
+	inputTextTexture.render(945, 700, NULL);
 }
