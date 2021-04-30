@@ -46,11 +46,11 @@ void loadButton()
 	ButtonTexture[CHOSEN].w = BUTTON_WIDTH;
 	ButtonTexture[CHOSEN].h = BUTTON_HEIGHT;
 
-	buttonChoice[CHOOSE_ONE_PLAYER_MODE].buttonTexture.loadFromFile("texture/1player.png");
-	buttonChoice[CHOOSE_TWO_PLAYER_MODE].buttonTexture.loadFromFile("texture/2player.png");
-	buttonChoice[CHOOSE_HELP].buttonTexture.loadFromFile("texture/help.png");
-	buttonChoice[CHOOSE_HIGH_SCORE].buttonTexture.loadFromFile("texture/highScore.png");
-	buttonChoice[CHOOSE_QUIT].buttonTexture.loadFromFile("texture/quit.png");
+	buttonChoice[CHOOSE_ONE_PLAYER_MODE].buttonTexture.loadFromFile("texture/1player_.png");
+	buttonChoice[CHOOSE_TWO_PLAYER_MODE].buttonTexture.loadFromFile("texture/2player_.png");
+	buttonChoice[CHOOSE_HELP].buttonTexture.loadFromFile("texture/help_.png");
+	buttonChoice[CHOOSE_HIGH_SCORE].buttonTexture.loadFromFile("texture/highScore_.png");
+	buttonChoice[CHOOSE_QUIT].buttonTexture.loadFromFile("texture/quit_.png");
 
 	for (int i = 0; i < CHOOSE_TOTAL; i++)
 	{
