@@ -296,15 +296,17 @@ void game::play()
 							e.type = NULL;
 							SDL_StopTextInput();
 						}
-						//SDL_Delay(2000);
+						//
 						else {
 							onePlayerModeScreen.render(0, 0, NULL);
 							GameOver.render(0, 0, NULL);
 							onePlayerMode.printScore(1030, 665, 100, scoreColor);
 							SDL_RenderPresent(mainRenderer);
+							SDL_Delay(1000);
+							while (SDL_PollEvent(&e)) e.key.keysym.sym = NULL;
 							SDL_Event returnMain;
 							SDL_PollEvent(&returnMain);
-							while (returnMain.key.keysym.sym != SDLK_RETURN) SDL_PollEvent(&returnMain);
+							while (returnMain.key.keysym.sym != SDLK_RETURN && returnMain.key.keysym.sym != SDLK_SPACE) SDL_PollEvent(&returnMain);
 							returnMain.key.keysym.sym = NULL;
 						}
 						onePlayerMode.reset();
@@ -680,11 +682,12 @@ void game::play()
 						}
 
 						SDL_RenderPresent(mainRenderer);
-						SDL_Delay(2000);
+						SDL_Delay(1000);
+						while (SDL_PollEvent(&e)) e.key.keysym.sym = NULL;
 						SDL_Event returnMain;
 						returnMain.type = 0;
 						SDL_PollEvent(&returnMain);
-						while (returnMain.key.keysym.sym != SDLK_RETURN) SDL_PollEvent(&returnMain);
+						while (returnMain.key.keysym.sym != SDLK_RETURN && returnMain.key.keysym.sym != SDLK_SPACE) SDL_PollEvent(&returnMain);
 						returnMain.key.keysym.sym = NULL;
 						playerOneField.reset();
 						playerTwoField.reset();
@@ -730,6 +733,18 @@ void game::play()
 							Mix_PlayChannel(-1, switchChoicesSound, 0);
 						}
 						break;
+					case SDLK_m:
+						if (Mix_PausedMusic() == 1)
+						{
+							Mix_ResumeMusic();
+							mute = false;
+						}
+						else
+						{
+							Mix_PauseMusic();
+							mute = true;
+						}
+						break;
 					case SDLK_ESCAPE: gameModeChosen = CHOOSE_TOTAL;
 					default:
 						break;
@@ -754,6 +769,19 @@ void game::play()
 					break;
 				}
 				if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) gameModeChosen = CHOOSE_TOTAL;
+				else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_m)
+				{
+					if (Mix_PausedMusic() == 1)
+					{
+						Mix_ResumeMusic();
+						mute = false;
+					}
+					else
+					{
+						Mix_PauseMusic();
+						mute = true;
+					}
+				}
 				break;
 
 			case CHOOSE_QUIT:
