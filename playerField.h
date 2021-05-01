@@ -16,7 +16,7 @@ public :
 	void printField(int x);
 	void unite(Block& block);
 	void fieldDown(int line);
-	bool lineClear();
+	int lineClear();
 	void shade(Block& block, int x);
 	bool checkLose();
 	void reset();

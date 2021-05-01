@@ -43,10 +43,10 @@ void Field::fieldDown(int line)
 	}
 }
 
-bool Field::lineClear()
+int Field::lineClear()
 {
 	int lineFull = 0;
-	bool getScore = false;
+	//bool getScore = false;
 	bool isFull = true;
 	for (int i = BOARD_HEIGHT - 1; i >= 0; i--) {
 		isFull = true;
@@ -57,7 +57,7 @@ bool Field::lineClear()
 			fieldDown(i);
 			lineFull++;
 			i++;
-			getScore = true;
+			//getScore = true;
 		}
 	}
 	Line += lineFull;
@@ -80,7 +80,7 @@ bool Field::lineClear()
 	}
 	Level = min(Line / 5 + 1, 15);
 	Time = pow(0.8 - (Level - 1) * 0.007, Level - 1) * 1000;
-	return getScore;
+	return lineFull;
 }
 
 void Field::shade(Block& block, int x)
