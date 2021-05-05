@@ -19,6 +19,9 @@ public:
 
 	void play();
 	void pause();
+	void onePlayer();
+	void twoPlayer();
+	void help();
 private:
 
 };

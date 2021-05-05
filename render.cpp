@@ -180,7 +180,7 @@ bool initSDL()
 void loadTexture()
 {
 	MainScreen.loadFromFile("texture/mainScreen.png");
-	HelpScreen[0].loadFromFile("texture/help_screen.png");
+	HelpScreen[0].loadFromFile("texture/help_screen_.png");
 	HelpScreen[1].loadFromFile("texture/help_screen_2.png");
 	HelpScreen[2].loadFromFile("texture/help_screen_3.png");
 	HighScoreScreen.loadFromFile("texture/highScoreScreen.png");
