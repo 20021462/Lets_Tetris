@@ -8,7 +8,7 @@ void Field::printField(int x)
 {
 	for (int i = 2; i < BOARD_HEIGHT; i++) {
 		for (int j = 0; j < BOARD_WIDTH; j++) {
-			if (fieldMatrix[i][j] == 0) continue;
+			if (fieldMatrix[i][j] == EMPTY) continue;
 			else BlockSheet.render(x + BLOCK_SIZE * j, START_HEIGHT + BLOCK_SIZE * (i - 2), &BlockRect[fieldMatrix[i][j]]);
 
 		}
@@ -118,33 +118,33 @@ void Field::reset()
 	}
 }
 
-/*void Field::sendBlock(int line)
-{
-	int tmp = line;
-	while (tmp > 0)
-	{
+void Field::receiveBlock(int a)
+{	
+	
+	for (int tmp = 0; tmp < a; tmp++)
+	{	
+		
 		for (int i = 2; i < BOARD_HEIGHT - 1; i++) {
 			for (int j = 0; j < BOARD_WIDTH; j++) {
 				fieldMatrix[i][j] = fieldMatrix[i + 1][j];
 			}
 		}
 		for (int i = 0; i < BOARD_WIDTH; i++) {
-			fieldMatrix[BOARD_HEIGHT - 1][i] = EMPTY;
+			fieldMatrix[BOARD_HEIGHT - 1][i] = BLOCK_DEFAULT;
 		}
-		tmp--;
 	}
-	srand(time(0));
-	int missingBlock = rand() % BOARD_HEIGHT;
-	for (int i = BOARD_HEIGHT - line; i < BOARD_HEIGHT; i++)
+	
+	srand(time(NULL));
+	int missingBlock = rand() % BOARD_WIDTH;
+	for (int i = BOARD_HEIGHT - a; i < BOARD_HEIGHT; i++)
 	{
-		for (int j = 0; j < BOARD_HEIGHT; j++)
+		for (int j = 0; j < BOARD_WIDTH; j++)
 		{
-			if (j == missingBlock) continue;
-			fieldMatrix[i][j] = BLOCK_DEFAULT;
+			if (j == missingBlock) fieldMatrix[i][j] = EMPTY;
 		}
 	}
 
-}*/
+}
 
 void Field::getStat(int x)
 {

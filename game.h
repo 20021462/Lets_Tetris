@@ -18,10 +18,7 @@ public:
 	SDL_Event e;
 
 	void play();
-	void pause();
-	void onePlayer();
-	void twoPlayer();
-	void help();
+	
 private:
 
 };

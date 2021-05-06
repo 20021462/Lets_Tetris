@@ -9,8 +9,9 @@ extern SDL_Window* mainWindow;
 extern SDL_Renderer* mainRenderer;
 
 enum BlockType
-{
-	BLOCK_Z=1,
+{	
+	EMPTY,
+	BLOCK_Z,
 	BLOCK_S,
 	BLOCK_J,
 	BLOCK_L,
