@@ -365,6 +365,18 @@ void game::play()
 							p2TotalTime += playerTwoField.Time;
 							p2Block[1].move(0, 1);
 						}
+						if (SDL_GetTicks() > p1SendBlockTime[0] && p1SendBlockTime[0] != 0)
+						{
+							playerTwoField.receiveBlock(p1SendBlock[0]);
+							nextBlockSend(p1SendBlockTime, p1SendBlock, p1SendBlockPointer, false);
+							Mix_PlayChannel(-1, lineClearSound, 0);
+						}
+						if (SDL_GetTicks() > p2SendBlockTime[0] && p2SendBlockTime[0] != 0)
+						{
+							playerOneField.receiveBlock(p2SendBlock[0]);
+							nextBlockSend(p2SendBlockTime, p2SendBlock, p2SendBlockPointer, false);
+							Mix_PlayChannel(-1, lineClearSound, 0);
+						}
 						twoPlayerModeScreen.render(0, 0, NULL);
 
 						p1Block[0].printNext(99, 283, 35);
@@ -622,8 +634,27 @@ void game::play()
 						p2Place--;
 					}
 
-					playerTwoField.receiveBlock(playerOneField.lineClear());	
-					playerOneField.receiveBlock(playerTwoField.lineClear());
+					int tmp1 = playerOneField.lineClear();
+					int tmp2 = playerTwoField.lineClear();
+					if (tmp1)
+					{
+						cout << tmp1 << endl;
+						p1SendBlockTime[p1SendBlockPointer] = SDL_GetTicks() + 3000;
+						p1SendBlock[p1SendBlockPointer] = tmp1;
+						p1SendBlockPointer++;
+					}
+					if (tmp2)
+					{
+						cout << tmp2 << endl;
+						p2SendBlockTime[p2SendBlockPointer] = SDL_GetTicks() + 3000;
+						p2SendBlock[p2SendBlockPointer] = tmp2;
+						p2SendBlockPointer++;
+					}
+					tmp1 = 0;
+					tmp2 = 0;
+
+					/*playerTwoField.receiveBlock(playerOneField.lineClear());	
+					playerOneField.receiveBlock(playerTwoField.lineClear());*/
 
 					if (playerOneField.checkLose()) p1Lose = true;
 					if (playerTwoField.checkLose()) p2Lose = true;
@@ -684,6 +715,8 @@ void game::play()
 						playerTwoField.reset();
 						p1TotalTime = 0;
 						p2TotalTime = 0;
+						nextBlockSend(p1SendBlockTime, p1SendBlock, p1SendBlockPointer, true);
+						nextBlockSend(p2SendBlockTime, p2SendBlock, p2SendBlockPointer, true);
 						gameModeChosen = CHOOSE_TOTAL;
 						break;
 					}

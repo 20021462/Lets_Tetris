@@ -82,15 +82,4 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="nodrop.cur">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="arrow.cur">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="cursor.cur">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
 </Project>

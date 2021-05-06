@@ -46,23 +46,42 @@ void Field::fieldDown(int line)
 int Field::lineClear()
 {
 	int lineFull = 0;
+	int lineSend = 0;
 	//bool getScore = false;
-	bool isFull = true;
+	bool isFull;
+	bool canSendFile;
+	bool playTrunk = false;
 	for (int i = BOARD_HEIGHT - 1; i >= 0; i--) {
 		isFull = true;
+		canSendFile = true;
 		for (int j = 0; j < BOARD_WIDTH; j++) {
-			if (!fieldMatrix[i][j]) isFull = false;
+			if (!fieldMatrix[i][j])
+			{
+				isFull = false;
+				canSendFile = false;
+			}
+			else if (fieldMatrix[i][j] == BLOCK_DEFAULT)
+			{
+				canSendFile = false;
+			}
 		}
-		if (isFull) {
+		if (isFull && canSendFile) {
 			fieldDown(i);
 			lineFull++;
 			i++;
+			playTrunk = true;
 			//getScore = true;
+		}
+		else if (isFull && !canSendFile)
+		{
+			fieldDown(i);
+			i++;
+			playTrunk = true;
 		}
 	}
 	Line += lineFull;
 
-	if (lineFull) Mix_PlayChannel(-1, lineClearSound, 0);
+	if (playTrunk) Mix_PlayChannel(-1, lineClearSound, 0);
 	switch (lineFull)
 	{
 	case 1:
@@ -196,4 +215,34 @@ void Field::printScore(int x, int y, int size, SDL_Color color)
 	scoreTexture.loadFromRenderedText(scoreText.str().c_str(), color, scoreFont);
 
 	scoreTexture.render(x, y, NULL);
+}
+
+unsigned long long int p1SendBlockTime[50] = { 0 };
+unsigned long long int p2SendBlockTime[50] = { 0 };
+
+int p1SendBlock[50] = { 0 };
+int p2SendBlock[50] = { 0 };
+
+short p1SendBlockPointer = 0;
+short p2SendBlockPointer = 0;
+
+void nextBlockSend(unsigned long long int time[], int block[], short &pointer, bool reset)
+{
+	for (int i = 0; i < 49; i++)
+	{
+		if (!reset)
+		{
+			time[i] = time[i + 1];
+			block[i] = block[i + 1];
+		}
+		else
+		{
+			time[i] = 0;
+			block[i] = 0;
+		}
+	}
+	time[49] = 0;
+	block[49] = 0;
+	if (reset) pointer = 0;
+	else pointer--;
 }

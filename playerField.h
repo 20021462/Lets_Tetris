@@ -36,3 +36,14 @@ private :
 extern Field onePlayerMode;
 extern Field playerOneField;
 extern Field playerTwoField;
+
+extern unsigned long long int p1SendBlockTime[];
+extern unsigned long long int p2SendBlockTime[];
+
+extern int p1SendBlock[];
+extern int p2SendBlock[];
+
+extern short p1SendBlockPointer;
+extern short p2SendBlockPointer;
+
+void nextBlockSend(unsigned long long int time[], int block[], short& pointer, bool reset);
