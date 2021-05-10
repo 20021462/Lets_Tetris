@@ -222,6 +222,7 @@ void game::play()
 									totalTime = SDL_GetTicks();
 									totalTime += onePlayerMode.Time;
 									Mix_ResumeMusic();
+									if (mute) Mix_PauseMusic();
 									break;
 								case PAUSE_NEW_GAME:
 									totalTime = 0;
@@ -555,6 +556,7 @@ void game::play()
 									p2TotalTime = SDL_GetTicks();
 									p2TotalTime += playerTwoField.Time;
 									Mix_ResumeMusic();
+									if (mute) Mix_PauseMusic();
 									break;
 								case PAUSE_NEW_GAME:
 									p1TotalTime = 0;
