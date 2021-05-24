@@ -30,16 +30,17 @@ enum BlockType
 //	rotateSound
 //};
 
-bool initSDL();
+bool initSDL(); //tham khao code tai lazyfoo.net
 
-void loadTexture();
+void loadTexture(); 
 
-void close();
+void close(); //tham khao code tai lazyfoo.net
 
 bool loadStat();
 
 bool loadBlock();
 
+//tham khao code tai lazyfoo.net
 class Texture
 {
 public:

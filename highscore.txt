@@ -1,5 +1,5 @@
-Lv10 37970
-Tu 31534
-SinhOcCho 804
-Player 729
-A 448
+Player 0
+Player 0
+Player 0
+Player 0
+Player 0
